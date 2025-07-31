@@ -1,0 +1,18 @@
+# Ignore everything
+/*
+
+# Except these files & folders
+!/app
+!/server
+!/database
+!.prettierrc
+!drizzle.config.ts
+!package.json
+!tsconfig.json
+!tsconfig.node.json
+!tsconfig.vite.json
+!vite.config.ts
+!server.js
+!README.md
+
+/database/migrations

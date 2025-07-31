@@ -6,9 +6,15 @@
     "build": "react-router build",
     "db:generate": "dotenv -- drizzle-kit generate",
     "db:migrate": "dotenv -- drizzle-kit migrate",
+    "db:studio": "dotenv -- drizzle-kit studio",
+    "db:psql": "docker compose exec db psql -h 127.0.0.1 -U admin -d fast",
+    "db:drop": "docker compose down --volumes --remove-orphans",
+    "db:up": "docker compose up db -d --build",
+    "db:reset": "npm run db:drop && npm run db:up && npm run db:migrate",
     "dev": "dotenv -- node server.js",
     "start": "node server.js",
-    "typecheck": "react-router typegen && tsc -b"
+    "typecheck": "react-router typegen && tsc -b",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@react-router/express": "^7.7.1",
@@ -36,6 +42,7 @@
     "@types/react-dom": "^19.1.2",
     "dotenv-cli": "^8.0.0",
     "drizzle-kit": "~0.28.1",
+    "prettier": "^3.6.2",
     "tailwindcss": "^4.1.4",
     "tsx": "^4.19.2",
     "typescript": "^5.8.3",
