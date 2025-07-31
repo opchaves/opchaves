@@ -6,6 +6,7 @@
     "app/**/.server/**/*",
     "app/**/.client/**/*",
     "database/**/*",
+    "lib/**/*",
     "server/**/*"
   ],
   "compilerOptions": {
@@ -21,6 +22,7 @@
     "rootDirs": [".", "./.react-router/types"],
     "paths": {
       "@/database/*": ["./database/*"],
+      "@/lib/*": ["./lib/*"],
       "@/*": ["./app/*"]
     },
     "esModuleInterop": true,
