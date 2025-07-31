@@ -1,8 +1,8 @@
-import { database } from "@/database/context";
 import * as schema from "@/database/schema";
 
 import type { Route } from "./+types/home";
 import { Welcome } from "../welcome/welcome";
+import { db } from "@/database/db";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -25,7 +25,6 @@ export async function action({ request }: Route.ActionArgs) {
     return { guestBookError: "Name and email are required" };
   }
 
-  const db = database();
   try {
     await db.insert(schema.guestBook).values({ name, email });
   } catch (error) {
@@ -34,8 +33,6 @@ export async function action({ request }: Route.ActionArgs) {
 }
 
 export async function loader({ context }: Route.LoaderArgs) {
-  const db = database();
-
   const guestBook = await db.query.guestBook.findMany({
     columns: {
       id: true,
