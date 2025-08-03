@@ -7,7 +7,7 @@
 !/app
 !/server
 !/database
-!/test
+!/tests
 !/lib
 !.prettierrc
 !drizzle.config.ts
