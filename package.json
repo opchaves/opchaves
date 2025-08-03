@@ -11,7 +11,7 @@
     "db:drop": "docker compose down --volumes --remove-orphans",
     "db:up": "docker compose up db -d --build",
     "db:reset": "npm run db:drop && npm run db:up && npm run db:migrate",
-    "dev": "dotenv -- node server.js",
+    "dev": "node server.js",
     "start": "node server.js",
     "typecheck": "react-router typegen && tsc -b",
     "format": "prettier --write .",

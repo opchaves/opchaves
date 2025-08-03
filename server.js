@@ -2,6 +2,26 @@ import compression from "compression";
 import express from "express";
 import morgan from "morgan";
 
+import { loadEnvFile } from "node:process";
+
+// Load environment variables from the appropriate .env file based on NODE_ENV
+const { NODE_ENV = "development" } = process.env;
+// built code lives under build/server/assets, so we need to adjust the path
+let envFile = null;
+if (NODE_ENV === "test") envFile = ".env.test";
+if (NODE_ENV === "development") envFile = ".env";
+console.log("NODE_ENV:", NODE_ENV);
+console.log(`Loading environment file: ${envFile}`);
+
+if (envFile) {
+  try {
+    loadEnvFile(envFile);
+  } catch (error) {
+    console.warn(`Failed to load environment file: ${envFile}`, error);
+    process.exit(1);
+  }
+}
+
 // Short-circuit the type-checking of the built output.
 const BUILD_PATH = "./build/server/index.js";
 const DEVELOPMENT = process.env.NODE_ENV === "development";

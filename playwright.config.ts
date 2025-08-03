@@ -9,10 +9,13 @@ const __dirname = path.dirname(__filename);
 export default defineConfig({
   testDir: "./tests",
   webServer: {
-    command: "npm run db:migrate && npm run dev",
+    command: "dotenv -e .env.test -- drizzle-kit migrate && npm run dev",
     url: env.CLIENT_ORIGIN,
     reuseExistingServer: !env.CI,
-    env: {},
+    stdout: env.TEST_E2E_STDOUT,
+    env: {
+      NODE_ENV: "test",
+    },
   },
   globalSetup: path.resolve(__dirname, "./tests/global-setup.ts"),
   globalTeardown: path.resolve(__dirname, "./tests/global-teardown.ts"),

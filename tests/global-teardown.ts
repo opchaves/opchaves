@@ -1,6 +1,6 @@
 import { execSync } from "child_process";
+import { resetDb } from "./reset-db";
 
 export default async () => {
-  // Optionally drop the test DB or clean up resources
-  // Example: execSync('npm run db:drop', { stdio: 'inherit' });
+    await resetDb();
 };

@@ -22,6 +22,12 @@ export const envSchema = z.object({
     .enum(["true", "false"])
     .transform((v) => v === "true")
     .default(false),
+  TEST_E2E_STDOUT: z
+    .enum(["pipe", "ignore"])
+    .default("pipe")
+    .describe(
+      "Controls how Playwright test output is displayed in CI. 'pipe' captures output, 'ignore' discards it.",
+    ),
 });
 
 export type Env = z.infer<typeof envSchema>;
