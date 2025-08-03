@@ -36,12 +36,15 @@ export async function action({ request }: Route.ActionArgs) {
   }
 
   try {
-    await auth.api.signUpEmail({
+    const res = await auth.api.signUpEmail({
       body: { name, email, password },
       headers: request.headers,
+      asResponse: true,
     });
-    
-    return redirect("/dashboard", 303);
+
+    // When doing server-side registration, setting headers is important so that
+    // the dashboard loader can access the session
+    return redirect("/dashboard", { headers: res.headers, status: 303 });
   } catch (error: any) {
     return data(
       { error: error.message || "Registration failed." },

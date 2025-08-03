@@ -40,9 +40,9 @@ const Avatar = ({ src }: { src?: string }) => (
 
 export async function loader({ request }: Route.LoaderArgs) {
   const session = await auth.api.getSession({ headers: request.headers });
-  
+
   if (!session?.user) {
-    return redirect("/auth/login", 303); // Redirect to login if not authenticated
+    return redirect("/auth/login"); // Redirect to login if not authenticated
   }
 
   return session?.user;

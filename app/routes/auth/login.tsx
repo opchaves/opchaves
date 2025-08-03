@@ -32,16 +32,17 @@ export async function action({ request }: Route.ActionArgs) {
   }
 
   try {
-    await auth.api.signInEmail({
+    const res = await auth.api.signInEmail({
       body: {
         email,
         password,
+        callbackURL: "/dashboard",
         rememberMe: true,
       },
-      headers: request.headers,
+      asResponse: true,
     });
 
-    return redirect("/dashboard", 303);
+    return redirect("/dashboard", { headers: res.headers, status: 303 });
   } catch (error: any) {
     return data({ error: error.message || "Login failed." }, { status: 400 });
   }
