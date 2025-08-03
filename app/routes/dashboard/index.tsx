@@ -92,13 +92,13 @@ export default function DashboardHome() {
             Received (This Month)
           </span>
           <span className="text-2xl font-bold text-green-600">
-            ${received.toLocaleString()}
+            ${received}
           </span>
         </div>
         <div className="bg-white rounded-lg shadow p-6 flex flex-col items-start border">
           <span className="text-gray-500 text-sm mb-1">Spent (This Month)</span>
           <span className="text-2xl font-bold text-red-600">
-            ${spent.toLocaleString()}
+            ${spent}
           </span>
         </div>
         <div className="bg-white rounded-lg shadow p-6 flex flex-col items-start border">
@@ -106,7 +106,7 @@ export default function DashboardHome() {
           <span
             className={`text-2xl font-bold ${balance >= 0 ? "text-green-700" : "text-red-700"}`}
           >
-            ${balance.toLocaleString()}
+            ${balance}
           </span>
         </div>
       </div>
@@ -145,7 +145,7 @@ export default function DashboardHome() {
                     className={`px-4 py-2 whitespace-nowrap text-right font-mono ${t.type === "income" ? "text-green-600" : "text-red-600"}`}
                   >
                     {t.type === "income" ? "+" : "-"}$
-                    {Math.abs(t.amount).toLocaleString()}
+                    {Math.abs(t.amount)}
                   </td>
                 </tr>
               ))}

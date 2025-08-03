@@ -13,6 +13,7 @@
 !tsconfig.vite.json
 !vite.config.ts
 !server.js
+!playwright.config.ts
 !README.md
 
 /database/migrations
