@@ -1,10 +1,14 @@
 # Ignore everything
 /*
 
+# TODO: make this simpler. maybe move things to src/
+
 # Except these files & folders
 !/app
 !/server
 !/database
+!/test
+!/lib
 !.prettierrc
 !drizzle.config.ts
 !package.json
