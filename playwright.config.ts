@@ -18,7 +18,7 @@ export default defineConfig({
   globalTeardown: path.resolve(__dirname, "./tests/global-teardown.ts"),
   use: {
     baseURL: env.CLIENT_ORIGIN,
-    headless: env.TEST_HEADLESS,
     ...devices["Desktop Chrome"],
+    headless: env.TEST_HEADLESS,
   },
 });
