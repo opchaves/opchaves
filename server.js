@@ -1,7 +1,6 @@
 import compression from "compression";
 import express from "express";
 import morgan from "morgan";
-
 import { loadEnvFile } from "node:process";
 
 // Load environment variables from the appropriate .env file based on NODE_ENV
@@ -24,7 +23,7 @@ if (envFile) {
 
 // Short-circuit the type-checking of the built output.
 const BUILD_PATH = "./build/server/index.js";
-const DEVELOPMENT = process.env.NODE_ENV === "development";
+const DEVELOPMENT = NODE_ENV === "development";
 const PORT = Number.parseInt(process.env.PORT || "3000");
 
 const app = express();
