@@ -13,9 +13,6 @@ export function Navbar() {
         <Link to="/blog" className="hover:text-indigo-600 font-medium">
           Blog
         </Link>
-        <Link to="/about" className="hover:text-indigo-600 font-medium">
-          About
-        </Link>
         <Link to="/resume" className="hover:text-indigo-600 font-medium">
           Resume
         </Link>
@@ -33,14 +30,14 @@ export function Navbar() {
 export function Footer() {
   return (
     <footer className="w-full py-6 text-center text-gray-500 border-t mt-12">
-      <div className="mb-2">
+      <div className="max-w-3xl mx-auto mb-2">
         <a
-          href="https://github.com/opchaves"
+          href="https://x.com/opchaves"
           target="_blank"
           rel="noopener"
           className="mx-2 hover:text-indigo-600"
         >
-          GitHub
+          X
         </a>
         <a
           href="https://linkedin.com/in/opchaves"
@@ -51,15 +48,23 @@ export function Footer() {
           LinkedIn
         </a>
         <a
-          href="https://x.com/opchaves"
+          href="https://github.com/opchaves"
           target="_blank"
           rel="noopener"
           className="mx-2 hover:text-indigo-600"
         >
-          X
+          GitHub
+        </a>
+        <a
+          href="https://youtube.com/@opchaves"
+          target="_blank"
+          rel="noopener"
+          className="mx-2 hover:text-indigo-600"
+        >
+          YouTube
         </a>
       </div>
-      <div className="text-xs">
+      <div className="max-w-3xl mx-auto text-xs">
         &copy; {new Date().getFullYear()} Paulo Chaves. All rights reserved.
       </div>
     </footer>

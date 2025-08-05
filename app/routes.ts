@@ -9,7 +9,6 @@ import {
 export default [
   layout("routes/site-layout.tsx", [
     index("routes/home.tsx"),
-    route("/about", "routes/about.tsx"),
     route("/blog", "routes/blog.tsx"),
     route("/resume", "routes/resume.tsx"),
   ]),
