@@ -27,7 +27,9 @@ test.describe("Register page", () => {
     // Wait for the browser to show the validation error
     await expect(emailInput).toBeFocused();
     // Check for the validation message (browser dependent)
-    const validationMessage = await emailInput.evaluate((el) => (el as HTMLInputElement).validationMessage);
+    const validationMessage = await emailInput.evaluate(
+      (el) => (el as HTMLInputElement).validationMessage,
+    );
     expect(validationMessage).toMatch(/please include an '@'/i);
   });
 

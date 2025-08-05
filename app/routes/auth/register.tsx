@@ -59,7 +59,9 @@ type GithubError = {
 };
 
 export default function Register({ actionData }: Route.ComponentProps) {
-  const [githubError, setGithubError] = useState<GithubError | undefined>(undefined);
+  const [githubError, setGithubError] = useState<GithubError | undefined>(
+    undefined,
+  );
   const navigation = useNavigation();
 
   const signInWithGithub = async () => {
@@ -89,7 +91,12 @@ export default function Register({ actionData }: Route.ComponentProps) {
     <>
       <div className="mb-6 flex justify-between items-center">
         <h1 className="text-3xl font-bold text-indigo-700">Register</h1>
-        <Link to="/" className="text-indigo-600 hover:underline text-sm font-medium">Back to Home</Link>
+        <Link
+          to="/"
+          className="text-indigo-600 hover:underline text-sm font-medium"
+        >
+          Back to Home
+        </Link>
       </div>
       <Form method="post" className="space-y-6">
         {error && (

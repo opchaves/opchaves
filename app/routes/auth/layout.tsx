@@ -13,7 +13,9 @@ export async function loader({ request }: Route.LoaderArgs) {
 function AuthNavbar() {
   return (
     <nav className="w-full flex items-center justify-between py-4 px-8 bg-white/80 backdrop-blur border-b border-gray-200 sticky top-0 z-10">
-      <Link to="/" className="text-xl font-bold tracking-tight text-indigo-700">Paulo Chaves</Link>
+      <Link to="/" className="text-xl font-bold tracking-tight text-indigo-700">
+        Paulo Chaves
+      </Link>
     </nav>
   );
 }
@@ -22,11 +24,32 @@ function AuthFooter() {
   return (
     <footer className="w-full py-6 text-center text-gray-500 border-t mt-12">
       <div className="mb-2">
-        <a href="https://github.com/opchaves" target="_blank" rel="noopener" className="mx-2 hover:text-indigo-600">GitHub</a>
-        <a href="https://linkedin.com/in/opchaves" target="_blank" rel="noopener" className="mx-2 hover:text-indigo-600">LinkedIn</a>
-        <a href="mailto:paulo@opchaves.com" className="mx-2 hover:text-indigo-600">Email</a>
+        <a
+          href="https://github.com/opchaves"
+          target="_blank"
+          rel="noopener"
+          className="mx-2 hover:text-indigo-600"
+        >
+          GitHub
+        </a>
+        <a
+          href="https://linkedin.com/in/opchaves"
+          target="_blank"
+          rel="noopener"
+          className="mx-2 hover:text-indigo-600"
+        >
+          LinkedIn
+        </a>
+        <a
+          href="mailto:paulo@opchaves.com"
+          className="mx-2 hover:text-indigo-600"
+        >
+          Email
+        </a>
       </div>
-      <div className="text-xs">&copy; {new Date().getFullYear()} Paulo Chaves. All rights reserved.</div>
+      <div className="text-xs">
+        &copy; {new Date().getFullYear()} Paulo Chaves. All rights reserved.
+      </div>
     </footer>
   );
 }

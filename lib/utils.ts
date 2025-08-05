@@ -8,10 +8,16 @@ export class InvariantError extends Error {
   }
 }
 
-export function invariant(condition: unknown, message: string | (() => string)): asserts condition {
+export function invariant(
+  condition: unknown,
+  message: string | (() => string),
+): asserts condition {
   if (!condition) {
-    throw new InvariantError(typeof message === 'function' ? message() : message);
+    throw new InvariantError(
+      typeof message === "function" ? message() : message,
+    );
   }
 }
 
-export const hasGithubAuth = !!env.GITHUB_CLIENT_ID && !!env.GITHUB_CLIENT_SECRET;
+export const hasGithubAuth =
+  !!env.GITHUB_CLIENT_ID && !!env.GITHUB_CLIENT_SECRET;
