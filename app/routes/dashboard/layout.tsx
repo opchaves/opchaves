@@ -1,4 +1,4 @@
-import { signOut, useSession } from "../../lib/auth-client";
+import { signOut } from "../../lib/auth-client";
 import React, { useState } from "react";
 import { Link, Outlet, redirect, useNavigate } from "react-router";
 import type { Route } from "./+types/layout";
