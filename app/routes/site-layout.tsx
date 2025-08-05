@@ -1,3 +1,4 @@
+import CaretDownIcon from "@/components/icons/caret-down";
 import { useState } from "react";
 import { Link, Outlet, useLocation } from "react-router";
 
@@ -59,19 +60,7 @@ export function Navbar() {
           aria-expanded={menuOpen}
         >
           <span>{selectedItem.name}</span>
-          <svg
-            className={`w-4 h-4 transition-transform ${menuOpen ? "rotate-180" : ""}`}
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>
+          <CaretDownIcon rotate={menuOpen} />
         </button>
         {menuOpen && (
           <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-lg z-20">
@@ -79,11 +68,10 @@ export function Navbar() {
               <Link
                 key={item.name}
                 to={item.to}
-                className={`block px-4 py-2 text-sm ${
-                  selected === item.name
+                className={`block px-4 py-2 text-sm ${selected === item.name
                     ? "bg-indigo-100 text-indigo-700 font-semibold"
                     : "hover:bg-gray-100"
-                }`}
+                  }`}
                 onClick={() => {
                   setSelected(item.name);
                   setMenuOpen(false);
