@@ -4,5 +4,5 @@ import { test, expect } from "@playwright/test";
 
 test("homepage loads", async ({ page }) => {
   await page.goto("/");
-  await expect(page).toHaveTitle(/New React Router App/i);
+  await expect(page).toHaveTitle(/Paulo Chaves/i);
 });
