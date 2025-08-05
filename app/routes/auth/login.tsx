@@ -54,10 +54,7 @@ type GithubError = {
 };
 
 export default function Login({ actionData }: Route.ComponentProps) {
-  const [githubError, setGithubError] = useState<GithubError | undefined>(
-    undefined,
-  );
-
+  const [githubError, setGithubError] = useState<GithubError | undefined>(undefined);
   const navigation = useNavigation();
 
   const signInWithGithub = async () => {
@@ -69,7 +66,6 @@ export default function Login({ actionData }: Route.ComponentProps) {
     if (res.error) {
       setGithubError(res.error);
     }
-    // what about redirecting to the dashboard?
   };
 
   // Extract error and errors from actionData
@@ -85,8 +81,11 @@ export default function Login({ actionData }: Route.ComponentProps) {
   }
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-6 text-center">Login</h1>
+    <>
+      <div className="mb-6 flex justify-between items-center">
+        <h1 className="text-3xl font-bold text-indigo-700">Login</h1>
+        <Link to="/" className="text-indigo-600 hover:underline text-sm font-medium">Back to Home</Link>
+      </div>
       <Form method="post" className="space-y-6">
         {error && (
           <div className="text-red-600 text-sm mb-2 text-center">{error}</div>
@@ -161,6 +160,6 @@ export default function Login({ actionData }: Route.ComponentProps) {
           Register
         </Link>
       </div>
-    </div>
+    </>
   );
 }
