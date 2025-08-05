@@ -1,9 +1,15 @@
-export default function GithubIcon() {
+type IconProps = {
+  width?: number;
+  height?: number;
+  viewBox?: string;
+};
+
+export default function GithubIcon(props: IconProps) {
   return (
     <svg
-      width="28"
-      height="28"
-      viewBox="0 0 24 24"
+      width={props.width || "28"}
+      height={props.height || "28"}
+      viewBox={props.viewBox || "0 0 24 24"}
       fill="none"
       aria-hidden="true"
     >
