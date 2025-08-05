@@ -12,7 +12,7 @@ export function meta() {
 function HeroSection() {
   return (
     <section className="flex flex-col items-center justify-center min-h-[50vh] text-center px-4">
-      <h1 className="text-4xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-indigo-600 to-blue-500 text-transparent bg-clip-text">
+      <h1 className="text-4xl md:text-6xl font-extrabold mb-4 mt-10 sm:mt-2 bg-gradient-to-r from-indigo-600 to-blue-500 text-transparent bg-clip-text">
         Paulo Chaves
       </h1>
       <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-gray-700">
