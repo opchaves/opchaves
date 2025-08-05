@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Link, Outlet } from "react-router";
+import { Link, Outlet, useLocation } from "react-router";
 
 export function Navbar() {
+  const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [selected, setSelected] = useState("Home");
   const menuItems = [
@@ -14,6 +15,9 @@ export function Navbar() {
   const selectedItem =
     menuItems.find((item) => item.name === selected) || menuItems[0];
 
+  const activePath = (val: string) =>
+    val === location.pathname ? "text-indigo-700 font-semibold" : "";
+
   return (
     <nav className="w-full flex items-center justify-between py-4 px-8 bg-white/80 backdrop-blur border-b border-gray-200 sticky top-0 z-10">
       <Link to="/" className="text-xl font-bold tracking-tight text-indigo-700">
@@ -21,13 +25,22 @@ export function Navbar() {
       </Link>
       {/* Desktop menu */}
       <div className="hidden sm:flex gap-6 items-center">
-        <Link to="/" className="hover:text-indigo-600 font-medium">
+        <Link
+          to="/"
+          className={`hover:text-indigo-600 font-medium ${activePath("/")}`}
+        >
           Home
         </Link>
-        <Link to="/blog" className="hover:text-indigo-600 font-medium">
+        <Link
+          to="/blog"
+          className={`hover:text-indigo-600 font-medium ${activePath("/blog")}`}
+        >
           Blog
         </Link>
-        <Link to="/resume" className="hover:text-indigo-600 font-medium">
+        <Link
+          to="/resume"
+          className={`hover:text-indigo-600 font-medium ${activePath("/resume")}`}
+        >
           Resume
         </Link>
         <Link
