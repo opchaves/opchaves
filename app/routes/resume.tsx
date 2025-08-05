@@ -1,14 +1,16 @@
 import GithubIcon from "@/components/icons/github";
 import LinkedInIcon from "@/components/icons/linkedin";
-import YoutubeIcon from "@/components/icons/youtube";
 
 export function meta() {
   return [
-    { title: "Paulo Chaves da Silva Filho – Resume" },
+    { title: "Resume - Paulo Chaves" },
     {
       name: "description",
-      content:
-        "Senior Developer with over 10 years of experience, specializing in backend development with Node.js, developing REST and GraphQL APIs. Skilled in the development of dynamic and modern UIs to enable efficient, scalable, and maintainable solutions in web applications using React.js and TypeScript.",
+      content: [
+        "Senior Developer with over 10 years of experience, specializing in backend development",
+        "with Node.js, developing REST and GraphQL APIs. Skilled in the development of dynamic and modern UIs",
+        "to enable efficient, scalable, and maintainable solutions in web applications using React.js and TypeScript.",
+      ].join(" "),
     },
   ];
 }
@@ -49,15 +51,6 @@ export default function Resume() {
             aria-label="LinkedIn"
           >
             <LinkedInIcon width={20} height={20} /> LinkedIn
-          </a>
-          <a
-            href="https://youtube.com/@opchaves"
-            target="_blank"
-            rel="noopener"
-            className="flex items-center gap-1 hover:text-indigo-600"
-            aria-label="YouTube"
-          >
-            <YoutubeIcon width={20} height={20} /> YouTube
           </a>
         </div>
         <div className="flex flex-wrap items-center gap-4 text-gray-700 text-sm mb-2">

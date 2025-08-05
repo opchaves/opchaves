@@ -68,10 +68,11 @@ export function Navbar() {
               <Link
                 key={item.name}
                 to={item.to}
-                className={`block px-4 py-2 text-sm ${selected === item.name
+                className={`block px-4 py-2 text-sm ${
+                  selected === item.name
                     ? "bg-indigo-100 text-indigo-700 font-semibold"
                     : "hover:bg-gray-100"
-                  }`}
+                }`}
                 onClick={() => {
                   setSelected(item.name);
                   setMenuOpen(false);
