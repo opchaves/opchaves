@@ -1,12 +1,26 @@
+import { useState } from "react";
 import { Link, Outlet } from "react-router";
 
 export function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [selected, setSelected] = useState("Home");
+  const menuItems = [
+    { name: "Home", to: "/" },
+    { name: "Blog", to: "/blog" },
+    { name: "Resume", to: "/resume" },
+    { name: "Sign in", to: "/auth/login" },
+  ];
+
+  const selectedItem =
+    menuItems.find((item) => item.name === selected) || menuItems[0];
+
   return (
     <nav className="w-full flex items-center justify-between py-4 px-8 bg-white/80 backdrop-blur border-b border-gray-200 sticky top-0 z-10">
       <Link to="/" className="text-xl font-bold tracking-tight text-indigo-700">
         Paulo Chaves
       </Link>
-      <div className="flex gap-6 items-center">
+      {/* Desktop menu */}
+      <div className="hidden sm:flex gap-6 items-center">
         <Link to="/" className="hover:text-indigo-600 font-medium">
           Home
         </Link>
@@ -22,6 +36,51 @@ export function Navbar() {
         >
           Sign in
         </Link>
+      </div>
+      {/* Mobile dropdown */}
+      <div className="sm:hidden relative">
+        <button
+          className="flex items-center gap-2 px-3 py-2 rounded border border-gray-300 bg-white text-gray-700"
+          onClick={() => setMenuOpen((open) => !open)}
+          aria-haspopup="true"
+          aria-expanded={menuOpen}
+        >
+          <span>{selectedItem.name}</span>
+          <svg
+            className={`w-4 h-4 transition-transform ${menuOpen ? "rotate-180" : ""}`}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </button>
+        {menuOpen && (
+          <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-lg z-20">
+            {menuItems.map((item) => (
+              <Link
+                key={item.name}
+                to={item.to}
+                className={`block px-4 py-2 text-sm ${
+                  selected === item.name
+                    ? "bg-indigo-100 text-indigo-700 font-semibold"
+                    : "hover:bg-gray-100"
+                }`}
+                onClick={() => {
+                  setSelected(item.name);
+                  setMenuOpen(false);
+                }}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </nav>
   );
