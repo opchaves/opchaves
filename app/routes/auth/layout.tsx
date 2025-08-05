@@ -41,10 +41,12 @@ function AuthFooter() {
           LinkedIn
         </a>
         <a
-          href="mailto:paulo@opchaves.com"
+          href="https://x.com/opchaves"
+          target="_blank"
+          rel="noopener"
           className="mx-2 hover:text-indigo-600"
         >
-          Email
+          X
         </a>
       </div>
       <div className="text-xs">
