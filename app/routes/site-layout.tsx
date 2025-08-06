@@ -2,10 +2,21 @@ import CaretDownIcon from "@/components/icons/caret-down";
 import { useState } from "react";
 import { Link, Outlet, useLocation } from "react-router";
 
+export default function SiteLayout() {
+  return (
+    <div className="min-h-screen flex flex-col bg-white">
+      <Navbar />
+      <main className="flex-1">
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
+  );
+}
+
 export function Navbar() {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [selected, setSelected] = useState("Home");
   const menuItems = [
     { name: "Home", to: "/" },
     { name: "Blog", to: "/blog" },
@@ -13,8 +24,8 @@ export function Navbar() {
     { name: "Sign in", to: "/auth/login" },
   ];
 
-  const selectedItem =
-    menuItems.find((item) => item.name === selected) || menuItems[0];
+  const selected =
+    menuItems.find((m) => m.to === location.pathname) || menuItems[0];
 
   const activePath = (val: string) =>
     val === location.pathname ? "text-indigo-700 font-semibold" : "";
@@ -59,7 +70,7 @@ export function Navbar() {
           aria-haspopup="true"
           aria-expanded={menuOpen}
         >
-          <span>{selectedItem.name}</span>
+          <span>{selected.name}</span>
           <CaretDownIcon rotate={menuOpen} />
         </button>
         {menuOpen && (
@@ -69,12 +80,11 @@ export function Navbar() {
                 key={item.name}
                 to={item.to}
                 className={`block px-4 py-2 text-sm ${
-                  selected === item.name
+                  selected.name === item.name
                     ? "bg-indigo-100 text-indigo-700 font-semibold"
                     : "hover:bg-gray-100"
                 }`}
                 onClick={() => {
-                  setSelected(item.name);
                   setMenuOpen(false);
                 }}
               >
@@ -129,17 +139,5 @@ export function Footer() {
         &copy; {new Date().getFullYear()} Paulo Chaves. All rights reserved.
       </div>
     </footer>
-  );
-}
-
-export default function SiteLayout() {
-  return (
-    <div className="min-h-screen flex flex-col bg-white">
-      <Navbar />
-      <main className="flex-1">
-        <Outlet />
-      </main>
-      <Footer />
-    </div>
   );
 }
