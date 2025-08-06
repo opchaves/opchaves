@@ -83,7 +83,8 @@ export default function Resume() {
           <ul className="list-disc pl-5 space-y-1">
             <li>
               <span className="font-semibold">Backend:</span> Node.js,
-              TypeScript, PostgreSQL, REST, GraphQL, MongoDB, Docker
+              TypeScript, PostgreSQL, Ruby on Rails, REST, GraphQL, MongoDB,
+              Docker
             </li>
             <li>
               <span className="font-semibold">Frontend:</span> React, React
@@ -171,7 +172,7 @@ export default function Resume() {
         </a>
         <Link
           reloadDocument
-          to="/resume.pdf"
+          to="/paulo-chaves-resume.pdf"
           className="ml-4 text-indigo-700 hover:underline"
         >
           Download

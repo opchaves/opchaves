@@ -13,7 +13,7 @@ export default [
     route("/resume", "routes/resume.tsx"),
   ]),
 
-  route("/resume.pdf", "routes/resume-pdf.ts"),
+  route("/paulo-chaves-resume.pdf", "routes/resume-pdf.ts"),
   route("/api/auth/*", "routes/api/auth.ts"),
 
   layout("routes/auth/layout.tsx", [
