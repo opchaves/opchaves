@@ -68,7 +68,7 @@ export default function Resume() {
         </header>
 
         <section className="mb-8">
-          <h3 className="text-lg font-bold mb-2 text-indigo-700">Summary</h3>
+          <h3 className="text-lg font-bold mb-2">Summary</h3>
           <p>
             Senior Developer with over 10 years of experience, specializing in
             backend development with Node.js, developing REST and GraphQL APIs.
@@ -79,7 +79,7 @@ export default function Resume() {
         </section>
 
         <section className="mb-8">
-          <h3 className="text-lg font-bold mb-2 text-indigo-700">Skills</h3>
+          <h3 className="text-lg font-bold mb-2">Skills</h3>
           <ul className="list-disc pl-5 space-y-1">
             <li>
               <span className="font-semibold">Backend:</span> Node.js,
@@ -93,7 +93,7 @@ export default function Resume() {
         </section>
 
         <section className="mb-8">
-          <h3 className="text-lg font-bold mb-2 text-indigo-700">Experience</h3>
+          <h3 className="text-lg font-bold mb-2">Experience</h3>
           <div className="mb-4">
             <div className="font-semibold">
               Senior Fullstack Developer (Remote | Contractor) at Thunkable
@@ -148,7 +148,7 @@ export default function Resume() {
         </section>
 
         <section>
-          <h3 className="text-lg font-bold mb-2 text-indigo-700">Education</h3>
+          <h3 className="text-lg font-bold mb-2">Education</h3>
           <ul className="list-disc pl-5 space-y-1">
             <li>Computer Science, Loyola University Chicago – 2014 - 2015</li>
             <li>
@@ -158,7 +158,7 @@ export default function Resume() {
           </ul>
         </section>
       </div>
-      <div className="mt-6">
+      <div className="mt-10">
         <a
           href="#"
           className="ml-0 text-indigo-700 hover:underline"
