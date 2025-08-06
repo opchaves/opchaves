@@ -89,7 +89,7 @@ function SkillsSection() {
       <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700">
         <li>
           <span className="font-semibold">Backend:</span> Node.js, TypeScript,
-          PostgreSQL, REST, GraphQL, MongoDB, Docker
+          PostgreSQL, REST, GraphQL, MongoDB, Docker, Ruby on Rails
         </li>
         <li>
           <span className="font-semibold">Frontend:</span> React, React Router,
