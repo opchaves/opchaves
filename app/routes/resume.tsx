@@ -1,5 +1,6 @@
 import GithubIcon from "@/components/icons/github";
 import LinkedInIcon from "@/components/icons/linkedin";
+import { Link } from "react-router";
 
 export function meta() {
   return [
@@ -158,13 +159,23 @@ export default function Resume() {
         </section>
       </div>
       <div className="mt-6">
-        <button
-          type="button"
-          className="px-4 py-2 bg-indigo-700 text-white rounded hover:bg-indigo-800"
-          onClick={() => handlePrint()}
+        <a
+          href="#"
+          className="ml-0 text-indigo-700 hover:underline"
+          onClick={(e) => {
+            e.preventDefault();
+            handlePrint();
+          }}
         >
-          Download as PDF
-        </button>
+          Print
+        </a>
+        <Link
+          reloadDocument
+          to="/resume.pdf"
+          className="ml-4 text-indigo-700 hover:underline"
+        >
+          Download
+        </Link>
       </div>
     </main>
   );
@@ -190,7 +201,7 @@ function handlePrint() {
     </html>
   `);
 
-  printWindow.document.title = "resume-paulo-chaves";
+  printWindow.document.title = "paulo-chaves-resume";
   printWindow.focus();
   printWindow.print();
   printWindow.close();
