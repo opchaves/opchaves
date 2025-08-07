@@ -2,14 +2,14 @@ import { data, Form, Link, redirect, useNavigation } from "react-router";
 import { signIn } from "../../lib/auth-client";
 import type { Route } from "./+types/login";
 import { useState } from "react";
-import { auth } from "@/lib/auth.server";
+import { getAuth } from "@/lib/auth.server";
 
 type ValidationError = {
   email?: string;
   password?: string;
 };
 
-export async function action({ request }: Route.ActionArgs) {
+export async function action({ request, context }: Route.ActionArgs) {
   const formData = await request.formData();
   const email = formData.get("email")?.toString() || "";
   const password = formData.get("password")?.toString() || "";
@@ -32,7 +32,7 @@ export async function action({ request }: Route.ActionArgs) {
   }
 
   try {
-    const res = await auth.api.signInEmail({
+    const res = await getAuth(context).api.signInEmail({
       body: {
         email,
         password,

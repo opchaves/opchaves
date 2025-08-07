@@ -170,13 +170,12 @@ export default function Resume() {
         >
           Print
         </a>
-        <Link
-          reloadDocument
-          to="/paulo-chaves-resume.pdf"
+        <a
+          href="/assets/paulo-chaves-resume.pdf"
           className="ml-4 text-indigo-700 hover:underline"
         >
           Download
-        </Link>
+        </a>
       </div>
     </main>
   );

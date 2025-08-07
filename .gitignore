@@ -10,3 +10,9 @@
 # React Router
 /.react-router/
 /build/
+
+# Cloudflare
+.mf
+.wrangler
+.dev.vars
+.dev.vars.*

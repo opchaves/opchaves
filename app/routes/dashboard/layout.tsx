@@ -2,7 +2,7 @@ import { signOut } from "../../lib/auth-client";
 import React, { useState } from "react";
 import { Link, Outlet, redirect, useNavigate } from "react-router";
 import type { Route } from "./+types/layout";
-import { auth } from "@/lib/auth.server";
+import { getAuth } from "@/lib/auth.server";
 
 // Placeholder icons and avatar (replace with shadcn/ui or your icon library)
 const MenuIcon = () => (
@@ -38,8 +38,10 @@ const Avatar = ({ src }: { src?: string }) => (
   />
 );
 
-export async function loader({ request }: Route.LoaderArgs) {
-  const session = await auth.api.getSession({ headers: request.headers });
+export async function loader({ request, context }: Route.LoaderArgs) {
+  const session = await getAuth(context).api.getSession({
+    headers: request.headers,
+  });
 
   if (!session?.user) {
     return redirect("/auth/login"); // Redirect to login if not authenticated
@@ -53,6 +55,8 @@ export default function DashboardLayout({ loaderData }: Route.ComponentProps) {
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [avatarDropdown, setAvatarDropdown] = useState(false);
+
+  const image = loaderData.image || "https://ui.shadcn.com/avatars/01.png";
 
   // Responsive: close drawer by default on mobile
   React.useEffect(() => {
@@ -147,7 +151,7 @@ export default function DashboardLayout({ loaderData }: Route.ComponentProps) {
                 onClick={() => setAvatarDropdown((v) => !v)}
                 aria-label="Open avatar menu"
               >
-                <Avatar src={loaderData.image} />
+                <Avatar src={image} />
               </button>
               {avatarDropdown && (
                 <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-lg z-50">

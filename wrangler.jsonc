@@ -1,0 +1,20 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "opchavescom",
+  "compatibility_date": "2025-04-04",
+  "main": "./workers/app.ts",
+  "compatibility_flags": [
+    "nodejs_compat",
+  ],
+  "vars": {
+    "VALUE_FROM_CLOUDFLARE": "Hello from Cloudflare"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "opchavescom",
+      "database_id": "e97ed9ac-cb3f-4d4d-8f03-dd6bc4473562",
+      "migrations_dir": "database/migrations",
+    }
+  ]
+}

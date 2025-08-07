@@ -1,8 +1,8 @@
 import { data, Form, Link, redirect, useNavigation } from "react-router";
-import { signUp, signIn } from "../../lib/auth-client";
+import { signIn } from "../../lib/auth-client";
 import type { Route } from "./+types/register";
 import { useState } from "react";
-import { auth } from "@/lib/auth.server";
+import { getAuth } from "@/lib/auth.server";
 
 type ValidationError = {
   name?: string;
@@ -10,7 +10,7 @@ type ValidationError = {
   password?: string;
 };
 
-export async function action({ request }: Route.ActionArgs) {
+export async function action({ request, context }: Route.ActionArgs) {
   const formData = await request.formData();
   const name = formData.get("name")?.toString() || "";
   const email = formData.get("email")?.toString() || "";
@@ -36,7 +36,7 @@ export async function action({ request }: Route.ActionArgs) {
   }
 
   try {
-    const res = await auth.api.signUpEmail({
+    const res = await getAuth(context).api.signUpEmail({
       body: { name, email, password },
       headers: request.headers,
       asResponse: true,

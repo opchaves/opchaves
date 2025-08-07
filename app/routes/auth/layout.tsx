@@ -1,9 +1,11 @@
 import { Outlet, Link, redirect } from "react-router";
 import type { Route } from "./+types/layout";
-import { auth } from "@/lib/auth.server";
+import { getAuth } from "@/lib/auth.server";
 
-export async function loader({ request }: Route.LoaderArgs) {
-  const session = await auth.api.getSession({ headers: request.headers });
+export async function loader({ request, context }: Route.LoaderArgs) {
+  const session = await getAuth(context).api.getSession({
+    headers: request.headers,
+  });
   if (session?.user) {
     return redirect("/dashboard", 303);
   }
@@ -56,7 +58,7 @@ function AuthFooter() {
   );
 }
 
-export default function AuthLayout({ loaderData }: Route.ComponentProps) {
+export default function AuthLayout() {
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <AuthNavbar />
