@@ -33,7 +33,7 @@ export function Navbar() {
   return (
     <nav className="w-full flex items-center justify-between py-4 px-8 bg-white/80 backdrop-blur border-b border-gray-200 sticky top-0 z-10">
       <Link to="/" className="text-xl font-bold tracking-tight text-gray-800">
-        Paulo Chaves
+        OpChaves
       </Link>
       {/* Desktop menu */}
       <div className="hidden sm:flex gap-6 items-center text-gray-800">
@@ -74,12 +74,12 @@ export function Navbar() {
           <CaretDownIcon rotate={menuOpen} />
         </button>
         {menuOpen && (
-          <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-lg z-20">
+          <div className="absolute right-0 mt-1 w-40 bg-white border border-gray-200 rounded shadow-lg z-20">
             {menuItems.map((item) => (
               <Link
                 key={item.name}
                 to={item.to}
-                className={`block px-4 py-2 text-sm ${selected.name === item.name
+                className={`block px-4 py-4 text-sm text-gray-700 ${selected.name === item.name
                     ? "bg-gray-200 text-gray-800 font-semibold"
                     : "hover:bg-gray-200"
                   }`}
