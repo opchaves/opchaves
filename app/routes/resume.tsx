@@ -212,7 +212,7 @@ function handlePrint() {
   if (!resume) return;
 
   const resumeContent = resume.innerHTML;
-  const printWindow = window.open();
+  const printWindow = window.open("", "", "width=800,height=600");
   const headContent = document.querySelector("head")?.innerHTML;
 
   if (!printWindow || !headContent) {
@@ -220,6 +220,7 @@ function handlePrint() {
     return;
   }
 
+  printWindow.document.title = "paulo-chaves-resume";
   printWindow.document.write(`
     <html lang="en">
       <head>${headContent}</head>
@@ -227,8 +228,10 @@ function handlePrint() {
     </html>
   `);
 
-  printWindow.document.title = "paulo-chaves-resume";
-  printWindow.focus();
-  printWindow.print();
-  printWindow.close();
+  // wait a tiny bit for the content to load and apply styles to the print window
+  setTimeout(() => {
+    printWindow.focus();
+    printWindow.print();
+    printWindow.close();
+  }, 50);
 }
