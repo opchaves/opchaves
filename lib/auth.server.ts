@@ -5,8 +5,6 @@ import * as schema from "../database/schema";
 import { env } from "./env";
 import type { AppLoadContext } from "react-router";
 
-console.log(">>>> env", env);
-
 function authBuilder(ctx: AppLoadContext) {
   return betterAuth({
     database: drizzleAdapter(ctx.db, {
