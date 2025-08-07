@@ -17,8 +17,16 @@
       "migrations_dir": "database/migrations",
     },
   ],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1,
+  },
   "env": {
     "production": {
+      "observability": {
+        "enabled": true,
+        "head_sampling_rate": 1,
+      },
       "d1_databases": [
         {
           "binding": "DB",
