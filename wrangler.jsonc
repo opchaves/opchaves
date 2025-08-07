@@ -37,8 +37,8 @@
       ],
       "vars": {
         "VALUE_FROM_CLOUDFLARE": "Hello from Production",
-        "BETTER_AUTH_URL": "https://opchavescom-production.opaulochaves.workers.dev",
-        "CLIENT_ORIGN": "https://opchavescom-production.opaulochaves.workers.dev",
+        "BETTER_AUTH_URL": "https://opchaves.com",
+        "CLIENT_ORIGN": "https://opchaves.com",
       },
     },
   },
