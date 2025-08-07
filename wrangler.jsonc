@@ -3,11 +3,11 @@
   "name": "opchavescom",
   "compatibility_date": "2025-04-04",
   "main": "./workers/app.ts",
-  "compatibility_flags": [
-    "nodejs_compat",
-  ],
+  "compatibility_flags": ["nodejs_compat"],
   "vars": {
-    "VALUE_FROM_CLOUDFLARE": "Hello from Cloudflare"
+    "VALUE_FROM_CLOUDFLARE": "Hello from Development",
+    "BETTER_AUTH_URL": "http://localhost:5173",
+    "CLIENT_ORIGN": "http://localhost:5173",
   },
   "d1_databases": [
     {
@@ -15,6 +15,23 @@
       "database_name": "opchavescom",
       "database_id": "e97ed9ac-cb3f-4d4d-8f03-dd6bc4473562",
       "migrations_dir": "database/migrations",
-    }
-  ]
+    },
+  ],
+  "env": {
+    "production": {
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "opchavescom",
+          "database_id": "e97ed9ac-cb3f-4d4d-8f03-dd6bc4473562",
+          "migrations_dir": "database/migrations",
+        },
+      ],
+      "vars": {
+        "VALUE_FROM_CLOUDFLARE": "Hello from Production",
+        "BETTER_AUTH_URL": "https://opchavescom-production.opaulochaves.workers.dev",
+        "CLIENT_ORIGN": "https://opchavescom-production.opaulochaves.workers.dev",
+      },
+    },
+  },
 }

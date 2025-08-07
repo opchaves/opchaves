@@ -18,6 +18,7 @@
 !vite.config.ts
 !server.js
 !playwright.config.ts
+!wrangler.jsonc
 !README.md
 
 /database/migrations
