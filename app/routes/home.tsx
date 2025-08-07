@@ -13,11 +13,8 @@ export function meta() {
         "specializing in building REST and GraphQL APIs with Node.js,",
         "powered by MongoDB, Postgres, and Redis. I also develop modern",
         "UIs with React.js leveraging TypeScript to deliver robust and highly",
-        "efficient web applications. My focus is on creating efficient,",
-        "maintainable solutions that drive business impact, from optimizing",
-        "infrastructure to integrating tools like Google Sheets, Baserow, and Airtable.",
-        "Experienced in remote and collaborative environments, I thrive on solving",
-        "complex challenges and delivering value through code.",
+        "efficient web applications. Experienced in remote and collaborative",
+        "environments, I thrive on solving complex challenges and delivering value through code.",
       ].join(" "),
     },
   ];
@@ -41,14 +38,9 @@ function HeroSection() {
         <span className="font-semibold">Redis</span>. I also develop modern UIs
         with <span className="font-semibold">React.js</span> leveraging{" "}
         <span className="font-semibold">TypeScript</span> to deliver robust and
-        highly efficient web applications. My focus is on creating efficient,
-        maintainable solutions that drive business impact, from optimizing
-        infrastructure to integrating tools like{" "}
-        <span className="font-semibold">Google Sheets</span>,{" "}
-        <span className="font-semibold">Baserow</span>, and{" "}
-        <span className="font-semibold">Airtable</span>. Experienced in remote
-        and collaborative environments, I thrive on solving complex challenges
-        and delivering value through code.
+        highly efficient web applications. Experienced in remote and
+        collaborative environments, I thrive on solving complex challenges and
+        delivering value through code.
       </p>
     </section>
   );
