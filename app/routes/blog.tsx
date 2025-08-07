@@ -18,7 +18,7 @@ const posts = [
 export default function Blog() {
   return (
     <section className="max-w-2xl mx-auto py-12 px-4">
-      <h1 className="text-4xl font-extrabold text-indigo-700 mb-8 text-center">
+      <h1 className="text-4xl font-extrabold text-gray-700 mb-8 text-center">
         Blog
       </h1>
       <ul className="space-y-8">
@@ -27,7 +27,7 @@ export default function Blog() {
             <div className="text-xs text-gray-400 mb-1">{post.date}</div>
             <a
               href={`/blog/${post.slug}`}
-              className="text-2xl font-bold text-indigo-700 hover:underline"
+              className="text-2xl font-bold text-gray-700 hover:underline"
             >
               {post.title}
             </a>
