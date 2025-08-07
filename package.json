@@ -9,7 +9,7 @@
     "db:migrate": "wrangler d1 migrations apply --local DB",
     "db:migrate-production": "dotenv -- drizzle-kit migrate",
     "deploy": "CLOUDFLARE_ENV=production npm run build && wrangler deploy",
-    "dev": "react-router dev",
+    "dev": "react-router dev --host 0.0.0.0",
     "postinstall": "npm run cf-typegen",
     "preview": "npm run build && vite preview",
     "typecheck": "npm run cf-typegen && react-router typegen && tsc -b",
