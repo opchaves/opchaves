@@ -1,6 +1,5 @@
 import GithubIcon from "@/components/icons/github";
 import LinkedInIcon from "@/components/icons/linkedin";
-import { Link } from "react-router";
 
 export function meta() {
   return [
@@ -8,9 +7,13 @@ export function meta() {
     {
       name: "description",
       content: [
-        "Senior Developer with over 10 years of experience, specializing in backend development",
-        "with Node.js, developing REST and GraphQL APIs. Skilled in the development of dynamic and modern UIs",
-        "to enable efficient, scalable, and maintainable solutions in web applications using React.js and TypeScript.",
+        "I’m a Senior Full Stack Engineer with over 10 years of experience,",
+        "specializing in building REST and GraphQL APIs with Node.js,",
+        "powered by MongoDB, Postgres, and Redis. I also develop modern",
+        "UIs with React.js leveraging TypeScript to deliver robust and highly",
+        "efficient web applications. My focus is on creating efficient,",
+        "maintainable solutions that drive business impact, from optimizing",
+        "infrastructure to integrating tools like Google Sheets, Baserow, and Airtable.",
       ].join(" "),
     },
   ];
@@ -25,9 +28,9 @@ export default function Resume() {
             Paulo Chaves da Silva Filho
           </h1>
           <h2 className="text-xl font-semibold mb-2">
-            Senior Fullstack Developer
+            Senior Full Stack Engineer
           </h2>
-          <div className="flex flex-wrap items-center gap-4 text-gray-700 text-sm mb-2">
+          <div className="flex flex-wrap items-center gap-4 text-sm mb-2">
             <a
               href="https://opchaves.com"
               target="_blank"
@@ -40,7 +43,7 @@ export default function Resume() {
               href="https://github.com/opchaves"
               target="_blank"
               rel="noopener"
-              className="flex items-center gap-1 hover:text-indigo-600"
+              className="flex items-center gap-1 hover:underline"
               aria-label="GitHub"
             >
               <GithubIcon width={20} height={20} /> Github
@@ -49,16 +52,16 @@ export default function Resume() {
               href="https://linkedin.com/in/opchaves"
               target="_blank"
               rel="noopener"
-              className="flex items-center gap-1 hover:text-indigo-600"
+              className="flex items-center gap-1 hover:underline"
               aria-label="LinkedIn"
             >
               <LinkedInIcon width={20} height={20} /> LinkedIn
             </a>
           </div>
-          <div className="flex flex-wrap items-center gap-4 text-gray-700 text-sm mb-2">
+          <div className="flex flex-wrap items-center gap-4 text-sm mb-2">
             <a
               href="mailto:opaulochaves@gmail.com"
-              className="hover:text-indigo-600"
+              className="hover:underline"
               aria-label="Email"
             >
               opaulochaves@gmail.com
@@ -70,11 +73,14 @@ export default function Resume() {
         <section className="mb-8">
           <h3 className="text-lg font-bold mb-2">Summary</h3>
           <p>
-            Senior Developer with over 10 years of experience, specializing in
-            backend development with Node.js, developing REST and GraphQL APIs.
-            Skilled in the development of dynamic and modern UIs to enable
-            efficient, scalable, and maintainable solutions in web applications
-            using React.js and TypeScript.
+            I’m a Senior Full Stack Engineer with over 10 years of experience,
+            specializing in building REST and GraphQL APIs with Node.js, powered
+            by MongoDB, Postgres, and Redis. I also develop modern UIs with
+            React.js leveraging TypeScript to deliver robust and highly
+            efficient web applications. My focus is on creating efficient,
+            maintainable solutions that drive business impact, from optimizing
+            infrastructure to integrating tools like Google Sheets, Baserow, and
+            Airtable.
           </p>
         </section>
 
@@ -87,7 +93,7 @@ export default function Resume() {
               Docker
             </li>
             <li>
-              <span className="font-semibold">Frontend:</span> React, React
+              <span className="font-semibold">Frontend:</span> React.js, React
               Router, Redux, Tailwind CSS, AntD, UI/UX, SSR, SPA
             </li>
           </ul>
@@ -99,27 +105,47 @@ export default function Resume() {
             <div className="font-semibold">
               Senior Fullstack Developer (Remote | Contractor) at Thunkable
             </div>
-            <div className="text-sm text-gray-600 mb-1">
+            <div className="text-xs text-gray-600 my-1">
               April 2023 to Current
             </div>
             <ul className="list-disc pl-5 space-y-1">
               <li>
-                Design and maintain scalable Node.js APIs using Express,
-                GraphQL, and REST, integrated with MongoDB and Redis.
+                Develop and maintain scalable Node.js backends with REST and
+                GraphQL APIs, integrating data sources like Google Sheets,
+                Airtable, and Baserow to power dynamic web, iOS, and Android
+                applications.
               </li>
               <li>
-                Integrate third-party tools (e.g., Airtable, Firebase) into
-                backend infrastructure.
+                Build and optimize infrastructure using Docker and Kubernetes to
+                enable seamless app generation across platforms.
               </li>
               <li>
-                Develop React.js-based frontend interfaces with AntD and Redux.
+                Lead end-to-end feature development, managing database, backend,
+                frontend (React.js, TypeScript), and mobile (React Native, Expo)
+                components.
               </li>
-              <li>Collaborate with QA to author Cypress E2E tests.</li>
+              <li>
+                Migrate extensive JavaScript codebases to TypeScript, enhancing
+                maintainability and type safety.
+              </li>
+              <li>
+                Optimize backend processes to reduce GCP storage costs,
+                improving operational efficiency.
+              </li>
+              <li>
+                Enhance MongoDB performance by optimizing queries, enabling
+                replica sets, and managing version upgrades for reliability and
+                scalability.
+              </li>
+              <li>
+                Implement end-to-end tests with Cypress, ensuring robust feature
+                validation and application reliability.
+              </li>
             </ul>
           </div>
           <div className="mb-4">
             <div className="font-semibold">Software Engineer at BairesDev</div>
-            <div className="text-sm text-gray-600 mb-1">
+            <div className="text-xs text-gray-600 my-1">
               July 2020 to December 2022
             </div>
             <ul className="list-disc pl-5 space-y-1">
@@ -135,7 +161,7 @@ export default function Resume() {
           </div>
           <div className="mb-4">
             <div className="font-semibold">Software Engineer at Movinga</div>
-            <div className="text-sm text-gray-600 mb-1">
+            <div className="text-xs text-gray-600 my-1">
               August 2019 to March 2020
             </div>
             <ul className="list-disc pl-5 space-y-1">
@@ -162,7 +188,7 @@ export default function Resume() {
       <div className="mt-10">
         <a
           href="#"
-          className="ml-0 text-indigo-700 hover:underline"
+          className="ml-0 text-gray-800 hover:underline"
           onClick={(e) => {
             e.preventDefault();
             handlePrint();
@@ -172,7 +198,7 @@ export default function Resume() {
         </a>
         <a
           href="/assets/paulo-chaves-resume.pdf"
-          className="ml-4 text-indigo-700 hover:underline"
+          className="ml-4 text-gray-800 hover:underline"
         >
           Download
         </a>

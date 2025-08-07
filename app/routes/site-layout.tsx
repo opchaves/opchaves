@@ -28,36 +28,36 @@ export function Navbar() {
     menuItems.find((m) => m.to === location.pathname) || menuItems[0];
 
   const activePath = (val: string) =>
-    val === location.pathname ? "text-indigo-700 font-semibold" : "";
+    val === location.pathname ? "text-gray-900 font-semibold" : "";
 
   return (
     <nav className="w-full flex items-center justify-between py-4 px-8 bg-white/80 backdrop-blur border-b border-gray-200 sticky top-0 z-10">
-      <Link to="/" className="text-xl font-bold tracking-tight text-indigo-700">
+      <Link to="/" className="text-xl font-bold tracking-tight text-gray-800">
         Paulo Chaves
       </Link>
       {/* Desktop menu */}
-      <div className="hidden sm:flex gap-6 items-center">
+      <div className="hidden sm:flex gap-6 items-center text-gray-800">
         <Link
           to="/"
-          className={`hover:text-indigo-600 font-medium ${activePath("/")}`}
+          className={`hover:text-gray-800 font-medium ${activePath("/")}`}
         >
           Home
         </Link>
         <Link
           to="/blog"
-          className={`hover:text-indigo-600 font-medium ${activePath("/blog")}`}
+          className={`hover:text-gray-800 font-medium ${activePath("/blog")}`}
         >
           Blog
         </Link>
         <Link
           to="/resume"
-          className={`hover:text-indigo-600 font-medium ${activePath("/resume")}`}
+          className={`hover:text-gray-800 font-medium ${activePath("/resume")}`}
         >
           Resume
         </Link>
         <Link
           to="/auth/login"
-          className="ml-4 px-4 py-1 rounded bg-indigo-600 text-white hover:bg-indigo-700 font-semibold"
+          className="ml-4 px-4 py-1 rounded bg-gray-600 text-white hover:bg-gray-800 font-semibold"
         >
           Sign in
         </Link>
@@ -65,7 +65,7 @@ export function Navbar() {
       {/* Mobile dropdown */}
       <div className="sm:hidden relative">
         <button
-          className="flex items-center gap-2 px-3 py-2 rounded border border-gray-300 bg-white text-gray-700"
+          className="flex items-center gap-2 px-3 py-2 rounded border border-gray-300 bg-white text-gray-800"
           onClick={() => setMenuOpen((open) => !open)}
           aria-haspopup="true"
           aria-expanded={menuOpen}
@@ -79,11 +79,10 @@ export function Navbar() {
               <Link
                 key={item.name}
                 to={item.to}
-                className={`block px-4 py-2 text-sm ${
-                  selected.name === item.name
-                    ? "bg-indigo-100 text-indigo-700 font-semibold"
-                    : "hover:bg-gray-100"
-                }`}
+                className={`block px-4 py-2 text-sm ${selected.name === item.name
+                    ? "bg-gray-200 text-gray-800 font-semibold"
+                    : "hover:bg-gray-200"
+                  }`}
                 onClick={() => {
                   setMenuOpen(false);
                 }}
@@ -100,13 +99,13 @@ export function Navbar() {
 
 export function Footer() {
   return (
-    <footer className="w-full py-6 text-center text-gray-500 border-t mt-12">
+    <footer className="w-full py-6 text-center text-gray-600 border-t mt-12">
       <div className="max-w-3xl mx-auto mb-2">
         <a
           href="https://x.com/opchaves"
           target="_blank"
           rel="noopener"
-          className="mx-2 hover:text-indigo-600"
+          className="mx-2 hover:text-gray-800"
         >
           X
         </a>
@@ -114,7 +113,7 @@ export function Footer() {
           href="https://linkedin.com/in/opchaves"
           target="_blank"
           rel="noopener"
-          className="mx-2 hover:text-indigo-600"
+          className="mx-2 hover:text-gray-800"
         >
           LinkedIn
         </a>
@@ -122,7 +121,7 @@ export function Footer() {
           href="https://github.com/opchaves"
           target="_blank"
           rel="noopener"
-          className="mx-2 hover:text-indigo-600"
+          className="mx-2 hover:text-gray-800"
         >
           GitHub
         </a>
@@ -130,7 +129,7 @@ export function Footer() {
           href="https://youtube.com/@opchaves"
           target="_blank"
           rel="noopener"
-          className="mx-2 hover:text-indigo-600"
+          className="mx-2 hover:text-gray-800"
         >
           YouTube
         </a>

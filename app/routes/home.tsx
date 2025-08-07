@@ -5,13 +5,19 @@ import YoutubeIcon from "@/components/icons/youtube";
 
 export function meta() {
   return [
-    { title: "Paulo Chaves – Senior Fullstack Developer" },
+    { title: "Paulo Chaves – Senior Full Stack Engineer" },
     {
       name: "description",
       content: [
-        "Senior Developer with over 10 years of experience, specializing in backend development",
-        "with Node.js, developing REST and GraphQL APIs. Skilled in the development of dynamic and modern UIs",
-        "to enable efficient, scalable, and maintainable solutions in web applications using React.js and TypeScript.",
+        "I’m a Senior Full Stack Engineer with over 10 years of experience,",
+        "specializing in building REST and GraphQL APIs with Node.js,",
+        "powered by MongoDB, Postgres, and Redis. I also develop modern",
+        "UIs with React.js leveraging TypeScript to deliver robust and highly",
+        "efficient web applications. My focus is on creating efficient,",
+        "maintainable solutions that drive business impact, from optimizing",
+        "infrastructure to integrating tools like Google Sheets, Baserow, and Airtable.",
+        "Experienced in remote and collaborative environments, I thrive on solving",
+        "complex challenges and delivering value through code.",
       ].join(" "),
     },
   ];
@@ -20,64 +26,30 @@ export function meta() {
 function HeroSection() {
   return (
     <section className="flex flex-col items-center justify-center min-h-[50vh] text-center px-4">
-      <h1 className="text-4xl md:text-6xl font-extrabold mb-4 mt-10 sm:mt-2 bg-gradient-to-r from-indigo-600 to-blue-500 text-transparent bg-clip-text">
+      <h1 className="text-4xl md:text-6xl font-extrabold mb-4 mt-10 sm:mt-2 bg-gradient-to-r from-gray-800 to-gray-500 text-transparent bg-clip-text">
         Paulo Chaves
       </h1>
       <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-gray-700">
-        Senior Fullstack Developer
+        Senior Full Stack Engineer
       </h2>
-      <p className="max-w-3xl text-lg md:text-xl text-gray-600 mb-8">
-        Senior Developer with over 10 years of experience, specializing in
-        backend development with{" "}
-        <span className="font-semibold text-indigo-600">Node.js</span>,{" "}
-        developing REST and GraphQL APIs. Skilled in the development of dynamic
-        and modern UIs to enable efficient, scalable, and maintainable solutions
-        in web applications using{" "}
-        <span className="font-semibold text-indigo-600">React.js</span> and{" "}
-        <span className="font-semibold text-indigo-600">TypeScript</span>.
+      <p className="max-w-3xl text-lg md:text-xl text-gray-700 mb-8">
+        I’m a Senior Full Stack Engineer with over 10 years of experience,
+        specializing in building REST and GraphQL APIs with{" "}
+        <span className="font-semibold">Node.js</span>, powered by{" "}
+        <span className="font-semibold">MongoDB</span>,{" "}
+        <span className="font-semibold">Postgres</span>, and{" "}
+        <span className="font-semibold">Redis</span>. I also develop modern UIs
+        with <span className="font-semibold">React.js</span> leveraging{" "}
+        <span className="font-semibold">TypeScript</span> to deliver robust and
+        highly efficient web applications. My focus is on creating efficient,
+        maintainable solutions that drive business impact, from optimizing
+        infrastructure to integrating tools like{" "}
+        <span className="font-semibold">Google Sheets</span>,{" "}
+        <span className="font-semibold">Baserow</span>, and{" "}
+        <span className="font-semibold">Airtable</span>. Experienced in remote
+        and collaborative environments, I thrive on solving complex challenges
+        and delivering value through code.
       </p>
-
-      <div className="flex flex-wrap gap-3 justify-center mb-8">
-        <span className="px-3 py-1 bg-gray-100 rounded-lg text-sm font-medium text-gray-800 border">
-          Node.js
-        </span>
-        <span className="px-3 py-1 bg-gray-100 rounded-lg text-sm font-medium text-gray-800 border">
-          React
-        </span>
-        <span className="px-3 py-1 bg-gray-100 rounded-lg text-sm font-medium text-gray-800 border">
-          TypeScript
-        </span>
-        <span className="px-3 py-1 bg-gray-100 rounded-lg text-sm font-medium text-gray-800 border">
-          PostgreSQL
-        </span>
-      </div>
-      <div className="flex gap-4 justify-center">
-        <a
-          href="https://github.com/opchaves"
-          target="_blank"
-          rel="noopener"
-          aria-label="GitHub"
-          className="text-gray-500 hover:text-indigo-600 text-2xl"
-        >
-          <i className="fa-brands fa-github"></i>
-        </a>
-        <a
-          href="https://linkedin.com/in/opchaves"
-          target="_blank"
-          rel="noopener"
-          aria-label="LinkedIn"
-          className="text-gray-500 hover:text-indigo-600 text-2xl"
-        >
-          <i className="fa-brands fa-linkedin"></i>
-        </a>
-        <a
-          href="mailto:paulo@opchaves.com"
-          className="text-gray-500 hover:text-indigo-600 text-2xl"
-          aria-label="Email"
-        >
-          <i className="fa-solid fa-envelope"></i>
-        </a>
-      </div>
     </section>
   );
 }
@@ -85,7 +57,7 @@ function HeroSection() {
 function SkillsSection() {
   return (
     <section className="max-w-3xl mx-auto pb-12 pt-3 px-4">
-      <h3 className="text-xl font-bold mb-4 text-indigo-700">Skills</h3>
+      <h3 className="text-xl font-bold mb-4 text-gray-700">Skills</h3>
       <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700">
         <li>
           <span className="font-semibold">Backend:</span> Node.js, TypeScript,
@@ -103,7 +75,7 @@ function SkillsSection() {
 function SocialLinksSection() {
   return (
     <section className="max-w-3xl mx-auto pb-12 pt-3 px-4">
-      <h3 className="text-xl font-bold mb-4 text-indigo-700 text-center">
+      <h3 className="text-xl font-bold mb-4 text-center text-gray-700">
         Let's Connect
       </h3>
       <div className="flex gap-6 justify-center">
@@ -112,7 +84,7 @@ function SocialLinksSection() {
           target="_blank"
           rel="noopener"
           aria-label="X (Twitter)"
-          className="text-gray-500 hover:text-indigo-600 text-2xl"
+          className="text-gray-500 hover:text-gray-800 text-2xl"
         >
           <XIcon />
         </a>
@@ -121,7 +93,7 @@ function SocialLinksSection() {
           target="_blank"
           rel="noopener"
           aria-label="LinkedIn"
-          className="text-gray-500 hover:text-indigo-600 text-2xl"
+          className="text-gray-500 hover:text-gray-800 text-2xl"
         >
           <LinkedInIcon />
         </a>
@@ -130,7 +102,7 @@ function SocialLinksSection() {
           target="_blank"
           rel="noopener"
           aria-label="GitHub"
-          className="text-gray-500 hover:text-indigo-600 text-2xl"
+          className="text-gray-500 hover:text-gray-800 text-2xl"
         >
           <GithubIcon />
         </a>
@@ -139,7 +111,7 @@ function SocialLinksSection() {
           target="_blank"
           rel="noopener"
           aria-label="YouTube"
-          className="text-gray-500 hover:text-indigo-600 text-2xl"
+          className="text-gray-500 hover:text-gray-800 text-2xl"
         >
           <YoutubeIcon />
         </a>
