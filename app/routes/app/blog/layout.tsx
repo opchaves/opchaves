@@ -1,5 +1,10 @@
 import React from "react";
+import { Outlet } from "react-router";
 
-export default function BlogLayout({ children }: { children: React.ReactNode }) {
-  return <div>{children}</div>;
+export default function BlogLayout() {
+  return (
+    <div>
+      <Outlet />
+    </div>
+  );
 }
