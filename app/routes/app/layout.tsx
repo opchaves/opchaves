@@ -1,6 +1,6 @@
 import { signOut } from "../../lib/auth-client";
 import React, { useState } from "react";
-import { Link, Outlet, redirect, useNavigate } from "react-router";
+import { Link, Outlet, redirect, useLocation, useNavigate } from "react-router";
 import type { Route } from "./+types/layout";
 import { getAuth } from "@/lib/auth.server";
 import { APP_PATH } from "@/lib/consts";
@@ -53,6 +53,7 @@ export async function loader({ request, context }: Route.LoaderArgs) {
 
 export default function Layout({ loaderData }: Route.ComponentProps) {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [avatarDropdown, setAvatarDropdown] = useState(false);
@@ -89,7 +90,12 @@ export default function Layout({ loaderData }: Route.ComponentProps) {
           md:relative md:translate-x-0 md:w-64 md:block`}
       >
         <div className="flex items-center justify-between h-16 px-5 border-b">
-          <span className="font-bold text-lg">OpChaves</span>
+          <Link
+            to="/"
+            className="font-bold text-lg"
+          >
+            OpChaves
+          </Link>
           <button
             className="md:hidden p-2 rounded hover:bg-gray-100"
             onClick={() => setDrawerOpen(false)}
@@ -106,7 +112,15 @@ export default function Layout({ loaderData }: Route.ComponentProps) {
             Home
           </Link>
           <Link
+            to={`${APP_PATH}/blog`}
+            state={{ title: "Blog" }}
+            className="block px-2 py-2 rounded hover:bg-gray-100"
+          >
+            Blog
+          </Link>
+          <Link
             to={`${APP_PATH}/settings`}
+            state={{ title: "Settings" }}
             className="block px-2 py-2 rounded hover:bg-gray-100"
           >
             Settings
@@ -136,7 +150,7 @@ export default function Layout({ loaderData }: Route.ComponentProps) {
             </button>
             <Link to={APP_PATH} className="flex items-center gap-2">
               <span className="font-bold text-lg hidden sm:block">
-                KomMonei
+                {location.state?.title || "Dashboard"}
               </span>
             </Link>
           </div>
