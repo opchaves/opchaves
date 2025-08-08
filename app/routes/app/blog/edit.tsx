@@ -1,6 +1,6 @@
 import type { Route } from "./+types/edit";
 import React from "react";
-import { useFetcher } from "react-router";
+import { useFetcher, useNavigate } from "react-router";
 import { useForm, useWatch, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -87,6 +87,7 @@ const schema = z.object({
     .max(200, "Excerpt must be at most 200 characters")
     .optional(),
   content: z.string().min(20, "Content must be at least 20 characters"),
+  status: z.enum(["draft", "published"]),
 });
 
 type BlogForm = z.infer<typeof schema>;
@@ -96,6 +97,7 @@ export default function BlogEdit({
   actionData,
 }: Route.ComponentProps) {
   const fetcher = useFetcher();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -108,6 +110,7 @@ export default function BlogEdit({
       title: loaderData.title,
       excerpt: loaderData.excerpt ?? "",
       content: loaderData.content,
+      status: (loaderData.status ?? "draft") as "draft" | "published",
     },
   });
   const content = useWatch({ control, name: "content" });
@@ -119,10 +122,27 @@ export default function BlogEdit({
     formData.append("title", data.title);
     formData.append("excerpt", data.excerpt ?? "");
     formData.append("content", data.content);
+    formData.append("status", data.status ?? "draft");
     fetcher.submit(formData, {
       method: "post",
       action: window.location.pathname,
     });
+  };
+
+  const hasContent = Boolean(
+    watch("title") !== loaderData.title ||
+    watch("excerpt") !== loaderData.excerpt ||
+    watch("content") !== loaderData.content ||
+    watch("status") !== (loaderData.status ?? "draft")
+  );
+  const handleCancel = () => {
+    if (hasContent) {
+      if (window.confirm("You have unsaved changes. Are you sure you want to leave?")) {
+        navigate("/app/blog");
+      }
+    } else {
+      navigate("/app/blog");
+    }
   };
 
   React.useEffect(() => {
@@ -203,7 +223,32 @@ export default function BlogEdit({
             </p>
           )}
         </div>
-        <div className="flex justify-end">
+        <div className="flex items-center gap-2 mt-2">
+          <label className="font-medium text-gray-700">
+            <Controller
+              name="status"
+              control={control}
+              defaultValue={loaderData.status ?? "draft"}
+              render={({ field }) => (
+                <input
+                  type="checkbox"
+                  checked={field.value === "draft"}
+                  onChange={e => field.onChange(e.target.checked ? "draft" : "published")}
+                  className="mr-2"
+                />
+              )}
+            />
+            Mark as draft
+          </label>
+        </div>
+        <div className="flex justify-end gap-2">
+          <button
+            type="button"
+            className="bg-gray-200 text-gray-800 px-6 py-2 rounded-lg font-semibold hover:bg-gray-300 transition"
+            onClick={handleCancel}
+          >
+            Cancel
+          </button>
           <button
             type="submit"
             disabled={isSubmitting}
@@ -212,21 +257,7 @@ export default function BlogEdit({
             {isSubmitting ? "Saving..." : "Save Changes"}
           </button>
         </div>
-      </fetcher.Form>
-      <div className="mt-10">
-        <h2 className="text-lg font-bold mb-2 text-gray-700">Preview</h2>
-        <div className="prose border rounded-lg p-4 bg-gray-50">
-          <Controller
-            name="content"
-            control={control}
-            render={({ field }) => (
-              <ReactMarkdown>
-                {field.value || "Nothing to preview yet."}
-              </ReactMarkdown>
-            )}
-          />
-        </div>
-      </div>
+  </fetcher.Form>
     </div>
   );
 }
