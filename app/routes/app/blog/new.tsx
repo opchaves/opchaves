@@ -228,22 +228,6 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
             </p>
           )}
         </div>
-        <div className="flex justify-end gap-2">
-          <button
-            type="button"
-            className="bg-gray-200 text-gray-800 px-6 py-2 rounded-lg font-semibold hover:bg-gray-300 transition"
-            onClick={handleCancel}
-          >
-            Cancel
-          </button>
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="bg-gray-800 text-white px-6 py-2 rounded-lg font-semibold hover:bg-gray-700 transition"
-          >
-            {isSubmitting ? "Saving..." : "Save"}
-          </button>
-        </div>
         <div className="flex items-center gap-2 mt-2">
           <label className="font-medium text-gray-700">
             <Controller
@@ -263,6 +247,22 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
             />
             Mark as draft
           </label>
+        </div>
+        <div className="flex justify-end gap-2">
+          <button
+            type="button"
+            className="bg-gray-200 text-gray-800 px-6 py-2 rounded-lg font-semibold hover:bg-gray-300 transition"
+            onClick={handleCancel}
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="bg-gray-800 text-white px-6 py-2 rounded-lg font-semibold hover:bg-gray-700 transition"
+          >
+            {isSubmitting ? "Saving..." : "Save"}
+          </button>
         </div>
       </fetcher.Form>
       <div className="mt-10">
