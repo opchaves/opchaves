@@ -1,5 +1,6 @@
 import type { Route } from "./+types/new";
 import React from "react";
+import { useNavigate } from "react-router";
 import { useFetcher } from "react-router";
 import { useForm, useWatch, Controller } from "react-hook-form";
 import { z } from "zod";
@@ -85,11 +86,18 @@ const schema = z.object({
     .max(200, "Excerpt must be at most 200 characters")
     .optional(),
   content: z.string().min(20, "Content must be at least 20 characters"),
+  status: z.enum(["draft", "published"]),
 });
 
-type BlogForm = z.infer<typeof schema>;
+type BlogForm = {
+  title: string;
+  excerpt?: string;
+  content: string;
+  status: "draft" | "published";
+};
 
 export default function BlogNew({ actionData }: Route.ComponentProps) {
+  const navigate = useNavigate();
   const fetcher = useFetcher();
   const {
     register,
@@ -97,7 +105,12 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
     watch,
     control,
     formState: { errors, isSubmitting },
-  } = useForm<BlogForm>({ resolver: zodResolver(schema) });
+  } = useForm<BlogForm>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      status: "draft",
+    },
+  });
   const content = useWatch({
     control,
     name: "content",
@@ -110,10 +123,29 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
     formData.append("title", data.title);
     formData.append("excerpt", data.excerpt ?? "");
     formData.append("content", data.content);
+    formData.append("status", data.status ?? "draft");
     fetcher.submit(formData, {
       method: "post",
       action: window.location.pathname,
     });
+  };
+
+  const hasContent = Boolean(
+    watch("title") || watch("excerpt") || watch("content"),
+  );
+
+  const handleCancel = () => {
+    if (hasContent) {
+      if (
+        window.confirm(
+          "You have unsaved changes. Are you sure you want to leave?",
+        )
+      ) {
+        navigate("/app/blog");
+      }
+    } else {
+      navigate("/app/blog");
+    }
   };
 
   // Show backend error if present
@@ -139,7 +171,7 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
       <fetcher.Form
         method="post"
         className="space-y-6"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(onSubmit as any)}
       >
         <div>
           <label className="block text-lg font-semibold mb-2 text-gray-700">
@@ -196,14 +228,41 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
             </p>
           )}
         </div>
-        <div className="flex justify-end">
+        <div className="flex justify-end gap-2">
+          <button
+            type="button"
+            className="bg-gray-200 text-gray-800 px-6 py-2 rounded-lg font-semibold hover:bg-gray-300 transition"
+            onClick={handleCancel}
+          >
+            Cancel
+          </button>
           <button
             type="submit"
             disabled={isSubmitting}
             className="bg-gray-800 text-white px-6 py-2 rounded-lg font-semibold hover:bg-gray-700 transition"
           >
-            {isSubmitting ? "Publishing..." : "Publish"}
+            {isSubmitting ? "Saving..." : "Save"}
           </button>
+        </div>
+        <div className="flex items-center gap-2 mt-2">
+          <label className="font-medium text-gray-700">
+            <Controller
+              name="status"
+              control={control}
+              defaultValue="draft"
+              render={({ field }) => (
+                <input
+                  type="checkbox"
+                  checked={field.value === "draft"}
+                  onChange={(e) =>
+                    field.onChange(e.target.checked ? "draft" : "published")
+                  }
+                  className="mr-2"
+                />
+              )}
+            />
+            Mark as draft
+          </label>
         </div>
       </fetcher.Form>
       <div className="mt-10">
