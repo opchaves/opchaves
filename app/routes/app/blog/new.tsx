@@ -1,5 +1,6 @@
 import type { Route } from "./+types/new";
 import React from "react";
+import { useFetcher } from "react-router";
 import { useForm, useWatch, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -89,10 +90,10 @@ const schema = z.object({
 type BlogForm = z.infer<typeof schema>;
 
 export default function BlogNew({ actionData }: Route.ComponentProps) {
+  const fetcher = useFetcher();
   const {
     register,
     handleSubmit,
-    setValue,
     watch,
     control,
     formState: { errors, isSubmitting },
@@ -102,6 +103,18 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
     name: "content",
   });
   const [submitError, setSubmitError] = React.useState<string | null>(null);
+
+  const onSubmit = (data: BlogForm) => {
+    setSubmitError(null);
+    const formData = new FormData();
+    formData.append("title", data.title);
+    formData.append("excerpt", data.excerpt ?? "");
+    formData.append("content", data.content);
+    fetcher.submit(formData, {
+      method: "post",
+      action: window.location.pathname,
+    });
+  };
 
   // Show backend error if present
   React.useEffect(() => {
@@ -113,11 +126,6 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
   }, [actionData]);
   console.log(">>> errors", actionData, submitError, errors);
 
-  const onSubmit = (data: BlogForm) => {
-    setSubmitError(null);
-    console.log(">>> data", data);
-  };
-
   return (
     <div className="max-w-2xl mx-auto py-12 px-4">
       <h1 className="text-3xl md:text-4xl font-extrabold mb-6 bg-gradient-to-r from-gray-800 to-gray-500 text-transparent bg-clip-text text-center">
@@ -128,7 +136,7 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
           {submitError}
         </div>
       )}
-      <form
+      <fetcher.Form
         method="post"
         className="space-y-6"
         onSubmit={handleSubmit(onSubmit)}
@@ -197,7 +205,7 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
             {isSubmitting ? "Publishing..." : "Publish"}
           </button>
         </div>
-      </form>
+      </fetcher.Form>
       <div className="mt-10">
         <h2 className="text-lg font-bold mb-2 text-gray-700">Preview</h2>
         <div className="prose border rounded-lg p-4 bg-gray-50">

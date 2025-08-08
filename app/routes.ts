@@ -24,14 +24,15 @@ export default [
     layout("routes/app/layout.tsx", [
       index("routes/app/index.tsx"),
       route("/settings", "routes/app/settings.tsx"),
-        ...prefix("blog", [
-          layout("routes/app/blog/layout.tsx", [
-            index("routes/app/blog/index.tsx"),
-            route("/new", "routes/app/blog/new.tsx"),
-            route("/:id", "routes/app/blog/view.tsx"),
-            route("/:id/edit", "routes/app/blog/edit.tsx"),
-          ]),
-        ]),
+    ]),
+  ]),
+
+  ...prefix("app/blog", [
+    layout("routes/app/blog/layout.tsx", [
+      index("routes/app/blog/index.tsx"),
+      route("/new", "routes/app/blog/new.tsx"),
+      route("/:id", "routes/app/blog/view.tsx"),
+      route("/:id/edit", "routes/app/blog/edit.tsx"),
     ]),
   ]),
 ] satisfies RouteConfig;
