@@ -1,8 +1,10 @@
 import type { Route } from "./+types/new";
-import { useForm } from "react-hook-form";
+import React from "react";
+import { useForm, useWatch, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import MDEditor from "@uiw/react-md-editor";
+import ReactMarkdown from "react-markdown";
 import { data, redirect } from "react-router";
 import { getAuth } from "@/lib/auth.server";
 import { nanoid } from "nanoid";
@@ -86,23 +88,51 @@ const schema = z.object({
 
 type BlogForm = z.infer<typeof schema>;
 
-export default function BlogNew() {
+export default function BlogNew({ actionData }: Route.ComponentProps) {
   const {
     register,
     handleSubmit,
     setValue,
     watch,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<BlogForm>({ resolver: zodResolver(schema) });
+  const content = useWatch({
+    control,
+    name: "content",
+  });
+  const [submitError, setSubmitError] = React.useState<string | null>(null);
 
-  const content = watch("content");
+  // Show backend error if present
+  React.useEffect(() => {
+    if (actionData && actionData.error) {
+      setSubmitError(actionData.error);
+    } else {
+      setSubmitError(null);
+    }
+  }, [actionData]);
+  console.log(">>> errors", actionData, submitError, errors);
+
+  const onSubmit = (data: BlogForm) => {
+    setSubmitError(null);
+    console.log(">>> data", data);
+  };
 
   return (
     <div className="max-w-2xl mx-auto py-12 px-4">
       <h1 className="text-3xl md:text-4xl font-extrabold mb-6 bg-gradient-to-r from-gray-800 to-gray-500 text-transparent bg-clip-text text-center">
         Create a New Blog Post
       </h1>
-      <form method="post" className="space-y-6">
+      {submitError && (
+        <div className="text-red-600 text-sm mb-4 text-center">
+          {submitError}
+        </div>
+      )}
+      <form
+        method="post"
+        className="space-y-6"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div>
           <label className="block text-lg font-semibold mb-2 text-gray-700">
             Title
@@ -114,7 +144,7 @@ export default function BlogNew() {
             placeholder="Enter post title"
           />
           {errors.title && (
-            <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>
+            <p className="text-red-500 text-sm mt-1">{errors.title?.message}</p>
           )}
         </div>
         <div>
@@ -129,7 +159,7 @@ export default function BlogNew() {
           />
           {errors.excerpt && (
             <p className="text-red-500 text-sm mt-1">
-              {errors.excerpt.message}
+              {errors.excerpt?.message}
             </p>
           )}
         </div>
@@ -137,17 +167,24 @@ export default function BlogNew() {
           <label className="block text-lg font-semibold mb-2 text-gray-700">
             Content
           </label>
-          <MDEditor
-            value={content || ""}
-            onChange={(v) => setValue("content", v || "")}
-            height={300}
-            previewOptions={{
-              className: "prose max-w-none",
-            }}
+          <Controller
+            name="content"
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <MDEditor
+                value={field.value}
+                onChange={field.onChange}
+                height={300}
+                previewOptions={{
+                  className: "prose max-w-none",
+                }}
+              />
+            )}
           />
           {errors.content && (
             <p className="text-red-500 text-sm mt-1">
-              {errors.content.message}
+              {errors.content?.message}
             </p>
           )}
         </div>
@@ -161,6 +198,20 @@ export default function BlogNew() {
           </button>
         </div>
       </form>
+      <div className="mt-10">
+        <h2 className="text-lg font-bold mb-2 text-gray-700">Preview</h2>
+        <div className="prose border rounded-lg p-4 bg-gray-50">
+          <Controller
+            name="content"
+            control={control}
+            render={({ field }) => (
+              <ReactMarkdown>
+                {field.value || "Nothing to preview yet."}
+              </ReactMarkdown>
+            )}
+          />
+        </div>
+      </div>
     </div>
   );
 }
