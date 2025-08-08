@@ -6,7 +6,6 @@ import { useForm, useWatch, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import MDEditor from "@uiw/react-md-editor";
-import ReactMarkdown from "react-markdown";
 import { data, redirect } from "react-router";
 import { getAuth } from "@/lib/auth.server";
 import { nanoid } from "nanoid";
@@ -265,20 +264,6 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
           </button>
         </div>
       </fetcher.Form>
-      <div className="mt-10">
-        <h2 className="text-lg font-bold mb-2 text-gray-700">Preview</h2>
-        <div className="prose border rounded-lg p-4 bg-gray-50">
-          <Controller
-            name="content"
-            control={control}
-            render={({ field }) => (
-              <ReactMarkdown>
-                {field.value || "Nothing to preview yet."}
-              </ReactMarkdown>
-            )}
-          />
-        </div>
-      </div>
     </div>
   );
 }
