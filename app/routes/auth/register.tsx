@@ -3,6 +3,7 @@ import { signIn } from "../../lib/auth-client";
 import type { Route } from "./+types/register";
 import { useState } from "react";
 import { getAuth } from "@/lib/auth.server";
+import { APP_PATH } from "@/lib/consts";
 
 type ValidationError = {
   name?: string;
@@ -43,8 +44,8 @@ export async function action({ request, context }: Route.ActionArgs) {
     });
 
     // When doing server-side registration, setting headers is important so that
-    // the dashboard loader can access the session
-    return redirect("/dashboard", { headers: res.headers, status: 303 });
+    // the loader can access the session
+    return redirect(APP_PATH, { headers: res.headers, status: 303 });
   } catch (error: any) {
     return data(
       { error: error.message || "Registration failed." },
@@ -67,7 +68,7 @@ export default function Register({ actionData }: Route.ComponentProps) {
   const signInWithGithub = async () => {
     const res = await signIn.social({
       provider: "github",
-      callbackURL: "/dashboard",
+      callbackURL: APP_PATH,
       errorCallbackURL: "/auth/register",
     });
     if (res.error) {

@@ -82,7 +82,7 @@ const balance = received - spent;
 
 // TODO: fix hydration issue. decimal values are rendered with `.` on the backend and `,` on the frontend
 
-export default function DashboardHome() {
+export default function Home() {
   return (
     <div className="space-y-8">
       {/* Cards */}

@@ -13,7 +13,7 @@ test.describe("Register page", () => {
     await page.fill('input[name="password"]', "testpassword");
 
     await page.click('button[type="submit"]');
-    await page.waitForURL(/\/dashboard/);
+    await page.waitForURL(/\/app/);
   });
 
   test("shows error for invalid email", async ({ page }) => {

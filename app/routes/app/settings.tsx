@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function DashboardSettings() {
+export default function Settings() {
   const [theme, setTheme] = useState("system");
   const [notifications, setNotifications] = useState(true);
 

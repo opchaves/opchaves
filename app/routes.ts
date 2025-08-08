@@ -20,10 +20,10 @@ export default [
     route("/auth/register", "routes/auth/register.tsx"),
   ]),
 
-  ...prefix("dashboard", [
-    layout("routes/dashboard/layout.tsx", [
-      index("routes/dashboard/index.tsx"),
-      route("/settings", "routes/dashboard/settings.tsx"),
+  ...prefix("app", [
+    layout("routes/app/layout.tsx", [
+      index("routes/app/index.tsx"),
+      route("/settings", "routes/app/settings.tsx"),
     ]),
   ]),
 ] satisfies RouteConfig;

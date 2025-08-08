@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Link, Outlet, redirect, useNavigate } from "react-router";
 import type { Route } from "./+types/layout";
 import { getAuth } from "@/lib/auth.server";
+import { APP_PATH } from "@/lib/consts";
 
 // Placeholder icons and avatar (replace with shadcn/ui or your icon library)
 const MenuIcon = () => (
@@ -50,7 +51,7 @@ export async function loader({ request, context }: Route.LoaderArgs) {
   return session?.user;
 }
 
-export default function DashboardLayout({ loaderData }: Route.ComponentProps) {
+export default function Layout({ loaderData }: Route.ComponentProps) {
   const navigate = useNavigate();
 
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -88,7 +89,7 @@ export default function DashboardLayout({ loaderData }: Route.ComponentProps) {
           md:relative md:translate-x-0 md:w-64 md:block`}
       >
         <div className="flex items-center justify-between h-16 px-5 border-b">
-          <span className="font-bold text-lg">Dashboard</span>
+          <span className="font-bold text-lg">OpChaves</span>
           <button
             className="md:hidden p-2 rounded hover:bg-gray-100"
             onClick={() => setDrawerOpen(false)}
@@ -99,13 +100,13 @@ export default function DashboardLayout({ loaderData }: Route.ComponentProps) {
         </div>
         <nav className="p-4 space-y-2">
           <Link
-            to="/dashboard"
+            to={APP_PATH}
             className="block px-2 py-2 rounded hover:bg-gray-100"
           >
             Home
           </Link>
           <Link
-            to="/dashboard/settings"
+            to={`${APP_PATH}/settings`}
             className="block px-2 py-2 rounded hover:bg-gray-100"
           >
             Settings
@@ -133,7 +134,7 @@ export default function DashboardLayout({ loaderData }: Route.ComponentProps) {
             >
               <MenuIcon />
             </button>
-            <Link to="/dashboard" className="flex items-center gap-2">
+            <Link to={APP_PATH} className="flex items-center gap-2">
               <span className="font-bold text-lg hidden sm:block">
                 KomMonei
               </span>
@@ -156,7 +157,7 @@ export default function DashboardLayout({ loaderData }: Route.ComponentProps) {
               {avatarDropdown && (
                 <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-lg z-50">
                   <Link
-                    to="/dashboard/settings"
+                    to={`${APP_PATH}/settings`}
                     className="block px-4 py-2 hover:bg-gray-100 text-sm"
                     onClick={() => setAvatarDropdown(false)}
                   >

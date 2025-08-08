@@ -3,6 +3,7 @@ import { signIn } from "../../lib/auth-client";
 import type { Route } from "./+types/login";
 import { useState } from "react";
 import { getAuth } from "@/lib/auth.server";
+import { APP_PATH } from "@/lib/consts";
 
 type ValidationError = {
   email?: string;
@@ -36,13 +37,13 @@ export async function action({ request, context }: Route.ActionArgs) {
       body: {
         email,
         password,
-        callbackURL: "/dashboard",
+        callbackURL: APP_PATH,
         rememberMe: true,
       },
       asResponse: true,
     });
 
-    return redirect("/dashboard", { headers: res.headers, status: 303 });
+    return redirect(APP_PATH, { headers: res.headers, status: 303 });
   } catch (error: any) {
     return data({ error: error.message || "Login failed." }, { status: 400 });
   }
@@ -62,7 +63,7 @@ export default function Login({ actionData }: Route.ComponentProps) {
   const signInWithGithub = async () => {
     const res = await signIn.social({
       provider: "github",
-      callbackURL: "/dashboard",
+      callbackURL: APP_PATH,
       errorCallbackURL: "/auth/login",
     });
     if (res.error) {

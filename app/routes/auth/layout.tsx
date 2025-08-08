@@ -1,13 +1,14 @@
 import { Outlet, Link, redirect } from "react-router";
 import type { Route } from "./+types/layout";
 import { getAuth } from "@/lib/auth.server";
+import { APP_PATH } from "@/lib/consts";
 
 export async function loader({ request, context }: Route.LoaderArgs) {
   const session = await getAuth(context).api.getSession({
     headers: request.headers,
   });
   if (session?.user) {
-    return redirect("/dashboard", 303);
+    return redirect(APP_PATH, 303);
   }
   return null;
 }
