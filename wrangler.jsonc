@@ -39,6 +39,7 @@
         "VALUE_FROM_CLOUDFLARE": "Hello from Production",
         "BETTER_AUTH_URL": "https://opchaves.com",
         "CLIENT_ORIGN": "https://opchaves.com",
+        "GITHUB_CLIENT_ID": "Ov23lige6XNeFi35MDiU",
       },
     },
   },
