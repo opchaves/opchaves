@@ -19,6 +19,7 @@
 !server.js
 !playwright.config.ts
 !wrangler.jsonc
+!auth.ts
 !README.md
 
 /database/migrations

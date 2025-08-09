@@ -1,22 +1,26 @@
+import type { BetterAuthOptions } from "better-auth";
 import { betterAuth } from "better-auth";
-import { drizzleAdapter } from "better-auth/adapters/drizzle";
-
-import * as schema from "../database/schema";
-import { env } from "./env";
 import type { AppLoadContext } from "react-router";
+import { env } from "./env";
+import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import * as schema from "../database/schema";
 
-function authBuilder(ctx: AppLoadContext) {
+export function createBetterAuth(database: BetterAuthOptions["database"]) {
   return betterAuth({
-    database: drizzleAdapter(ctx.db, {
-      provider: "sqlite",
-      schema,
-    }),
+    database,
     trustedOrigins: [env.CLIENT_ORIGIN],
     baseURL: env.BETTER_AUTH_URL,
     advanced: {
+      ipAddress: {
+        ipAddressHeaders: ["cf-connecting-ip"],
+      },
       crossSubDomainCookies: {
         enabled: true,
       },
+    },
+    rateLimit: {
+      storage: "database",
+      modelName: "rateLimit",
     },
     emailAndPassword: {
       enabled: true,
@@ -34,19 +38,21 @@ function authBuilder(ctx: AppLoadContext) {
           type: "string",
           required: false,
           defaultValue: "user",
-          input: false, // don't allow user to set role
+          input: false,
         },
       },
     },
   });
 }
 
-let authInstance: ReturnType<typeof authBuilder> | null = null;
+let authInstance: ReturnType<typeof createBetterAuth> | null = null;
 
 export function getAuth(ctx: AppLoadContext) {
   if (!authInstance) {
-    authInstance = authBuilder(ctx);
+    const database = drizzleAdapter(ctx.db, { provider: "sqlite", schema });
+    authInstance = createBetterAuth(database);
   }
+
   return authInstance;
 }
 
