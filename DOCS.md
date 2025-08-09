@@ -10,8 +10,7 @@ A modern, production-ready template for building full-stack React applications u
 - 🔄 Data loading and mutations
 - 🔒 TypeScript by default
 - 🎉 TailwindCSS for styling
-- 💾 PostgreSQL + DrizzleORM
-- 📖 [React Router docs](https://reactrouter.com/)
+-  [React Router docs](https://reactrouter.com/)
 
 ## Getting Started
 
@@ -25,11 +24,24 @@ npm install
 
 ### Development
 
-Copy `.env.example` to `.env` and provide a `DATABASE_URL` with your connection string.
+Copy `.env.example` to `.env`
+Deployment is done using the Wrangler CLI.
+
+First, you need to create a d1 database in Cloudflare.
+
+```sh
+npx wrangler d1 create <name-of-your-database>
+```
+
+Be sure to update the `wrangler.jsonc` file with the correct database name and id.
+
+You will also need to [update the `drizzle.config.ts` file](https://orm.drizzle.team/docs/guides/d1-http-with-drizzle-kit), and then run the production migration:
 
 Run an initial database migration:
 
 ```bash
+npm run auth:db:generate
+npm run db:generate
 npm run db:migrate
 ```
 
@@ -49,42 +61,17 @@ Create a production build:
 npm run build
 ```
 
-## Deployment
-
-### Docker Deployment
-
-To build and run using Docker:
+Preview production build
 
 ```bash
-# For npm
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
+npm run preview
 ```
 
-The containerized application can be deployed to any platform that supports Docker, including:
+## Deployment
 
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── server.js
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
+```bash
+npm run db:migrate-production
+npm run deploy
 ```
 
 ## Styling
