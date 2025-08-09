@@ -81,3 +81,8 @@ This template comes with [Tailwind CSS](https://tailwindcss.com/) already config
 ---
 
 Built with ❤️ using React Router.
+
+### Resources
+
+- [Setup Better Auth with React Router & Cloudflare D1](https://dev.to/atman33/setup-better-auth-with-react-router-cloudflare-d1-2ad4)
+- [Drizzle schema](https://orm.drizzle.team/docs/sql-schema-declaration)
