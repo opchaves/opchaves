@@ -90,10 +90,7 @@ export default function Layout({ loaderData }: Route.ComponentProps) {
           md:relative md:translate-x-0 md:w-64 md:block`}
       >
         <div className="flex items-center justify-between h-16 px-5 border-b">
-          <Link
-            to="/"
-            className="font-bold text-lg"
-          >
+          <Link to="/" className="font-bold text-lg">
             OpChaves
           </Link>
           <button

@@ -131,13 +131,17 @@ export default function BlogEdit({
 
   const hasContent = Boolean(
     watch("title") !== loaderData.title ||
-    watch("excerpt") !== loaderData.excerpt ||
-    watch("content") !== loaderData.content ||
-    watch("status") !== (loaderData.status ?? "draft")
+      watch("excerpt") !== loaderData.excerpt ||
+      watch("content") !== loaderData.content ||
+      watch("status") !== (loaderData.status ?? "draft"),
   );
   const handleCancel = () => {
     if (hasContent) {
-      if (window.confirm("You have unsaved changes. Are you sure you want to leave?")) {
+      if (
+        window.confirm(
+          "You have unsaved changes. Are you sure you want to leave?",
+        )
+      ) {
         navigate("/app/blog");
       }
     } else {
@@ -228,12 +232,16 @@ export default function BlogEdit({
             <Controller
               name="status"
               control={control}
-              defaultValue={loaderData.status ?? "draft"}
+              defaultValue={
+                (loaderData.status ?? "draft") as "draft" | "published"
+              }
               render={({ field }) => (
                 <input
                   type="checkbox"
                   checked={field.value === "draft"}
-                  onChange={e => field.onChange(e.target.checked ? "draft" : "published")}
+                  onChange={(e) =>
+                    field.onChange(e.target.checked ? "draft" : "published")
+                  }
                   className="mr-2"
                 />
               )}
@@ -257,7 +265,7 @@ export default function BlogEdit({
             {isSubmitting ? "Saving..." : "Save Changes"}
           </button>
         </div>
-  </fetcher.Form>
+      </fetcher.Form>
     </div>
   );
 }
