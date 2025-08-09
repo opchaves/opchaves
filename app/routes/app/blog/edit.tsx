@@ -5,11 +5,10 @@ import { useForm, useWatch, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import MDEditor from "@uiw/react-md-editor";
-import ReactMarkdown from "react-markdown";
 import { data, redirect } from "react-router";
 import { getAuth } from "@/lib/auth.server";
 import { post } from "@/database/schema";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 
 export const loader = async ({
   params,
@@ -19,16 +18,21 @@ export const loader = async ({
   const session = await getAuth(context).api.getSession({
     headers: request.headers,
   });
+
   if (!session?.user) {
     return redirect("/auth/login");
   }
-  const { id } = params;
+
   const postData = await context.db
     .select()
     .from(post)
-    .where(eq(post.id, id))
+    .where(and(eq(post.id, params.id), eq(post.authorId, session.user.id)))
     .get();
-  if (!postData) throw new Response("Not Found", { status: 404 });
+
+  if (!postData) {
+    throw new Response("Not Found", { status: 404 });
+  }
+
   return postData;
 };
 
@@ -71,7 +75,7 @@ export const action = async ({
     await context.db
       .update(post)
       .set({ title, excerpt, content, updatedAt: new Date() })
-      .where(eq(post.id, id));
+      .where(and(eq(post.id, id), eq(post.authorId, session.user.id)));
     return redirect(`/app/blog/${id}`);
   } catch (error) {
     const message =

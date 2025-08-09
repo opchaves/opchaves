@@ -1,22 +1,41 @@
 import React from "react";
-import { useFetcher, Link } from "react-router";
+import { useFetcher, Link, redirect } from "react-router";
 import { post } from "@/database/schema";
-import { desc, eq } from "drizzle-orm";
+import { and, desc, eq } from "drizzle-orm";
 import type { Route } from "../blog/+types/index";
+import { getAuth } from "@/lib/auth.server";
 
-export async function loader({ context }: Route.LoaderArgs) {
+export async function loader({ request, context }: Route.LoaderArgs) {
+  const session = await getAuth(context).api.getSession({
+    headers: request.headers,
+  });
+  if (!session) {
+    return redirect("/auth/login");
+  }
+
   const posts = await context.db
     .select()
     .from(post)
+    .where(eq(post.authorId, session.user.id))
     .orderBy(desc(post.createdAt));
+
   return posts;
 }
 
-export async function action({ request, context }: Route.ActionArgs) {
+export async function action({ params, request, context }: Route.ActionArgs) {
+  const session = await getAuth(context).api.getSession({
+    headers: request.headers,
+  });
+  if (!session?.user) {
+    return new Response("Unauthorized", { status: 401 });
+  }
+
   const formData = await request.formData();
   const id = formData.get("id")?.toString();
   if (formData.get("_action") === "delete" && id) {
-    await context.db.delete(post).where(eq(post.id, id));
+    await context.db
+      .delete(post)
+      .where(and(eq(post.id, id), eq(post.authorId, session.user.id)));
     return { success: true };
   }
   return { success: false };
