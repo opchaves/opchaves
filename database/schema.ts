@@ -1,4 +1,5 @@
 import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
+import { relations } from "drizzle-orm";
 
 import { user } from "./auth-schema";
 export * from "./auth-schema";
@@ -29,6 +30,12 @@ export const post = sqliteTable("post", {
   status: text("status").default("draft"), // draft/published
 });
 
+export const postRelations = relations(post, ({ many }) => ({
+  tags: many(postTag),
+  comments: many(comment),
+  author: many(user),
+}));
+
 export const comment = sqliteTable("comment", {
   id: text("id").primaryKey(),
   postId: text("post_id")
@@ -46,11 +53,26 @@ export const comment = sqliteTable("comment", {
     .notNull(),
 });
 
+export const commentRelations = relations(comment, ({ one }) => ({
+  post: one(post, {
+    fields: [comment.postId],
+    references: [post.id],
+  }),
+  author: one(user, {
+    fields: [comment.authorId],
+    references: [user.id],
+  }),
+}));
+
 export const tag = sqliteTable("tag", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
   slug: text("slug").notNull().unique(),
 });
+
+export const tagRelations = relations(tag, ({ many }) => ({
+  posts: many(postTag),
+}));
 
 export const postTag = sqliteTable("postTag", {
   postId: text("post_id")
@@ -60,3 +82,14 @@ export const postTag = sqliteTable("postTag", {
     .notNull()
     .references(() => tag.id, { onDelete: "cascade" }),
 });
+
+export const postTagRelations = relations(postTag, ({ one }) => ({
+  post: one(post, {
+    fields: [postTag.postId],
+    references: [post.id],
+  }),
+  tag: one(tag, {
+    fields: [postTag.tagId],
+    references: [tag.id],
+  }),
+}));
