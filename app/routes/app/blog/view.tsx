@@ -2,6 +2,7 @@ import type { Route } from "./+types/view";
 import { post } from "@/database/schema";
 import { and, eq } from "drizzle-orm";
 import React from "react";
+import { ConfirmDialog } from "@/components/ConfirmDialog";
 import { useFetcher, Link, useNavigate } from "react-router";
 import ReactMarkdown from "react-markdown";
 import { ensureAuthenticated } from "@/lib/utils.server";
@@ -91,31 +92,16 @@ export default function BlogView({ loaderData }: Route.ComponentProps) {
       <div className="prose mb-8">
         <ReactMarkdown>{postData.content}</ReactMarkdown>
       </div>
-      {confirmDelete && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/30 z-50">
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <h3 className="text-lg font-bold mb-4">Confirm Delete</h3>
-            <p className="mb-4">
-              Are you sure you want to delete{" "}
-              <span className="font-semibold">{postData.title}</span>?
-            </p>
-            <div className="flex gap-4 justify-end">
-              <button
-                className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 text-gray-800 font-medium"
-                onClick={() => setConfirmDelete(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="px-4 py-2 bg-red-600 rounded hover:bg-red-700 text-white font-medium"
-                onClick={confirmDeletePost}
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <ConfirmDialog
+        open={confirmDelete}
+        title="Confirm Delete"
+        description={`Are you sure you want to delete "${postData.title}"?`}
+        confirmLabel="Delete"
+        cancelLabel="Cancel"
+        danger
+        onConfirm={confirmDeletePost}
+        onCancel={() => setConfirmDelete(false)}
+      />
     </div>
   );
 }
