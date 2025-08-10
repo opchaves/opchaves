@@ -11,7 +11,7 @@ import { nanoid } from "nanoid";
 import { APP_PATH } from "@/lib/consts";
 import { post } from "@/database/schema";
 import { ensureAuthenticated } from "@/lib/utils.server";
-import { slugify } from "@/lib/utils";
+import { slugify, zodErrorToFieldMessages } from "@/lib/utils";
 
 const postSchema = z.object({
   title: z.string().min(5, "Title must be at least 5 characters"),
@@ -35,12 +35,13 @@ export async function action({ request, context }: Route.ActionArgs) {
     title: formData.get("title")?.toString() || "",
     excerpt: formData.get("excerpt")?.toString() || "",
     content: formData.get("content")?.toString() || "",
+    status: formData.get("status")?.toString() || "draft",
   };
 
   const result = postSchema.safeParse(values);
   if (!result.success) {
-    const errorMessages = z.treeifyError(result.error).errors;
-    return data({ error: errorMessages.join(" ") }, { status: 400 });
+    const errorMessages = zodErrorToFieldMessages(result.error);
+    return data({ error: errorMessages }, { status: 400 });
   }
 
   const { title, excerpt, content } = result.data;
@@ -60,41 +61,45 @@ export async function action({ request, context }: Route.ActionArgs) {
     });
     return redirect(`${APP_PATH}/blog`);
   } catch (error) {
-    const message =
-      error instanceof Error ? error.message : "Failed to create post.";
-    return data({ error: message }, { status: 500 });
+    console.log({ error });
+    if (
+      error instanceof Error &&
+      error.message.match(/unique constraint failed/i)
+    ) {
+      return data(
+        { error: { error: "Post with this slug already exists." } },
+        { status: 400 },
+      );
+    }
+    return data(
+      { error: { error: "Failed to create post." } },
+      { status: 500 },
+    );
   }
 }
 
 type BlogForm = z.infer<typeof postSchema>;
+type ActionError = Record<string, string>;
 
 export default function BlogNew({ actionData }: Route.ComponentProps) {
   const navigate = useNavigate();
-  const fetcher = useFetcher();
+  const fetcher = useFetcher<typeof actionData>();
+  const busy = fetcher.state !== "idle";
+  const submitError = fetcher.data?.error;
+
   const {
     register,
     handleSubmit,
     watch,
     control,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<BlogForm>({
     resolver: zodResolver(postSchema),
     defaultValues: { status: "draft" },
   });
-  const content = useWatch({
-    control,
-    name: "content",
-  });
-  const [submitError, setSubmitError] = React.useState<string | null>(null);
 
   const onSubmit = (data: BlogForm) => {
-    setSubmitError(null);
-    const formData = new FormData();
-    formData.append("title", data.title);
-    formData.append("excerpt", data.excerpt ?? "");
-    formData.append("content", data.content);
-    formData.append("status", data.status ?? "draft");
-    fetcher.submit(formData, {
+    fetcher.submit(data, {
       method: "post",
       action: window.location.pathname,
     });
@@ -118,23 +123,14 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
     }
   };
 
-  // Show backend error if present
-  React.useEffect(() => {
-    if (actionData && actionData.error) {
-      setSubmitError(actionData.error);
-    } else {
-      setSubmitError(null);
-    }
-  }, [actionData]);
-
   return (
     <div className="max-w-2xl mx-auto py-12 px-4">
       <h1 className="text-3xl md:text-4xl font-extrabold mb-6 bg-gradient-to-r from-gray-800 to-gray-500 text-transparent bg-clip-text text-center">
         New Blog Post
       </h1>
-      {submitError && (
+      {submitError?.["error"] && (
         <div className="text-red-600 text-sm mb-4 text-center">
-          {submitError}
+          {submitError["error"]}
         </div>
       )}
       <fetcher.Form
@@ -155,6 +151,9 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
           {errors.title && (
             <p className="text-red-500 text-sm mt-1">{errors.title?.message}</p>
           )}
+          {submitError && "title" in submitError && (
+            <p className="text-red-500 text-xs mt-1">{submitError["title"]}</p>
+          )}
         </div>
         <div>
           <label className="block text-lg font-semibold mb-2 text-gray-700">
@@ -169,6 +168,11 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
           {errors.excerpt && (
             <p className="text-red-500 text-sm mt-1">
               {errors.excerpt?.message}
+            </p>
+          )}
+          {submitError && "excerpt" in submitError && (
+            <p className="text-red-500 text-xs mt-1">
+              {submitError["excerpt"]}
             </p>
           )}
         </div>
@@ -196,8 +200,13 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
               {errors.content?.message}
             </p>
           )}
+          {submitError && "content" in submitError && (
+            <p className="text-red-500 text-xs mt-1">
+              {submitError["content"]}
+            </p>
+          )}
         </div>
-        <div className="flex items-center gap-2 mt-2">
+        <div>
           <label className="font-medium text-gray-700">
             <Controller
               name="status"
@@ -216,6 +225,9 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
             />
             Mark as draft
           </label>
+          {submitError && "status" in submitError && (
+            <p className="text-red-500 text-xs mt-1">{submitError["status"]}</p>
+          )}
         </div>
         <div className="flex justify-end gap-2">
           <button
@@ -227,10 +239,10 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
           </button>
           <button
             type="submit"
-            disabled={isSubmitting}
+            disabled={busy}
             className="bg-gray-800 text-white px-6 py-2 rounded-lg font-semibold hover:bg-gray-700 transition"
           >
-            {isSubmitting ? "Saving..." : "Save"}
+            {busy ? "Saving..." : "Save"}
           </button>
         </div>
       </fetcher.Form>
