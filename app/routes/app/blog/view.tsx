@@ -1,26 +1,39 @@
 import type { Route } from "./+types/view";
 import { post } from "@/database/schema";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import React from "react";
-import { useLoaderData, useFetcher, Link, useNavigate } from "react-router";
+import { useFetcher, Link, useNavigate } from "react-router";
 import ReactMarkdown from "react-markdown";
+import { ensureAuthenticated } from "@/lib/utils.server";
 
-export const loader = async ({ params, context }: Route.LoaderArgs) => {
-  const { id } = params;
+export const loader = async ({
+  params,
+  context,
+  request,
+}: Route.LoaderArgs) => {
+  const session = await ensureAuthenticated({ context, request });
   const postData = await context.db
     .select()
     .from(post)
-    .where(eq(post.id, id))
+    .where(and(eq(post.id, params.id), eq(post.authorId, session.user.id)))
     .get();
+
   if (!postData) throw new Response("Not Found", { status: 404 });
   return postData;
 };
 
 export const action = async ({ request, context }: Route.ActionArgs) => {
+  const session = await ensureAuthenticated({ context, request });
   const formData = await request.formData();
+
   const id = formData.get("id")?.toString();
-  if (formData.get("_action") === "delete" && id) {
-    await context.db.delete(post).where(eq(post.id, id));
+  const isDeleteAction = formData.get("_action") === "delete";
+
+  if (isDeleteAction && id) {
+    await context.db
+      .delete(post)
+      .where(and(eq(post.id, id), eq(post.authorId, session.user.id)));
+
     return { success: true };
   }
   return { success: false };

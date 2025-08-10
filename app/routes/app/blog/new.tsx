@@ -7,28 +7,29 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import MDEditor from "@uiw/react-md-editor";
 import { data, redirect } from "react-router";
-import { getAuth } from "@/lib/auth.server";
 import { nanoid } from "nanoid";
 import { APP_PATH } from "@/lib/consts";
 import { post } from "@/database/schema";
+import { ensureAuthenticated } from "@/lib/utils.server";
+import { slugify } from "@/lib/utils";
+
+const postSchema = z.object({
+  title: z.string().min(5, "Title must be at least 5 characters"),
+  excerpt: z
+    .string()
+    .max(200, "Excerpt must be at most 200 characters")
+    .optional(),
+  content: z.string().min(20, "Content must be at least 20 characters"),
+  status: z.enum(["draft", "published"]),
+});
 
 export async function loader({ request, context }: Route.LoaderArgs) {
-  const session = await getAuth(context).api.getSession({
-    headers: request.headers,
-  });
-  if (!session?.user) {
-    return redirect("/auth/login");
-  }
+  const session = await ensureAuthenticated({ context, request });
   return session.user;
 }
 
 export async function action({ request, context }: Route.ActionArgs) {
-  const session = await getAuth(context).api.getSession({
-    headers: request.headers,
-  });
-  if (!session?.user) {
-    return redirect("/auth/login");
-  }
+  const session = await ensureAuthenticated({ context, request });
   const formData = await request.formData();
   const values = {
     title: formData.get("title")?.toString() || "",
@@ -36,27 +37,14 @@ export async function action({ request, context }: Route.ActionArgs) {
     content: formData.get("content")?.toString() || "",
   };
 
-  const schema = z.object({
-    title: z.string().min(5, "Title must be at least 5 characters"),
-    excerpt: z
-      .string()
-      .max(200, "Excerpt must be at most 200 characters")
-      .optional(),
-    content: z.string().min(20, "Content must be at least 20 characters"),
-  });
-
-  const result = schema.safeParse(values);
+  const result = postSchema.safeParse(values);
   if (!result.success) {
     const errorMessages = z.treeifyError(result.error).errors;
     return data({ error: errorMessages.join(" ") }, { status: 400 });
   }
 
   const { title, excerpt, content } = result.data;
-  const slug = title
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .slice(0, 50);
+  const slug = slugify(title);
 
   try {
     await context.db.insert(post).values({
@@ -78,22 +66,7 @@ export async function action({ request, context }: Route.ActionArgs) {
   }
 }
 
-const schema = z.object({
-  title: z.string().min(5, "Title must be at least 5 characters"),
-  excerpt: z
-    .string()
-    .max(200, "Excerpt must be at most 200 characters")
-    .optional(),
-  content: z.string().min(20, "Content must be at least 20 characters"),
-  status: z.enum(["draft", "published"]),
-});
-
-type BlogForm = {
-  title: string;
-  excerpt?: string;
-  content: string;
-  status: "draft" | "published";
-};
+type BlogForm = z.infer<typeof postSchema>;
 
 export default function BlogNew({ actionData }: Route.ComponentProps) {
   const navigate = useNavigate();
@@ -105,10 +78,8 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
     control,
     formState: { errors, isSubmitting },
   } = useForm<BlogForm>({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      status: "draft",
-    },
+    resolver: zodResolver(postSchema),
+    defaultValues: { status: "draft" },
   });
   const content = useWatch({
     control,
@@ -155,12 +126,11 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
       setSubmitError(null);
     }
   }, [actionData]);
-  console.log(">>> errors", actionData, submitError, errors);
 
   return (
     <div className="max-w-2xl mx-auto py-12 px-4">
       <h1 className="text-3xl md:text-4xl font-extrabold mb-6 bg-gradient-to-r from-gray-800 to-gray-500 text-transparent bg-clip-text text-center">
-        Create a New Blog Post
+        New Blog Post
       </h1>
       {submitError && (
         <div className="text-red-600 text-sm mb-4 text-center">
@@ -170,7 +140,7 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
       <fetcher.Form
         method="post"
         className="space-y-6"
-        onSubmit={handleSubmit(onSubmit as any)}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <div>
           <label className="block text-lg font-semibold mb-2 text-gray-700">

@@ -1,5 +1,3 @@
-import { env } from "./env";
-
 // see https://github.com/epicweb-dev/invariant/blob/main/src/index.ts
 export class InvariantError extends Error {
   constructor(message: string) {
@@ -19,5 +17,11 @@ export function invariant(
   }
 }
 
-export const hasGithubAuth =
-  !!env.GITHUB_CLIENT_ID && !!env.GITHUB_CLIENT_SECRET;
+export function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w\-]+/g, "")
+    .replace(/\-\-+/g, "-");
+}

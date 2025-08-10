@@ -1,5 +1,5 @@
 import { data, Form, Link, redirect, useNavigation } from "react-router";
-import { signIn } from "../../lib/auth-client";
+import { signIn } from "../../../lib/auth-client";
 import type { Route } from "./+types/register";
 import { useState } from "react";
 import { getAuth } from "@/lib/auth.server";
