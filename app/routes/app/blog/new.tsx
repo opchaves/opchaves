@@ -51,7 +51,7 @@ export async function action({ request, context }: Route.ActionArgs) {
   const result = postSchema.safeParse(values);
   if (!result.success) {
     const errorMessages = zodErrorToFieldMessages<BlogForm>(result.error);
-    return data({ error: errorMessages }, { status: 400 });
+    return data(errorMessages, { status: 400 });
   }
 
   const { title, slug, excerpt, content, status } = result.data;
@@ -76,14 +76,11 @@ export async function action({ request, context }: Route.ActionArgs) {
       error.message.match(/unique constraint failed/i)
     ) {
       return data(
-        { error: { error: "Post with this slug already exists." } },
+        { error: "Post with this slug already exists." },
         { status: 400 },
       );
     }
-    return data(
-      { error: { error: "Failed to create post." } },
-      { status: 500 },
-    );
+    return data({ error: "Failed to create post." }, { status: 500 });
   }
 }
 
@@ -93,7 +90,7 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
   const navigate = useNavigate();
   const fetcher = useFetcher<typeof actionData>();
   const busy = fetcher.state !== "idle";
-  const submitError = fetcher.data?.error;
+  const submitError = fetcher.data;
 
   const {
     register,
@@ -147,22 +144,17 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
     }
   };
 
-  let formError: string | undefined;
-  let titleError = errors.title?.message;
-  let slugError = errors.slug?.message;
-  let excerptError = errors.excerpt?.message;
-  let contentError = errors.content?.message;
-  let statusError = errors.status?.message;
+  // Map client and server error messages to their respective fields
+  const errorsObj: Record<string, string | undefined> = {
+    error: undefined,
+    title: errors.title?.message,
+    slug: errors.slug?.message,
+    excerpt: errors.excerpt?.message,
+    content: errors.content?.message,
+    status: errors.status?.message,
+  };
   if (submitError) {
-    if ("error" in submitError) {
-      formError = submitError.error;
-    } else {
-      titleError = submitError.title;
-      slugError = submitError.slug;
-      excerptError = submitError.excerpt;
-      contentError = submitError.content;
-      statusError = submitError.status;
-    }
+    Object.assign(errorsObj, submitError);
   }
 
   return (
@@ -170,8 +162,10 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
       <h1 className="text-3xl md:text-4xl font-extrabold mb-6 bg-gradient-to-r from-gray-800 to-gray-500 text-transparent bg-clip-text text-center">
         New Blog Post
       </h1>
-      {formError && (
-        <div className="text-red-600 text-sm mb-4 text-center">{formError}</div>
+      {errorsObj.error && (
+        <div className="text-red-600 text-sm mb-4 text-center">
+          {errorsObj.error}
+        </div>
       )}
       <fetcher.Form
         method="post"
@@ -185,7 +179,7 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
           register={register}
           onChange={onTitleChange}
           placeholder="Enter post title"
-          error={titleError}
+          error={errorsObj.title}
         />
         <Input
           label="Slug"
@@ -194,7 +188,7 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
           register={register}
           onChange={onSlugChange}
           placeholder="post-title-slug"
-          error={slugError}
+          error={errorsObj.slug}
         />
         <Input
           label="Excerpt"
@@ -203,7 +197,7 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
           register={register}
           placeholder="Short summary (optional)"
           maxLength={200}
-          error={excerptError}
+          error={errorsObj.excerpt}
         />
         <div>
           <label className="block text-lg font-semibold mb-2 text-gray-700">
@@ -224,8 +218,8 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
               />
             )}
           />
-          {contentError && (
-            <p className="text-red-500 text-sm mt-1">{contentError}</p>
+          {errorsObj.content && (
+            <p className="text-red-500 text-sm mt-1">{errorsObj.content}</p>
           )}
         </div>
         <div>
@@ -247,8 +241,8 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
             />
             Mark as draft
           </label>
-          {statusError && (
-            <p className="text-red-500 text-xs mt-1">{statusError}</p>
+          {errorsObj.status && (
+            <p className="text-red-500 text-xs mt-1">{errorsObj.status}</p>
           )}
         </div>
         <div className="flex justify-end gap-2">

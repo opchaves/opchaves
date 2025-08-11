@@ -1,6 +1,6 @@
-// Converts Zod 4 errors to { field: message } format
 import type { ZodError } from "zod";
 
+// the `error` field contains a general error message, usually displayed at the top of the form
 type ZodFieldError<T> = Partial<Record<keyof T, string>> & { error?: string };
 
 export function zodErrorToFieldMessages<T>(
