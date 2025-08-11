@@ -219,7 +219,7 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
             )}
           />
           {errorsObj.content && (
-            <p className="text-red-500 text-sm mt-1">{errorsObj.content}</p>
+            <p className="text-red-500 text-xs mt-1">{errorsObj.content}</p>
           )}
         </div>
         <div>
