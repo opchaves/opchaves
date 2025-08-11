@@ -26,8 +26,8 @@ const postSchema = z.object({
     ),
   excerpt: z
     .string()
-    .max(200, "Excerpt must be at most 200 characters")
-    .optional(),
+    .min(1, "Excerpt is required")
+    .max(200, "Excerpt must be at most 200 characters"),
   content: z.string().min(20, "Content must be at least 20 characters"),
   status: z.enum(["draft", "published"]),
 });
@@ -41,10 +41,10 @@ export async function action({ request, context }: Route.ActionArgs) {
   const session = await ensureAuthenticated({ context, request });
   const formData = await request.formData();
   const values = {
-    title: formData.get("title")?.toString() || "",
-    slug: formData.get("slug")?.toString() || "",
-    excerpt: formData.get("excerpt")?.toString() || "",
-    content: formData.get("content")?.toString() || "",
+    title: formData.get("title")?.toString(),
+    slug: formData.get("slug")?.toString(),
+    excerpt: formData.get("excerpt")?.toString(),
+    content: formData.get("content")?.toString(),
     status: formData.get("status")?.toString() || "draft",
   };
 
@@ -195,7 +195,7 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
           name="excerpt"
           as="textarea"
           register={register}
-          placeholder="Short summary (optional)"
+          placeholder="Short summary"
           maxLength={200}
           error={errorsObj.excerpt}
         />
