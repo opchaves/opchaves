@@ -30,7 +30,9 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
       <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6 w-full max-w-sm">
         <h2 className="text-lg font-semibold mb-2">{title}</h2>
-        {description && <p className="mb-4 text-gray-600 dark:text-gray-300">{description}</p>}
+        {description && (
+          <p className="mb-4 text-gray-600 dark:text-gray-300">{description}</p>
+        )}
         {children}
         <div className="flex justify-end gap-2 mt-6">
           <button

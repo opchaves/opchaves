@@ -1,7 +1,9 @@
 // Converts Zod 4 errors to { field: message } format
 import type { ZodError } from "zod";
 
-export function zodErrorToFieldMessages(error: ZodError): Record<string, string> {
+export function zodErrorToFieldMessages(
+  error: ZodError,
+): Record<string, string> {
   const messages: Record<string, string> = {};
   for (const issue of error.issues) {
     const field = issue.path.join(".");
