@@ -2,7 +2,7 @@ import type { Route } from "./+types/new";
 import React from "react";
 import { useNavigate } from "react-router";
 import { useFetcher } from "react-router";
-import { useForm, useWatch, Controller } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import MDEditor from "@uiw/react-md-editor";
@@ -13,8 +13,16 @@ import { post } from "@/database/schema";
 import { ensureAuthenticated } from "@/lib/utils.server";
 import { slugify, zodErrorToFieldMessages } from "@/lib/utils";
 
+const slugRegex = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const postSchema = z.object({
   title: z.string().min(5, "Title must be at least 5 characters"),
+  slug: z
+    .string()
+    .min(1, "Slug is required")
+    .regex(
+      slugRegex,
+      "Slug must contain only lowercase letters, numbers, and hyphens",
+    ),
   excerpt: z
     .string()
     .max(200, "Excerpt must be at most 200 characters")
@@ -33,6 +41,7 @@ export async function action({ request, context }: Route.ActionArgs) {
   const formData = await request.formData();
   const values = {
     title: formData.get("title")?.toString() || "",
+    slug: formData.get("slug")?.toString() || "",
     excerpt: formData.get("excerpt")?.toString() || "",
     content: formData.get("content")?.toString() || "",
     status: formData.get("status")?.toString() || "draft",
@@ -44,18 +53,17 @@ export async function action({ request, context }: Route.ActionArgs) {
     return data({ error: errorMessages }, { status: 400 });
   }
 
-  const { title, excerpt, content } = result.data;
-  const slug = slugify(title);
+  const { title, slug, excerpt, content, status } = result.data;
 
   try {
     await context.db.insert(post).values({
       id: nanoid(),
       title,
+      slug,
       excerpt,
       content,
-      slug,
       authorId: session.user.id,
-      status: "draft",
+      status,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -79,7 +87,6 @@ export async function action({ request, context }: Route.ActionArgs) {
 }
 
 type BlogForm = z.infer<typeof postSchema>;
-type ActionError = Record<string, string>;
 
 export default function BlogNew({ actionData }: Route.ComponentProps) {
   const navigate = useNavigate();
@@ -91,12 +98,27 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
     register,
     handleSubmit,
     watch,
+    setValue,
     control,
     formState: { errors },
   } = useForm<BlogForm>({
     resolver: zodResolver(postSchema),
     defaultValues: { status: "draft" },
   });
+
+  const [slugManuallyEdited, setSlugManuallyEdited] = React.useState(false);
+
+  const onSlugChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue("slug", e.target.value);
+    setSlugManuallyEdited(true);
+  };
+
+  const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue("title", e.target.value);
+    if (!slugManuallyEdited) {
+      setValue("slug", slugify(e.target.value));
+    }
+  };
 
   const onSubmit = (data: BlogForm) => {
     fetcher.submit(data, {
@@ -106,7 +128,7 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
   };
 
   const hasContent = Boolean(
-    watch("title") || watch("excerpt") || watch("content"),
+    watch("title") || watch("excerpt") || watch("content") || watch("slug"),
   );
 
   const handleCancel = () => {
@@ -128,9 +150,9 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
       <h1 className="text-3xl md:text-4xl font-extrabold mb-6 bg-gradient-to-r from-gray-800 to-gray-500 text-transparent bg-clip-text text-center">
         New Blog Post
       </h1>
-      {submitError?.["error"] && (
+      {submitError?.error && (
         <div className="text-red-600 text-sm mb-4 text-center">
-          {submitError["error"]}
+          {submitError?.error}
         </div>
       )}
       <fetcher.Form
@@ -145,6 +167,7 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
           <input
             type="text"
             {...register("title")}
+            onChange={onTitleChange}
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
             placeholder="Enter post title"
           />
@@ -153,6 +176,24 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
           )}
           {submitError && "title" in submitError && (
             <p className="text-red-500 text-xs mt-1">{submitError["title"]}</p>
+          )}
+        </div>
+        <div>
+          <label className="block text-lg font-semibold mb-2 text-gray-700">
+            Slug
+          </label>
+          <input
+            type="text"
+            {...register("slug")}
+            onChange={onSlugChange}
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
+            placeholder="post-title-slug"
+          />
+          {errors.slug && (
+            <p className="text-red-500 text-sm mt-1">{errors.slug?.message}</p>
+          )}
+          {submitError && "slug" in submitError && (
+            <p className="text-red-500 text-xs mt-1">{submitError["slug"]}</p>
           )}
         </div>
         <div>
