@@ -1,5 +1,6 @@
 import type { Route } from "./+types/new";
 import React from "react";
+import { Input } from "@/components/Input";
 import { useNavigate } from "react-router";
 import { useFetcher } from "react-router";
 import { useForm, Controller } from "react-hook-form";
@@ -49,7 +50,7 @@ export async function action({ request, context }: Route.ActionArgs) {
 
   const result = postSchema.safeParse(values);
   if (!result.success) {
-    const errorMessages = zodErrorToFieldMessages(result.error);
+    const errorMessages = zodErrorToFieldMessages<BlogForm>(result.error);
     return data({ error: errorMessages }, { status: 400 });
   }
 
@@ -109,8 +110,9 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
   const [slugManuallyEdited, setSlugManuallyEdited] = React.useState(false);
 
   const onSlugChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const isEmpty = e.target.value.trim() === "";
     setValue("slug", e.target.value);
-    setSlugManuallyEdited(true);
+    setSlugManuallyEdited(!isEmpty);
   };
 
   const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -145,78 +147,64 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
     }
   };
 
+  let formError: string | undefined;
+  let titleError = errors.title?.message;
+  let slugError = errors.slug?.message;
+  let excerptError = errors.excerpt?.message;
+  let contentError = errors.content?.message;
+  let statusError = errors.status?.message;
+  if (submitError) {
+    if ("error" in submitError) {
+      formError = submitError.error;
+    } else {
+      titleError = submitError.title;
+      slugError = submitError.slug;
+      excerptError = submitError.excerpt;
+      contentError = submitError.content;
+      statusError = submitError.status;
+    }
+  }
+
   return (
     <div className="max-w-2xl mx-auto py-12 px-4">
       <h1 className="text-3xl md:text-4xl font-extrabold mb-6 bg-gradient-to-r from-gray-800 to-gray-500 text-transparent bg-clip-text text-center">
         New Blog Post
       </h1>
-      {submitError?.error && (
-        <div className="text-red-600 text-sm mb-4 text-center">
-          {submitError?.error}
-        </div>
+      {formError && (
+        <div className="text-red-600 text-sm mb-4 text-center">{formError}</div>
       )}
       <fetcher.Form
         method="post"
         className="space-y-6"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div>
-          <label className="block text-lg font-semibold mb-2 text-gray-700">
-            Title
-          </label>
-          <input
-            type="text"
-            {...register("title")}
-            onChange={onTitleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
-            placeholder="Enter post title"
-          />
-          {errors.title && (
-            <p className="text-red-500 text-sm mt-1">{errors.title?.message}</p>
-          )}
-          {submitError && "title" in submitError && (
-            <p className="text-red-500 text-xs mt-1">{submitError["title"]}</p>
-          )}
-        </div>
-        <div>
-          <label className="block text-lg font-semibold mb-2 text-gray-700">
-            Slug
-          </label>
-          <input
-            type="text"
-            {...register("slug")}
-            onChange={onSlugChange}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
-            placeholder="post-title-slug"
-          />
-          {errors.slug && (
-            <p className="text-red-500 text-sm mt-1">{errors.slug?.message}</p>
-          )}
-          {submitError && "slug" in submitError && (
-            <p className="text-red-500 text-xs mt-1">{submitError["slug"]}</p>
-          )}
-        </div>
-        <div>
-          <label className="block text-lg font-semibold mb-2 text-gray-700">
-            Excerpt
-          </label>
-          <textarea
-            {...register("excerpt")}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
-            placeholder="Short summary (optional)"
-            maxLength={200}
-          />
-          {errors.excerpt && (
-            <p className="text-red-500 text-sm mt-1">
-              {errors.excerpt?.message}
-            </p>
-          )}
-          {submitError && "excerpt" in submitError && (
-            <p className="text-red-500 text-xs mt-1">
-              {submitError["excerpt"]}
-            </p>
-          )}
-        </div>
+        <Input
+          label="Title"
+          name="title"
+          type="text"
+          register={register}
+          onChange={onTitleChange}
+          placeholder="Enter post title"
+          error={titleError}
+        />
+        <Input
+          label="Slug"
+          name="slug"
+          type="text"
+          register={register}
+          onChange={onSlugChange}
+          placeholder="post-title-slug"
+          error={slugError}
+        />
+        <Input
+          label="Excerpt"
+          name="excerpt"
+          as="textarea"
+          register={register}
+          placeholder="Short summary (optional)"
+          maxLength={200}
+          error={excerptError}
+        />
         <div>
           <label className="block text-lg font-semibold mb-2 text-gray-700">
             Content
@@ -236,15 +224,8 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
               />
             )}
           />
-          {errors.content && (
-            <p className="text-red-500 text-sm mt-1">
-              {errors.content?.message}
-            </p>
-          )}
-          {submitError && "content" in submitError && (
-            <p className="text-red-500 text-xs mt-1">
-              {submitError["content"]}
-            </p>
+          {contentError && (
+            <p className="text-red-500 text-sm mt-1">{contentError}</p>
           )}
         </div>
         <div>
@@ -266,8 +247,8 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
             />
             Mark as draft
           </label>
-          {submitError && "status" in submitError && (
-            <p className="text-red-500 text-xs mt-1">{submitError["status"]}</p>
+          {statusError && (
+            <p className="text-red-500 text-xs mt-1">{statusError}</p>
           )}
         </div>
         <div className="flex justify-end gap-2">
