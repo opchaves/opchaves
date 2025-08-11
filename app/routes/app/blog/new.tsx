@@ -169,7 +169,7 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
       )}
       <fetcher.Form
         method="post"
-        className="space-y-6"
+        className="space-y-2"
         onSubmit={handleSubmit(onSubmit)}
       >
         <Input
@@ -200,7 +200,7 @@ export default function BlogNew({ actionData }: Route.ComponentProps) {
           error={errorsObj.excerpt}
         />
         <div>
-          <label className="block text-lg font-semibold mb-2 text-gray-700">
+          <label className="block font-semibold mb-2 text-gray-700">
             Content
           </label>
           <Controller

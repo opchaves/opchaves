@@ -18,10 +18,7 @@ export const Input: React.FC<InputProps> = ({
 }) => {
   return (
     <div>
-      <label
-        htmlFor={name}
-        className="block text-lg font-semibold mb-2 text-gray-700"
-      >
+      <label htmlFor={name} className="block font-semibold mb-2 text-gray-700">
         {label}
       </label>
       {as === "textarea" ? (
@@ -39,7 +36,7 @@ export const Input: React.FC<InputProps> = ({
           className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500${error ? " border-red-500" : ""}`}
         />
       )}
-      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+      {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
     </div>
   );
 };
