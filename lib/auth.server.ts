@@ -47,7 +47,8 @@ export function createBetterAuth(database: BetterAuthOptions["database"]) {
       user: {
         create: {
           before: async (user) => {
-            if (!env.ALLOWED_EMAILS?.includes(user.email)) {
+            const isProd = import.meta.env.PROD;
+            if (isProd && !env.ALLOWED_EMAILS?.includes(user.email)) {
               console.log({
                 message: "Email is not allowed",
                 email: user.email,
