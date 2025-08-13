@@ -25,6 +25,7 @@ export async function action({ request, context }: Route.ActionArgs) {
     excerpt: formData.get("excerpt")?.toString(),
     content: formData.get("content")?.toString(),
     status: formData.get("status")?.toString() || "draft",
+    publishedDate: formData.get("publishedDate")?.toString(),
   };
 
   const result = blogSchema.safeParse(values);
@@ -33,7 +34,7 @@ export async function action({ request, context }: Route.ActionArgs) {
     return data(errorMessages, { status: 400 });
   }
 
-  const { title, slug, excerpt, content, status } = result.data;
+  const { title, slug, excerpt, content, status, publishedDate } = result.data;
 
   try {
     await context.db.insert(post).values({
@@ -44,6 +45,7 @@ export async function action({ request, context }: Route.ActionArgs) {
       content,
       authorId: session.user.id,
       status,
+      ...(publishedDate && { publishedDate: new Date(publishedDate) }),
     });
     return redirect(`${APP_PATH}/blog`);
   } catch (error) {
@@ -71,6 +73,7 @@ export default function BlogNew() {
         excerpt: "",
         content: "",
         status: "draft",
+        publishedDate: undefined,
       }}
     />
   );

@@ -34,6 +34,7 @@ export const loader = async ({
     excerpt: postData.excerpt,
     content: postData.content,
     status: postData.status,
+    publishedDate: postData.publishedDate,
   };
 };
 
@@ -51,6 +52,7 @@ export const action = async ({
     excerpt: formData.get("excerpt")?.toString() || "",
     content: formData.get("content")?.toString() || "",
     status: formData.get("status")?.toString() || "draft",
+    publishedDate: formData.get("publishedDate")?.toString(),
   };
 
   const result = blogSchema.safeParse(values);
@@ -59,11 +61,18 @@ export const action = async ({
     return data(errorMessages, { status: 400 });
   }
 
-  const { title, excerpt, content, status } = result.data;
+  const { title, excerpt, content, status, publishedDate } = result.data;
   try {
     await context.db
       .update(post)
-      .set({ title, excerpt, content, status, updatedAt: new Date() })
+      .set({
+        title,
+        excerpt,
+        content,
+        status,
+        updatedAt: new Date(),
+        ...(publishedDate && { publishedDate: new Date(publishedDate) }),
+      })
       .where(and(eq(post.id, id), eq(post.authorId, session.user.id)));
     return redirect(`/app/blog/${id}`);
   } catch (error) {
@@ -73,16 +82,21 @@ export const action = async ({
   }
 };
 
-export default function BlogEdit({ loaderData }: Route.ComponentProps) {
+export default function BlogEdit({ loaderData: post }: Route.ComponentProps) {
+  const publishedDate = post.publishedDate
+    ? post.publishedDate.toISOString().split("T")[0]
+    : undefined;
+
   return (
     <BlogForm
       mode="edit"
       initialValues={{
-        title: loaderData.title,
-        slug: loaderData.slug,
-        excerpt: loaderData.excerpt ?? undefined,
-        content: loaderData.content,
-        status: loaderData.status as "draft" | "published",
+        publishedDate,
+        title: post.title,
+        slug: post.slug,
+        excerpt: post.excerpt ?? undefined,
+        content: post.content,
+        status: post.status as "draft" | "published",
       }}
     />
   );

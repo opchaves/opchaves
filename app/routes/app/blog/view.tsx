@@ -8,6 +8,7 @@ import { ensureAuthenticated } from "@/lib/utils.server";
 
 import markdownCSS from "github-markdown-css?url";
 import Markdown from "@/components/Markdown";
+import { toDateString } from "@/lib/utils";
 
 export const links: Route.LinksFunction = () => [
   { rel: "stylesheet", href: markdownCSS },
@@ -47,7 +48,7 @@ export const action = async ({ request, context }: Route.ActionArgs) => {
 };
 
 export default function BlogView({ loaderData }: Route.ComponentProps) {
-  const postData = loaderData;
+  const post = loaderData;
   const fetcher = useFetcher();
   const navigate = useNavigate();
   const [confirmDelete, setConfirmDelete] = React.useState(false);
@@ -58,7 +59,7 @@ export default function BlogView({ loaderData }: Route.ComponentProps) {
 
   const confirmDeletePost = () => {
     const formData = new FormData();
-    formData.append("id", postData.id);
+    formData.append("id", post.id);
     formData.append("_action", "delete");
     fetcher.submit(formData, { method: "post" });
     setConfirmDelete(false);
@@ -76,7 +77,7 @@ export default function BlogView({ loaderData }: Route.ComponentProps) {
         </button>
         <div className="flex gap-2">
           <Link
-            to={`/app/blog/${postData.id}/edit`}
+            to={`/app/blog/${post.id}/edit`}
             className="px-4 py-2 bg-blue-100 rounded hover:bg-blue-200 text-blue-800 font-medium"
           >
             Edit
@@ -90,18 +91,22 @@ export default function BlogView({ loaderData }: Route.ComponentProps) {
         </div>
       </div>
       <h1 className="text-3xl lg:text-4xl font-bold mb-2 text-gray-800">
-        {postData.title}
+        {post.title}
       </h1>
-      <div className="text-xs text-gray-400 mb-4">
-        {new Date(postData.createdAt).toLocaleString()}
-      </div>
+      {post.status === "published" ? (
+        <div className="text-xs text-gray-400 mb-4">
+          Published on {post.publishedDate && toDateString(post.publishedDate)}
+        </div>
+      ) : (
+        <div className="text-xs text-gray-400 mb-4">Draft</div>
+      )}
       <div className="mt-8">
-        <Markdown>{postData.content}</Markdown>
+        <Markdown>{post.content}</Markdown>
       </div>
       <ConfirmDialog
         open={confirmDelete}
         title="Confirm Delete"
-        description={`Are you sure you want to delete "${postData.title}"?`}
+        description={`Are you sure you want to delete "${post.title}"?`}
         confirmLabel="Delete"
         cancelLabel="Cancel"
         danger

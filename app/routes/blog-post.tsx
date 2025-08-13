@@ -1,6 +1,6 @@
 import { post } from "@/database/schema";
 import type { Route } from "./+types/blog-post";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { toDateString } from "@/lib/utils";
 import Markdown from "@/components/Markdown";
 import markdownCSS from "github-markdown-css?url";
@@ -20,7 +20,7 @@ export async function loader({ params, context }: Route.LoaderArgs) {
       createdAt: post.createdAt,
     })
     .from(post)
-    .where(eq(post.slug, params.slug))
+    .where(and(eq(post.slug, params.slug), eq(post.status, "published")))
     .limit(1)
     .get();
 

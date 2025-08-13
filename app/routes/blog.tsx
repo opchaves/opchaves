@@ -1,6 +1,6 @@
 import { post } from "@/database/schema";
 import type { Route } from "./+types/blog";
-import { desc } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import { toDateString } from "@/lib/utils";
 
 export async function loader({ context }: Route.LoaderArgs) {
@@ -13,6 +13,7 @@ export async function loader({ context }: Route.LoaderArgs) {
       createdAt: post.createdAt,
     })
     .from(post)
+    .where(eq(post.status, "published"))
     .orderBy(desc(post.createdAt));
 
   return posts;

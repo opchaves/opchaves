@@ -23,6 +23,9 @@ export const blogSchema = z.object({
     .max(200, "Excerpt must be at most 200 characters"),
   content: z.string().min(20, "Content must be at least 20 characters"),
   status: z.enum(["draft", "published"]),
+  publishedDate: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format"),
 });
 
 export type BlogFormValues = z.infer<typeof blogSchema>;
@@ -164,6 +167,15 @@ export const BlogForm: React.FC<BlogFormProps> = ({
           {mergedErrors.content && (
             <p className="text-red-500 text-xs mt-1">{mergedErrors.content}</p>
           )}
+        </div>
+        <div>
+          <Input
+            label="Published Date"
+            name="publishedDate"
+            type="date"
+            register={register}
+            error={mergedErrors.publishedDate}
+          />
         </div>
         <div>
           <label className="font-medium text-gray-700">

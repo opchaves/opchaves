@@ -1,17 +1,14 @@
 import React from "react";
-import { useFetcher, Link, redirect } from "react-router";
+import { useFetcher, Link } from "react-router";
 import { post } from "@/database/schema";
 import { and, desc, eq } from "drizzle-orm";
 import type { Route } from "../blog/+types/index";
 import { getAuth } from "@/lib/auth.server";
+import { toDateString } from "@/lib/utils";
+import { ensureAuthenticated } from "@/lib/utils.server";
 
 export async function loader({ request, context }: Route.LoaderArgs) {
-  const session = await getAuth(context).api.getSession({
-    headers: request.headers,
-  });
-  if (!session) {
-    return redirect("/auth/login");
-  }
+  const session = await ensureAuthenticated({ context, request });
 
   const posts = await context.db
     .select()
@@ -83,9 +80,14 @@ export default function BlogIndex({ loaderData }: Route.ComponentProps) {
                   {post.title}
                 </h2>
                 <p className="text-gray-700 mb-2">{post.excerpt}</p>
-                <span className="text-xs text-gray-400">
-                  {new Date(post.createdAt).toLocaleString()}
-                </span>
+                {post.status === "published" ? (
+                  <div className="text-xs text-gray-400 mb-4">
+                    Published on{" "}
+                    {post.publishedDate && toDateString(post.publishedDate)}
+                  </div>
+                ) : (
+                  <div className="text-xs text-gray-400 mb-4">Draft</div>
+                )}
               </div>
               <div className="flex gap-3 mt-4 md:mt-0">
                 <Link
