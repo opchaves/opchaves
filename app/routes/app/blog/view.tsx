@@ -4,8 +4,14 @@ import { and, eq } from "drizzle-orm";
 import React from "react";
 import { ConfirmDialog } from "@/components/ConfirmDialog";
 import { useFetcher, Link, useNavigate } from "react-router";
-import ReactMarkdown from "react-markdown";
 import { ensureAuthenticated } from "@/lib/utils.server";
+
+import markdownCSS from "github-markdown-css?url";
+import Markdown from "@/components/Markdown";
+
+export const links: Route.LinksFunction = () => [
+  { rel: "stylesheet", href: markdownCSS },
+];
 
 export const loader = async ({
   params,
@@ -83,14 +89,14 @@ export default function BlogView({ loaderData }: Route.ComponentProps) {
           </button>
         </div>
       </div>
-      <h1 className="text-3xl font-bold mb-2 text-gray-800">
+      <h1 className="text-3xl lg:text-4xl font-bold mb-2 text-gray-800">
         {postData.title}
       </h1>
       <div className="text-xs text-gray-400 mb-4">
         {new Date(postData.createdAt).toLocaleString()}
       </div>
-      <div className="prose mb-8">
-        <ReactMarkdown>{postData.content}</ReactMarkdown>
+      <div className="mt-8">
+        <Markdown>{postData.content}</Markdown>
       </div>
       <ConfirmDialog
         open={confirmDelete}
