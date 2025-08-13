@@ -47,6 +47,7 @@ export function createBetterAuth(database: BetterAuthOptions["database"]) {
       user: {
         create: {
           before: async (user) => {
+            // to try production mode locally, run `npm run preview`
             const isProd = import.meta.env.PROD;
             if (isProd && !env.ALLOWED_EMAILS?.includes(user.email)) {
               console.log({
