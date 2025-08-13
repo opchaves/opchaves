@@ -43,14 +43,18 @@ export async function action({ request, context }: Route.ActionArgs) {
       asResponse: true,
     });
 
+    if (!res.ok) {
+      const error = (await res.json()) as Record<string, unknown>;
+      const message = error.message || "Registration failed.";
+      return data({ error: message }, { status: 400 });
+    }
+
     // When doing server-side registration, setting headers is important so that
     // the loader can access the session
     return redirect(APP_PATH, { headers: res.headers, status: 303 });
   } catch (error: any) {
-    return data(
-      { error: error.message || "Registration failed." },
-      { status: 400 },
-    );
+    console.log({ error });
+    return data({ error: error.message || "Internal Error" }, { status: 500 });
   }
 }
 

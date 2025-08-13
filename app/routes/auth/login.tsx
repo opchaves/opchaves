@@ -43,9 +43,16 @@ export async function action({ request, context }: Route.ActionArgs) {
       asResponse: true,
     });
 
+    if (!res.ok) {
+      const error = (await res.json()) as Record<string, unknown>;
+      const message = error.message || "Login failed.";
+      return data({ error: message }, { status: 400 });
+    }
+
     return redirect(APP_PATH, { headers: res.headers, status: 303 });
   } catch (error: any) {
-    return data({ error: error.message || "Login failed." }, { status: 400 });
+    console.log({ error });
+    return data({ error: error.message || "Internal Error" }, { status: 500 });
   }
 }
 

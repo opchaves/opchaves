@@ -23,6 +23,7 @@ export const envSchema = z.object({
     .describe(
       "Controls how Playwright test output is displayed in CI. 'pipe' captures output, 'ignore' discards it.",
     ),
+  ALLOWED_EMAILS: z.string().optional().default("opaulochaves@gmail.com"), // comma-separated list of emails
 });
 
 export type Env = z.infer<typeof envSchema>;

@@ -4,6 +4,7 @@ import type { AppLoadContext } from "react-router";
 import { env } from "./env";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import * as schema from "../database/schema";
+import { createAuthMiddleware, APIError } from "better-auth/api";
 
 export function createBetterAuth(database: BetterAuthOptions["database"]) {
   return betterAuth({
@@ -41,6 +42,18 @@ export function createBetterAuth(database: BetterAuthOptions["database"]) {
           input: false,
         },
       },
+    },
+    hooks: {
+      before: createAuthMiddleware(async (ctx) => {
+        console.log('>>>PATH"', ctx.path, ctx.body);
+        if (ctx.path === "/sign-up/email" || ctx.path === "/sign-in/email") {
+          if (!env.ALLOWED_EMAILS?.includes(ctx.body?.email)) {
+            throw new APIError("BAD_REQUEST", {
+              message: "Email is not allowed",
+            });
+          }
+        }
+      }),
     },
   });
 }
