@@ -10,6 +10,7 @@ export default [
   layout("routes/site-layout.tsx", [
     index("routes/home.tsx"),
     route("/blog", "routes/blog.tsx"),
+    route("/blog/:slug", "routes/blog-post.tsx"),
     route("/resume", "routes/resume.tsx"),
   ]),
 
