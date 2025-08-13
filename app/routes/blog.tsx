@@ -11,6 +11,7 @@ export async function loader({ context }: Route.LoaderArgs) {
       slug: post.slug,
       excerpt: post.excerpt,
       createdAt: post.createdAt,
+      publishedDate: post.publishedDate,
     })
     .from(post)
     .where(eq(post.status, "published"))
@@ -46,7 +47,7 @@ export default function Blog({ loaderData: posts }: Route.ComponentProps) {
               {post.title}
             </a>
             <div className="text-xs text-gray-400 mb-1">
-              {toDateString(post.createdAt)}
+              {post.publishedDate ? toDateString(post.publishedDate) : ""}
             </div>
             <p className="text-gray-700 mt-2">{post.excerpt}</p>
           </li>

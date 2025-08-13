@@ -18,6 +18,7 @@ export async function loader({ params, context }: Route.LoaderArgs) {
       content: post.content,
       excerpt: post.excerpt,
       createdAt: post.createdAt,
+      publishedDate: post.publishedDate,
     })
     .from(post)
     .where(and(eq(post.slug, params.slug), eq(post.status, "published")))
@@ -48,7 +49,7 @@ export default function BlogPost({ loaderData: post }: Route.ComponentProps) {
         {post.title}
       </h1>
       <div className="text-xs text-gray-400 mb-1">
-        {toDateString(post.createdAt)}
+        {post.publishedDate ? toDateString(post.publishedDate) : ""}
       </div>
       <div className="mt-8">
         <Markdown>{post.content}</Markdown>
