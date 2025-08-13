@@ -43,16 +43,23 @@ export function createBetterAuth(database: BetterAuthOptions["database"]) {
         },
       },
     },
-    hooks: {
-      before: createAuthMiddleware(async (ctx) => {
-        if (ctx.path === "/sign-up/email" || ctx.path === "/sign-in/email") {
-          if (!env.ALLOWED_EMAILS?.includes(ctx.body?.email)) {
-            throw new APIError("BAD_REQUEST", {
-              message: "Email is not allowed",
-            });
-          }
-        }
-      }),
+    databaseHooks: {
+      user: {
+        create: {
+          before: async (user) => {
+            if (!env.ALLOWED_EMAILS?.includes(user.email)) {
+              console.log({
+                message: "Email is not allowed",
+                email: user.email,
+              });
+              throw new APIError("BAD_REQUEST", {
+                message: "Email is not allowed",
+              });
+            }
+            return { data: { ...user } };
+          },
+        },
+      },
     },
   });
 }
