@@ -20,6 +20,17 @@ export async function loader({ context }: Route.LoaderArgs) {
 }
 
 export default function Blog({ loaderData: posts }: Route.ComponentProps) {
+  if (posts.length === 0) {
+    return (
+      <section className="max-w-2xl mx-auto py-12 px-4">
+        <h1 className="text-4xl font-extrabold text-gray-700 mb-8 text-center">
+          Blog
+        </h1>
+        <p className="text-gray-600 text-center">No posts available.</p>
+      </section>
+    );
+  }
+
   return (
     <section className="max-w-2xl mx-auto py-12 px-4">
       <h1 className="text-4xl font-extrabold text-gray-700 mb-8 text-center">

@@ -21,7 +21,6 @@ export function Navbar() {
     { name: "Home", to: "/" },
     { name: "Blog", to: "/blog" },
     { name: "Resume", to: "/resume" },
-    { name: "Sign in", to: "/auth/login" },
   ];
 
   const selected =
@@ -31,7 +30,7 @@ export function Navbar() {
     val === location.pathname ? "text-gray-900 font-semibold" : "";
 
   return (
-    <nav className="w-full flex items-center justify-between py-4 px-8 bg-white/80 backdrop-blur border-b border-gray-200 sticky top-0 z-10">
+    <nav className="w-full max-w-7xl mx-auto flex items-center justify-between py-4 px-8 bg-white/80 backdrop-blur border-b border-gray-200 sticky top-0 z-10">
       <Link to="/" className="text-xl font-bold tracking-tight text-gray-800">
         OpChaves
       </Link>
@@ -54,12 +53,6 @@ export function Navbar() {
           className={`hover:text-gray-800 font-medium ${activePath("/resume")}`}
         >
           Resume
-        </Link>
-        <Link
-          to="/auth/login"
-          className="ml-4 px-4 py-1 rounded bg-gray-600 text-white hover:bg-gray-800 font-semibold"
-        >
-          Sign in
         </Link>
       </div>
       {/* Mobile dropdown */}
