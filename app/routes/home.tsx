@@ -1,4 +1,6 @@
+import EmailIcon from "@/components/icons/email";
 import GithubIcon from "@/components/icons/github";
+import InstagramIcon from "@/components/icons/instagram";
 import LinkedInIcon from "@/components/icons/linkedin";
 import XIcon from "@/components/icons/x";
 import YoutubeIcon from "@/components/icons/youtube";
@@ -64,6 +66,9 @@ function SkillsSection() {
   );
 }
 
+const mailQuery =
+  "subject=Let's%20collaborate!&body=Hey%20Paulo%2C%0A%0AI'd%like%20to%20connect%20about%20business%20or%20engineering%20collaboration.%0A";
+
 function SocialLinksSection() {
   return (
     <section className="max-w-3xl mx-auto pb-12 pt-3 px-4">
@@ -106,6 +111,24 @@ function SocialLinksSection() {
           className="text-gray-500 hover:text-gray-800 text-2xl"
         >
           <YoutubeIcon />
+        </a>
+        <a
+          href={`mailto:paulo@opchaves.com?${mailQuery}`}
+          target="_blank"
+          rel="noopener"
+          aria-label="Email"
+          className="text-gray-500 hover:text-gray-800 text-2xl"
+        >
+          <EmailIcon />
+        </a>
+        <a
+          href="https://instagram.com/opchaves"
+          target="_blank"
+          rel="noopener"
+          aria-label="Instagram"
+          className="text-gray-500 hover:text-gray-800 text-2xl"
+        >
+          <InstagramIcon />
         </a>
       </div>
     </section>

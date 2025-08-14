@@ -60,11 +60,11 @@ export default function Resume() {
           </div>
           <div className="flex flex-wrap items-center gap-4 text-sm mb-2">
             <a
-              href="mailto:opaulochaves@gmail.com"
+              href="mailto:paulo@opchaves.com"
               className="hover:underline"
               aria-label="Email"
             >
-              opaulochaves@gmail.com
+              paulo@opchaves.com
             </a>
             <span>Teresina-PI, Brasil</span>
           </div>
