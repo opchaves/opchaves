@@ -2,6 +2,8 @@
 
 Senior Full Stack Engineer
 
+TypeScript / C++
+
 ## About
 
 - Building scalable web apps
