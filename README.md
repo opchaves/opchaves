@@ -2,7 +2,7 @@
 
 Senior Full Stack Engineer
 
-TypeScript / C++
+TypeScript / C++ / Node.js / React.js / MongoDB / Postgres / Docker
 
 ## About
 
