@@ -9,6 +9,7 @@
 # React Router
 /.react-router/
 /build/
+/test-results/
 
 # Cloudflare
 .mf
