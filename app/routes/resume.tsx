@@ -103,12 +103,18 @@ export default function Resume() {
           <h3 className="text-lg font-bold mb-2">Experience</h3>
           <div className="mb-4">
             <div className="font-semibold">
-              Senior Fullstack Developer at Thunkable
+              Senior Software Engineer at Thunkable
             </div>
             <div className="text-xs text-gray-600 my-1">
               April 2023 to Current
             </div>
             <ul className="list-disc pl-5 space-y-1">
+              <li>
+                Architect and develop AI-driven application generation features
+                using LLMs (Claude, ChatGPT) via APIs, transitioning the
+                platform from Blockly/drag-and-drop to a natural language
+                interface.
+              </li>
               <li>
                 Develop and maintain scalable Node.js backends with REST and
                 GraphQL APIs, integrating data sources like Google Sheets,
@@ -117,29 +123,29 @@ export default function Resume() {
               </li>
               <li>
                 Build and optimize infrastructure using Docker and Kubernetes to
-                enable seamless app generation across platforms.
+                enable seamless app generation across platforms (React Native,
+                Expo).
               </li>
               <li>
                 Lead end-to-end feature development, managing database, backend,
-                frontend (React.js, TypeScript), and mobile (React Native, Expo)
-                components.
+                frontend (React.js, TypeScript), and mobile components.
               </li>
               <li>
                 Migrate extensive JavaScript codebases to TypeScript, enhancing
                 maintainability and type safety.
               </li>
               <li>
-                Optimize backend processes to reduce GCP storage costs,
-                improving operational efficiency.
+                Optimize backend processes and MongoDB performance to improve
+                operational efficiency and scalability.
               </li>
               <li>
-                Enhance MongoDB performance by optimizing queries, enabling
-                replica sets, and managing version upgrades for reliability and
-                scalability.
+                Implement end-to-end tests with Playwright, ensuring robust
+                feature validation and application reliability.
               </li>
               <li>
-                Implement end-to-end tests with Cypress, ensuring robust feature
-                validation and application reliability.
+                <span className="font-semibold text-xs">Technologies:</span>{" "}
+                Node.js, TypeScript, React.js, GraphQL, LLMs (Claude, ChatGPT),
+                Docker, Kubernetes, MongoDB.
               </li>
             </ul>
           </div>
