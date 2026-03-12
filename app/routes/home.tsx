@@ -1,22 +1,18 @@
-import EmailIcon from "@/components/icons/email";
 import GithubIcon from "@/components/icons/github";
-import InstagramIcon from "@/components/icons/instagram";
 import LinkedInIcon from "@/components/icons/linkedin";
 import XIcon from "@/components/icons/x";
 import YoutubeIcon from "@/components/icons/youtube";
 
 export function meta() {
   return [
-    { title: "Paulo Chaves – Senior Full Stack Engineer" },
+    { title: "Paulo Chaves – Senior Software Engineer" },
     {
       name: "description",
       content: [
-        "I’m a Senior Full Stack Engineer with over 10 years of experience,",
-        "specializing in building REST and GraphQL APIs with Node.js,",
-        "powered by MongoDB, Postgres, and Redis. I also develop modern",
-        "UIs with React.js leveraging TypeScript to deliver robust and highly",
-        "efficient web applications. Experienced in remote and collaborative",
-        "environments, I thrive on solving complex challenges and delivering value through code.",
+        "Senior Software Engineer with 10+ years of experience.",
+        "Currently architecting AI-driven platforms at Thunkable to enable",
+        "natural language app generation. Expert in Node.js, React, and",
+        "Ruby on Rails with an AI-augmented development workflow.",
       ].join(" "),
     },
   ];
@@ -29,20 +25,16 @@ function HeroSection() {
         Paulo Chaves
       </h1>
       <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-gray-700">
-        Senior Full Stack Engineer
+        Senior Software Engineer
       </h2>
       <p className="max-w-3xl text-lg md:text-xl text-gray-700 mb-8">
-        I’m a Senior Full Stack Engineer with over 10 years of experience,
-        specializing in building REST and GraphQL APIs with{" "}
-        <span className="font-semibold">Node.js</span>, powered by{" "}
-        <span className="font-semibold">MongoDB</span>,{" "}
-        <span className="font-semibold">Postgres</span>, and{" "}
-        <span className="font-semibold">Redis</span>. I also develop modern UIs
-        with <span className="font-semibold">React.js</span> leveraging{" "}
-        <span className="font-semibold">TypeScript</span> to deliver robust and
-        highly efficient web applications. Experienced in remote and
-        collaborative environments, I thrive on solving complex challenges and
-        delivering value through code.
+        I’m a Senior Software Engineer with a decade of experience building
+        systems that scale and solutions that last. Currently, I’m at{" "}
+        <span className="font-semibold">Thunkable</span> helping to bridge the
+        gap between human ideas and mobile apps by using LLMs to enable natural
+        language creation. I’m a firm believer in the power of{" "}
+        <span className="font-semibold">AI-augmented engineering</span>—not just
+        in the products I build, but in how I build them.
       </p>
     </section>
   );
@@ -52,14 +44,26 @@ function SkillsSection() {
   return (
     <section className="max-w-3xl mx-auto pb-12 pt-3 px-4">
       <h3 className="text-xl font-bold mb-4 text-gray-700">Skills</h3>
-      <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700">
+      <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 text-gray-700">
+        <li>
+          <span className="font-semibold">AI & LLM:</span> Claude Code, Gemini
+          CLI, Anthropic/OpenAI APIs, AI-Augmented Development
+        </li>
         <li>
           <span className="font-semibold">Backend:</span> Node.js, TypeScript,
-          PostgreSQL, REST, GraphQL, MongoDB, Docker, Ruby on Rails
+          Ruby on Rails, PostgreSQL, MongoDB, Redis, GraphQL
         </li>
         <li>
           <span className="font-semibold">Frontend:</span> React, React Router,
-          Redux, Tailwind CSS, AntD, UI/UX, SSR, SPA
+          Next.js, Vite, Tailwind CSS, TypeScript
+        </li>
+        <li>
+          <span className="font-semibold">Infrastructure & Ops:</span> Docker,
+          Kubernetes, GCP, AWS, CI/CD (GitHub Actions), Git
+        </li>
+        <li>
+          <span className="font-semibold">Testing:</span> Playwright, Cypress,
+          Jest, Vitest
         </li>
       </ul>
     </section>
@@ -111,24 +115,6 @@ function SocialLinksSection() {
           className="text-gray-500 hover:text-gray-800 text-2xl"
         >
           <YoutubeIcon />
-        </a>
-        <a
-          href={`mailto:paulo@opchaves.com?${mailQuery}`}
-          target="_blank"
-          rel="noopener"
-          aria-label="Email"
-          className="text-gray-500 hover:text-gray-800 text-2xl"
-        >
-          <EmailIcon />
-        </a>
-        <a
-          href="https://instagram.com/opchaves"
-          target="_blank"
-          rel="noopener"
-          aria-label="Instagram"
-          className="text-gray-500 hover:text-gray-800 text-2xl"
-        >
-          <InstagramIcon />
         </a>
       </div>
     </section>
