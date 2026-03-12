@@ -7,13 +7,10 @@ export function meta() {
     {
       name: "description",
       content: [
-        "I’m a Senior Software Engineer with over 10 years of experience,",
-        "specializing in building REST and GraphQL APIs with Node.js,",
-        "powered by MongoDB, Postgres, and Redis. I also develop modern",
-        "UIs with React.js leveraging TypeScript to deliver robust and highly",
-        "efficient web applications. My focus is on creating efficient,",
-        "maintainable solutions that drive business impact, from optimizing",
-        "infrastructure to integrating tools like Google Sheets, Baserow, and Airtable.",
+        "Senior Software Engineer with 10+ years of experience.",
+        "Currently architecting AI-driven platforms at Thunkable to enable",
+        "natural language app generation. Expert in Node.js, React, and",
+        "Ruby on Rails with an AI-augmented development workflow using Gemini CLI.",
       ].join(" "),
     },
   ];
@@ -73,14 +70,15 @@ export default function Resume() {
         <section className="mb-8">
           <h3 className="text-lg font-bold mb-2">Summary</h3>
           <p>
-            I’m a Senior Software Engineer with over 10 years of experience,
-            specializing in building REST and GraphQL APIs with Node.js, powered
-            by MongoDB, Postgres, and Redis. I also develop modern UIs with
-            React.js leveraging TypeScript to deliver robust and highly
-            efficient web applications. My focus is on creating efficient,
-            maintainable solutions that drive business impact, from optimizing
-            infrastructure to integrating tools like Google Sheets, Baserow, and
-            Airtable.
+            I’m a Senior Software Engineer with a decade of experience building
+            systems that scale and solutions that last. Currently, I’m at
+            Thunkable helping to bridge the gap between human ideas and mobile
+            apps by using LLMs to enable natural language creation. I’m a firm
+            believer in the power of AI-augmented engineering, not just in the
+            products I build, but in how I build them. Whether I’m working in
+            Node.js, React, or Ruby on Rails, my focus is always on combining
+            deep technical craftsmanship with the latest in AI, like Claude Code
+            and Gemini, to solve meaningful problems at scale.
           </p>
         </section>
 
@@ -88,13 +86,26 @@ export default function Resume() {
           <h3 className="text-lg font-bold mb-2">Skills</h3>
           <ul className="list-disc pl-5 space-y-1">
             <li>
+              <span className="font-semibold">AI & LLM:</span> Claude Code,
+              Gemini CLI, Anthropic API, OpenAI APIs, Prompt Engineering,
+              AI-Augmented Development
+            </li>
+            <li>
               <span className="font-semibold">Backend:</span> Node.js,
-              TypeScript, PostgreSQL, Ruby on Rails, REST, GraphQL, MongoDB,
-              Docker
+              TypeScript, Ruby on Rails, PostgreSQL, MongoDB, Redis, REST,
+              GraphQL
             </li>
             <li>
               <span className="font-semibold">Frontend:</span> React.js, React
-              Router, Redux, Tailwind CSS, AntD, UI/UX, SSR, SPA
+              Router, Next.js, Vite, Redux, Tailwind CSS, TypeScript, UI/UX
+            </li>
+            <li>
+              <span className="font-semibold">Infrastructure & Ops:</span>{" "}
+              Docker, Kubernetes, GCP, CI/CD (GitHub Actions), Git
+            </li>
+            <li>
+              <span className="font-semibold">Testing:</span> Playwright,
+              Cypress, Jest, Vitest, Truffle
             </li>
           </ul>
         </section>
@@ -111,9 +122,8 @@ export default function Resume() {
             <ul className="list-disc pl-5 space-y-1">
               <li>
                 Architect and develop AI-driven application generation features
-                using LLMs (Claude, ChatGPT) via APIs, transitioning the
-                platform from Blockly/drag-and-drop to a natural language
-                interface.
+                using LLMs (Claude, Gemini) via APIs, transitioning the platform
+                from Blockly/drag-and-drop to a natural language interface.
               </li>
               <li>
                 Develop and maintain scalable Node.js backends with REST and
@@ -145,7 +155,7 @@ export default function Resume() {
               <li>
                 <span className="font-semibold text-xs">Technologies:</span>{" "}
                 Node.js, TypeScript, React.js, GraphQL, LLMs (Claude, ChatGPT),
-                Docker, Kubernetes, MongoDB.
+                Docker, Kubernetes, MongoDB, Redis
               </li>
             </ul>
           </div>
@@ -272,12 +282,12 @@ export default function Resume() {
               <li>Development of APIs using Node.js and Ruby.</li>
               <li>
                 Write automated tests for Smart Contracts using Truffle and
-                Mocha.
+                Vitest.
               </li>
               <li>Frontend development with React.js.</li>
               <li>
                 <span className="font-semibold text-xs">Technologies:</span>{" "}
-                Node.js, Ruby, Ethereum, Solidity, React.js, Truffle, Mocha.
+                Node.js, Ruby, Ethereum, Solidity, React.js, Truffle, Vitest.
               </li>
             </ul>
           </div>
