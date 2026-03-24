@@ -9,8 +9,8 @@ export function meta() {
       content: [
         "Senior Software Engineer with 10+ years of experience.",
         "Currently architecting AI-driven platforms at Thunkable to enable",
-        "natural language app generation. Expert in Node.js, React, and",
-        "Ruby on Rails with an AI-augmented development workflow using Gemini CLI.",
+        "natural language app generation. Main stack is Node.js, React, and",
+        "Ruby on Rails with an AI-augmented development using Claude Code.",
       ].join(" "),
     },
   ];
@@ -20,7 +20,7 @@ export default function Resume() {
   return (
     <main className="max-w-3xl mx-auto px-4 py-10 text-gray-900">
       <div id="resume">
-        <header className="mb-8">
+        <header className="mb-5">
           <h1 className="text-3xl font-extrabold mb-1">
             Paulo Chaves da Silva Filho
           </h1>
@@ -35,6 +35,13 @@ export default function Resume() {
               className="hover:underline text-sm"
             >
               opchaves.com
+            </a>
+            <a
+              href="mailto:paulo@opchaves.com"
+              className="hover:underline"
+              aria-label="Email"
+            >
+              paulo@opchaves.com
             </a>
             <a
               href="https://github.com/opchaves"
@@ -55,31 +62,19 @@ export default function Resume() {
               <LinkedInIcon width={20} height={20} /> LinkedIn
             </a>
           </div>
-          <div className="flex flex-wrap items-center gap-4 text-sm mb-2">
-            <a
-              href="mailto:paulo@opchaves.com"
-              className="hover:underline"
-              aria-label="Email"
-            >
-              paulo@opchaves.com
-            </a>
-            <span>Teresina-PI, Brasil</span>
-          </div>
         </header>
 
-        <section className="mb-8">
+        <section className="mb-5">
           <h3 className="text-lg font-bold mb-2">Summary</h3>
           <p>
-            Senior Software Engineer with 10+ years of experience building
-            scalable systems. Currently at Thunkable, I leverage LLMs to enable
-            natural language mobile app creation. I am a strong advocate for
-            AI-augmented development, combining technical craftsmanship with
-            tools like Claude and ChatGPT to solve complex problems at scale
-            across Node.js, React, and Ruby on Rails.
+            Senior Software Engineer with 10+ years of experience. Currently
+            architecting AI-driven platforms at Thunkable to enable natural
+            language app generation. Main stack is Node.js, React, and Ruby on
+            Rails with an AI-augmented development using Claude Code.
           </p>
         </section>
 
-        <section className="mb-8">
+        <section className="mb-5">
           <h3 className="text-lg font-bold mb-2">Skills</h3>
           <ul className="list-disc pl-5 space-y-1 text-sm">
             <li>
@@ -106,7 +101,7 @@ export default function Resume() {
           </ul>
         </section>
 
-        <section className="mb-8">
+        <section className="mb-5">
           <h3 className="text-lg font-bold mb-2">Experience</h3>
           <div className="mb-4">
             <div className="font-semibold">
@@ -212,12 +207,8 @@ export default function Resume() {
                 site to a headless CMS (Gatsby).
               </li>
               <li>
-                Built and maintained efficient Node.js and Rails backends,
-                integrating Salesforce APIs and services.
-              </li>
-              <li>
-                Established engineering best practices through cross-functional
-                collaboration and high-quality code.
+                Built Node.js/Rails backends and integrated Salesforce APIs
+                while establishing engineering best practices.
               </li>
               <li>
                 <span className="font-semibold text-xs">Technologies:</span>{" "}
@@ -234,12 +225,8 @@ export default function Resume() {
             </div>
             <ul className="list-disc pl-5 space-y-1 text-sm">
               <li>
-                Developed an event processing pipeline handling thousands of
-                events per second using Ethereum and Smart Contracts.
-              </li>
-              <li>
-                Integrated large datasets from multiple sources via Node.js and
-                Ruby APIs.
+                Developed high-throughput event processing pipelines using
+                Ethereum, Smart Contracts, and Node.js/Ruby APIs.
               </li>
               <li>
                 Built React.js frontends and wrote automated tests for Solidity
@@ -303,11 +290,7 @@ export default function Resume() {
             <ul className="list-disc pl-5 space-y-1 text-sm">
               <li>
                 Modernized legacy Java/Struts2 applications by integrating
-                Spring Framework and AngularJS.
-              </li>
-              <li>
-                Implemented REST APIs to enhance frontend/backend communication
-                and maintainability.
+                Spring Framework, AngularJS, and REST APIs.
               </li>
               <li>
                 <span className="font-semibold text-xs">Technologies:</span>{" "}
@@ -324,12 +307,8 @@ export default function Resume() {
             </div>
             <ul className="list-disc pl-5 space-y-1 text-sm">
               <li>
-                Developed a public health scheduling system for over a million
-                users using PHP and JavaScript.
-              </li>
-              <li>
-                Led the migration from MySQL to PostgreSQL and implemented Git
-                version control across the company.
+                Developed a PHP-based scheduling system for 1M+ users and led
+                the migration from MySQL to PostgreSQL with Git adoption.
               </li>
               <li>
                 <span className="font-semibold text-xs">Technologies:</span>{" "}

@@ -9,10 +9,10 @@ export function meta() {
     {
       name: "description",
       content: [
-        "Senior Software Engineer with 10+ years of experience.",
-        "Currently architecting AI-driven platforms at Thunkable to enable",
-        "natural language app generation. Expert in Node.js, React, and",
-        "Ruby on Rails with an AI-augmented development workflow.",
+        "Senior Software Engineer with 10+ years of experience. Currently",
+        "architecting AI-driven platforms at Thunkable to enable natural",
+        "language app generation. Main stack is Node.js, React, and Ruby on",
+        "Rails with an AI-augmented development using Claude Code.",
       ].join(" "),
     },
   ];
@@ -21,18 +21,17 @@ export function meta() {
 function HeroSection() {
   return (
     <section className="flex flex-col items-center justify-center min-h-[40vh] text-center px-4">
-      <h1 className="text-4xl md:text-6xl font-extrabold mb-4 mt-10 sm:mt-2 bg-gradient-to-r from-gray-800 to-gray-500 text-transparent bg-clip-text">
+      <h1 className="text-4xl md:text-6xl font-bold mb-4 text-center text-gray-700">
         Paulo Chaves
       </h1>
       <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-gray-700">
         Senior Software Engineer
       </h2>
       <p className="max-w-3xl text-lg md:text-xl text-gray-700 mb-8">
-        I’m a Senior Software Engineer with a decade of experience building
-        systems that scale and solutions that last. Currently, I’m at{" "}
-        <span className="font-semibold">Thunkable</span> helping to bridge the
-        gap between human ideas and mobile apps by using LLMs to enable natural
-        language creation.
+        Senior Software Engineer with 10+ years of experience. Currently
+        architecting AI-driven platforms at Thunkable to enable natural language
+        app generation. Main stack is Node.js, React, and Ruby on Rails with an
+        AI-augmented development using Claude Code.
       </p>
     </section>
   );
