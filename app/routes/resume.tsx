@@ -330,19 +330,19 @@ export default function Resume() {
         </section>
       </div>
       <div className="mt-10">
-        <a
-          href="#"
-          className="ml-0 text-gray-800 hover:underline"
-          onClick={(e) => {
-            e.preventDefault();
-            handlePrint();
-          }}
-        >
-          Print
-        </a>
+        {/* <a */}
+        {/*   href="#" */}
+        {/*   className="ml-0 text-gray-800 hover:underline" */}
+        {/*   onClick={(e) => { */}
+        {/*     e.preventDefault(); */}
+        {/*     handlePrint(); */}
+        {/*   }} */}
+        {/* > */}
+        {/*   Print */}
+        {/* </a> */}
         <a
           href="/assets/paulo-chaves-resume.pdf"
-          className="ml-4 text-gray-800 hover:underline"
+          className="text-gray-800 hover:underline"
         >
           Download
         </a>
@@ -351,31 +351,31 @@ export default function Resume() {
   );
 }
 
-function handlePrint() {
-  const resume = document.getElementById("resume");
-  if (!resume) return;
-
-  const resumeContent = resume.innerHTML;
-  const printWindow = window.open("", "", "width=800,height=600");
-  const headContent = document.querySelector("head")?.innerHTML;
-
-  if (!printWindow || !headContent) {
-    console.error("Failed to open print window.");
-    return;
-  }
-
-  printWindow.document.title = "paulo-chaves-resume";
-  printWindow.document.write(`
-    <html lang="en">
-      <head>${headContent}</head>
-      <body>${resumeContent}</body>
-    </html>
-  `);
-
-  // wait a tiny bit for the content to load and apply styles to the print window
-  setTimeout(() => {
-    printWindow.focus();
-    printWindow.print();
-    printWindow.close();
-  }, 50);
-}
+// function handlePrint() {
+//   const resume = document.getElementById("resume");
+//   if (!resume) return;
+//
+//   const resumeContent = resume.innerHTML;
+//   const printWindow = window.open("", "", "width=800,height=600");
+//   const headContent = document.querySelector("head")?.innerHTML;
+//
+//   if (!printWindow || !headContent) {
+//     console.error("Failed to open print window.");
+//     return;
+//   }
+//
+//   printWindow.document.title = "paulo-chaves-resume";
+//   printWindow.document.write(`
+//     <html lang="en">
+//       <head>${headContent}</head>
+//       <body>${resumeContent}</body>
+//     </html>
+//   `);
+//
+//   // wait a tiny bit for the content to load and apply styles to the print window
+//   setTimeout(() => {
+//     printWindow.focus();
+//     printWindow.print();
+//     printWindow.close();
+//   }, 50);
+// }
