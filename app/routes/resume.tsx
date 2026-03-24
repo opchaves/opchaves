@@ -78,7 +78,7 @@ export default function Resume() {
             products I build, but in how I build them. Whether I’m working in
             Node.js, React, or Ruby on Rails, my focus is always on combining
             deep technical craftsmanship with the latest in AI, like Claude Code
-            and Gemini, to solve meaningful problems at scale.
+            and Codex, to solve meaningful problems at scale.
           </p>
         </section>
 
@@ -87,8 +87,7 @@ export default function Resume() {
           <ul className="list-disc pl-5 space-y-1">
             <li>
               <span className="font-semibold">AI & LLM:</span> Claude Code,
-              Gemini CLI, Anthropic API, OpenAI APIs, Prompt Engineering,
-              AI-Augmented Development
+              ChatGPT, Codex, Prompt Engineering, AI-Augmented Development
             </li>
             <li>
               <span className="font-semibold">Backend:</span> Node.js,
@@ -122,8 +121,9 @@ export default function Resume() {
             <ul className="list-disc pl-5 space-y-1">
               <li>
                 Architect and develop AI-driven application generation features
-                using LLMs (Claude, Gemini) via APIs, transitioning the platform
-                from Blockly/drag-and-drop to a natural language interface.
+                using LLMs (Claude Code, ChatGPT Codex) via APIs, transitioning
+                the platform from Blockly/drag-and-drop to a natural language
+                interface.
               </li>
               <li>
                 Develop and maintain scalable Node.js backends with REST and

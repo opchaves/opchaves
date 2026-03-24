@@ -32,9 +32,7 @@ function HeroSection() {
         systems that scale and solutions that last. Currently, I’m at{" "}
         <span className="font-semibold">Thunkable</span> helping to bridge the
         gap between human ideas and mobile apps by using LLMs to enable natural
-        language creation. I’m a firm believer in the power of{" "}
-        <span className="font-semibold">AI-augmented engineering</span>—not just
-        in the products I build, but in how I build them.
+        language creation.
       </p>
     </section>
   );
@@ -46,8 +44,8 @@ function SkillsSection() {
       <h3 className="text-xl font-bold mb-4 text-gray-700">Skills</h3>
       <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 text-gray-700">
         <li>
-          <span className="font-semibold">AI & LLM:</span> Claude Code, Gemini
-          CLI, Anthropic/OpenAI APIs, AI-Augmented Development
+          <span className="font-semibold">AI & LLM:</span> Claude Code, Codex,
+          Gemini, AI-Augmented Development
         </li>
         <li>
           <span className="font-semibold">Backend:</span> Node.js, TypeScript,
