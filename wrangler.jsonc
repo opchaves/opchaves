@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "opchavescom",
-  "compatibility_date": "2025-04-04",
+	"compatibility_date": "2026-07-03",
   "main": "./workers/app.ts",
   "compatibility_flags": ["nodejs_compat"],
   "vars": {
