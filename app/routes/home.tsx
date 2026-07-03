@@ -53,7 +53,7 @@ function SkillsSection() {
     },
     {
       title: "Backend & Architecture",
-      skills: "Database Design, Distributed Locks, GraphQL (DataLoader), MongoDB Transactions, REST/GraphQL APIs, PostgreSQL, Redis",
+      skills: "Database Design, Distributed Locks, MongoDB Transactions, REST/GraphQL APIs, PostgreSQL, Redis",
     },
     {
       title: "Frontend & Mobile",
