@@ -9,6 +9,7 @@ import { ensureAuthenticated } from "@/lib/utils.server";
 import markdownCSS from "github-markdown-css?url";
 import Markdown from "@/components/Markdown";
 import { toDateString } from "@/lib/utils";
+import { dbContext } from "@/lib/context";
 
 export const links: Route.LinksFunction = () => [
   { rel: "stylesheet", href: markdownCSS },
@@ -20,7 +21,8 @@ export const loader = async ({
   request,
 }: Route.LoaderArgs) => {
   const session = await ensureAuthenticated({ context, request });
-  const postData = await context.db
+  const postData = await context
+    .get(dbContext)
     .select()
     .from(post)
     .where(and(eq(post.id, params.id), eq(post.authorId, session.user.id)))
@@ -38,7 +40,8 @@ export const action = async ({ request, context }: Route.ActionArgs) => {
   const isDeleteAction = formData.get("_action") === "delete";
 
   if (isDeleteAction && id) {
-    await context.db
+    await context
+      .get(dbContext)
       .delete(post)
       .where(and(eq(post.id, id), eq(post.authorId, session.user.id)));
 

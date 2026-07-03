@@ -10,6 +10,7 @@ import {
   blogSchema,
   type BlogFormValues,
 } from "./components/BlogForm";
+import { dbContext } from "@/lib/context";
 
 export async function loader({ request, context }: Route.LoaderArgs) {
   const session = await ensureAuthenticated({ context, request });
@@ -37,16 +38,19 @@ export async function action({ request, context }: Route.ActionArgs) {
   const { title, slug, excerpt, content, status, publishedDate } = result.data;
 
   try {
-    await context.db.insert(post).values({
-      id: nanoid(),
-      title,
-      slug,
-      excerpt,
-      content,
-      authorId: session.user.id,
-      status,
-      ...(publishedDate && { publishedDate: new Date(publishedDate) }),
-    });
+    await context
+      .get(dbContext)
+      .insert(post)
+      .values({
+        id: nanoid(),
+        title,
+        slug,
+        excerpt,
+        content,
+        authorId: session.user.id,
+        status,
+        ...(publishedDate && { publishedDate: new Date(publishedDate) }),
+      });
     return redirect(`${APP_PATH}/blog`);
   } catch (error) {
     console.log({ error });

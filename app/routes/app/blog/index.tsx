@@ -6,11 +6,13 @@ import type { Route } from "../blog/+types/index";
 import { getAuth } from "@/lib/auth.server";
 import { toDateString } from "@/lib/utils";
 import { ensureAuthenticated } from "@/lib/utils.server";
+import { dbContext } from "@/lib/context";
 
 export async function loader({ request, context }: Route.LoaderArgs) {
   const session = await ensureAuthenticated({ context, request });
 
-  const posts = await context.db
+  const posts = await context
+    .get(dbContext)
     .select()
     .from(post)
     .where(eq(post.authorId, session.user.id))
@@ -30,7 +32,8 @@ export async function action({ params, request, context }: Route.ActionArgs) {
   const formData = await request.formData();
   const id = formData.get("id")?.toString();
   if (formData.get("_action") === "delete" && id) {
-    await context.db
+    await context
+      .get(dbContext)
       .delete(post)
       .where(and(eq(post.id, id), eq(post.authorId, session.user.id)));
     return { success: true };

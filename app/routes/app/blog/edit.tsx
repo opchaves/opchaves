@@ -9,6 +9,7 @@ import {
   type BlogFormValues,
 } from "./components/BlogForm";
 import { zodErrorToFieldMessages } from "@/lib/utils";
+import { dbContext } from "@/lib/context";
 
 export const loader = async ({
   params,
@@ -17,7 +18,8 @@ export const loader = async ({
 }: Route.LoaderArgs) => {
   const session = await ensureAuthenticated({ context, request });
 
-  const postData = await context.db
+  const postData = await context
+    .get(dbContext)
     .select()
     .from(post)
     .where(and(eq(post.id, params.id), eq(post.authorId, session.user.id)))
@@ -63,7 +65,8 @@ export const action = async ({
 
   const { title, excerpt, content, status, publishedDate } = result.data;
   try {
-    await context.db
+    await context
+      .get(dbContext)
       .update(post)
       .set({
         title,

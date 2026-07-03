@@ -83,15 +83,17 @@ export default function Resume() {
             </li>
             <li>
               <span className="font-semibold">Backend & Architecture:</span>{" "}
-              Database Design, Distributed Locks, MongoDB Transactions, REST/GraphQL APIs, PostgreSQL, Redis
+              Database Design, Distributed Locks, MongoDB Transactions,
+              REST/GraphQL APIs, PostgreSQL, Redis
             </li>
             <li>
-              <span className="font-semibold">Frontend & Mobile:</span>{" "}
-              React Router, Next.js, Vite, Tailwind CSS, Redux, AntD, Apollo
+              <span className="font-semibold">Frontend & Mobile:</span> React
+              Router, Next.js, Vite, Tailwind CSS, Redux, AntD, Apollo
             </li>
             <li>
               <span className="font-semibold">Testing & DevOps:</span>{" "}
-              Playwright, Jest, Vitest, Docker, Kubernetes, GCP, CI/CD (GitHub Actions)
+              Playwright, Jest, Vitest, Docker, Kubernetes, GCP, CI/CD (GitHub
+              Actions)
             </li>
             <li>
               <span className="font-semibold">Development Velocity:</span>{" "}
@@ -111,32 +113,50 @@ export default function Resume() {
             </div>
             <ul className="list-disc pl-5 space-y-1 text-sm">
               <li>
-                Architected and implemented Thunkable Cloud, a backend-as-a-service solution (powered by Supabase) that orchestrates database provisioning, table creation, relationships, permissions, and user authentication under the hood, enabling non-technical users to build applications with a fully-functional backend via natural language prompts.
+                Architected and implemented Thunkable Cloud, a
+                backend-as-a-service solution (powered by Supabase) that
+                orchestrates database provisioning, table creation,
+                relationships, permissions, and user authentication under the
+                hood, enabling non-technical users to build applications with a
+                fully-functional backend via natural language prompts.
               </li>
               <li>
-                Led the full-stack engineering of this backend generation engine across the backend infrastructure, user-facing configurations, and native mobile runtime libraries.
+                Led the full-stack engineering of this backend generation engine
+                across the backend infrastructure, user-facing configurations,
+                and native mobile runtime libraries.
               </li>
               <li>
-                Engineered a secure API connector featuring backend key-vaulting to safely manage, store, and proxy third-party API credentials for end-user app integrations.
+                Engineered a secure API connector featuring backend key-vaulting
+                to safely manage, store, and proxy third-party API credentials
+                for end-user app integrations.
               </li>
               <li>
-                Optimized core backend systems by introducing MongoDB transactions for multi-document ACID compliance, a distributed lock system (Redis) to prevent concurrent state collisions, and GraphQL DataLoader to eliminate N+1 queries.
+                Optimized core backend systems by introducing MongoDB
+                transactions for multi-document ACID compliance, a distributed
+                lock system (Redis) to prevent concurrent state collisions, and
+                GraphQL DataLoader to eliminate N+1 queries.
               </li>
               <li>
-                Maintained and scaled high-throughput Node.js backends, integrating external data providers like Google Sheets, Airtable, and Supabase.
+                Maintained and scaled high-throughput Node.js backends,
+                integrating external data providers like Google Sheets,
+                Airtable, and Supabase.
               </li>
               <li>
-                Improved system diagnostics and observability by designing and implementing a centralized, structured logging pipeline.
+                Improved system diagnostics and observability by designing and
+                implementing a centralized, structured logging pipeline.
               </li>
               <li>
-                Streamlined cross-platform app generation and build flows utilizing Docker, Kubernetes, React Native, and Expo.
+                Streamlined cross-platform app generation and build flows
+                utilizing Docker, Kubernetes, React Native, and Expo.
               </li>
               <li>
-                Ensured platform reliability and test coverage using Playwright for end-to-end integration test suites.
+                Ensured platform reliability and test coverage using Playwright
+                for end-to-end integration test suites.
               </li>
               <li>
                 <span className="font-semibold text-xs">Technologies:</span>{" "}
-                Node.js, TypeScript, React, React Native, GraphQL, Supabase, MongoDB, Redis, Docker, Kubernetes, Playwright.
+                Node.js, TypeScript, React, React Native, GraphQL, Supabase,
+                MongoDB, Redis, Docker, Kubernetes, Playwright.
               </li>
             </ul>
           </div>

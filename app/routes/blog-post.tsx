@@ -4,13 +4,15 @@ import { and, eq } from "drizzle-orm";
 import { toDateString } from "@/lib/utils";
 import Markdown from "@/components/Markdown";
 import markdownCSS from "github-markdown-css?url";
+import { dbContext } from "@/lib/context";
 
 export const links: Route.LinksFunction = () => [
   { rel: "stylesheet", href: markdownCSS },
 ];
 
 export async function loader({ params, context }: Route.LoaderArgs) {
-  const aPost = await context.db
+  const aPost = await context
+    .get(dbContext)
     .select({
       id: post.id,
       title: post.title,
@@ -32,7 +34,7 @@ export async function loader({ params, context }: Route.LoaderArgs) {
   return aPost;
 }
 
-export const meta: Route.MetaFunction = ({ data }) => {
+export const meta: Route.MetaFunction = ({ loaderData: data }) => {
   if (!data) return [];
   return [
     { title: `${data.title} - OpChaves` },

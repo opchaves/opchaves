@@ -30,8 +30,8 @@ function HeroSection() {
       <p className="max-w-2xl text-base md:text-lg text-slate-600 mb-8 leading-relaxed">
         Senior Software Engineer with 10+ years of experience. Currently
         building the next generation of natural language app creation at
-        Thunkable. Expert in Node.js, TypeScript, and React, leveraging
-        Claude Code to accelerate engineering velocity and system delivery.
+        Thunkable. Expert in Node.js, TypeScript, and React, leveraging Claude
+        Code to accelerate engineering velocity and system delivery.
       </p>
       <div>
         <a
@@ -53,7 +53,8 @@ function SkillsSection() {
     },
     {
       title: "Backend & Architecture",
-      skills: "Database Design, Distributed Locks, MongoDB Transactions, REST/GraphQL APIs, PostgreSQL, Redis",
+      skills:
+        "Database Design, Distributed Locks, MongoDB Transactions, REST/GraphQL APIs, PostgreSQL, Redis",
     },
     {
       title: "Frontend & Mobile",
@@ -61,7 +62,8 @@ function SkillsSection() {
     },
     {
       title: "Testing & DevOps",
-      skills: "Playwright, Jest, Vitest, Docker, Kubernetes, GCP, CI/CD (GitHub Actions)",
+      skills:
+        "Playwright, Jest, Vitest, Docker, Kubernetes, GCP, CI/CD (GitHub Actions)",
     },
     {
       title: "Development Velocity",
@@ -71,7 +73,9 @@ function SkillsSection() {
 
   return (
     <section className="max-w-4xl mx-auto pb-20 pt-8 px-4 border-t border-slate-100">
-      <h3 className="text-2xl font-bold mb-8 text-slate-900 text-center">Technical Skills</h3>
+      <h3 className="text-2xl font-bold mb-8 text-slate-900 text-center">
+        Technical Skills
+      </h3>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {skillCategories.map((category) => (
           <div
@@ -94,9 +98,21 @@ function SkillsSection() {
 function SocialLinksSection() {
   const links = [
     { href: "https://x.com/opchaves", icon: <XIcon />, label: "X (Twitter)" },
-    { href: "https://linkedin.com/in/opchaves", icon: <LinkedInIcon />, label: "LinkedIn" },
-    { href: "https://github.com/opchaves", icon: <GithubIcon />, label: "GitHub" },
-    { href: "https://youtube.com/@opchaves", icon: <YoutubeIcon />, label: "YouTube" },
+    {
+      href: "https://linkedin.com/in/opchaves",
+      icon: <LinkedInIcon />,
+      label: "LinkedIn",
+    },
+    {
+      href: "https://github.com/opchaves",
+      icon: <GithubIcon />,
+      label: "GitHub",
+    },
+    {
+      href: "https://youtube.com/@opchaves",
+      icon: <YoutubeIcon />,
+      label: "YouTube",
+    },
   ];
 
   return (

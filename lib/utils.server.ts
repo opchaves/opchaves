@@ -1,8 +1,8 @@
-import { redirect, type AppLoadContext } from "react-router";
+import { redirect, RouterContextProvider } from "react-router";
 import { getAuth } from "./auth.server";
 
 type SessionParams = {
-  context: AppLoadContext;
+  context: Readonly<RouterContextProvider>;
   request: Request;
   redirectTo?: string;
 };

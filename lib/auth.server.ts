@@ -1,10 +1,11 @@
 import type { BetterAuthOptions } from "better-auth";
 import { betterAuth } from "better-auth";
-import type { AppLoadContext } from "react-router";
+import type { RouterContextProvider } from "react-router";
 import { env } from "./env";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import * as schema from "../database/schema";
-import { createAuthMiddleware, APIError } from "better-auth/api";
+import { APIError } from "better-auth/api";
+import { dbContext } from "@/lib/context";
 
 export function createBetterAuth(database: BetterAuthOptions["database"]) {
   return betterAuth({
@@ -68,9 +69,10 @@ export function createBetterAuth(database: BetterAuthOptions["database"]) {
 
 let authInstance: ReturnType<typeof createBetterAuth> | null = null;
 
-export function getAuth(ctx: AppLoadContext) {
+export function getAuth(ctx: Readonly<RouterContextProvider>) {
   if (!authInstance) {
-    const database = drizzleAdapter(ctx.db, { provider: "sqlite", schema });
+    const db = ctx.get(dbContext);
+    const database = drizzleAdapter(db, { provider: "sqlite", schema });
     authInstance = createBetterAuth(database);
   }
 

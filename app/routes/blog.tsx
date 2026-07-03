@@ -2,9 +2,11 @@ import { post } from "@/database/schema";
 import type { Route } from "./+types/blog";
 import { desc, eq } from "drizzle-orm";
 import { toDateString } from "@/lib/utils";
+import { dbContext } from "@/lib/context";
 
 export async function loader({ context }: Route.LoaderArgs) {
-  const posts = await context.db
+  const posts = await context
+    .get(dbContext)
     .select({
       id: post.id,
       title: post.title,
