@@ -9,10 +9,10 @@ export function meta() {
     {
       name: "description",
       content: [
-        "Senior Software Engineer with 10+ years of experience. Currently",
-        "architecting AI-driven platforms at Thunkable to enable natural",
-        "language app generation. Main stack is Node.js, React, and Ruby on",
-        "Rails with an AI-augmented development using Claude Code.",
+        "Senior Software Engineer with 10+ years of experience.",
+        "Currently architecting AI-driven platforms at Thunkable to enable",
+        "natural language app generation. Main stack is Node.js, TypeScript, and React",
+        "with an AI-augmented development using Claude Code.",
       ].join(" "),
     },
   ];
@@ -28,10 +28,11 @@ function HeroSection() {
         Senior Software Engineer
       </h2>
       <p className="max-w-3xl text-lg md:text-xl text-gray-700 mb-8">
-        Senior Software Engineer with 10+ years of experience. Currently
-        architecting AI-driven platforms at Thunkable to enable natural language
-        app generation. Main stack is Node.js, React, and Ruby on Rails with an
-        AI-augmented development using Claude Code.
+        Senior Software Engineer with 10+ years of experience architecting
+        high-scale cloud architectures, backend engines, and AI-driven platforms.
+        Currently building the next generation of natural language app creation
+        at Thunkable. Expert in Node.js, TypeScript, and React, leveraging
+        Claude Code to accelerate engineering velocity and system delivery.
       </p>
     </section>
   );
@@ -43,24 +44,24 @@ function SkillsSection() {
       <h3 className="text-xl font-bold mb-4 text-gray-700">Skills</h3>
       <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 text-gray-700">
         <li>
-          <span className="font-semibold">AI & LLM:</span> Claude Code, Codex,
-          Gemini, AI-Augmented Development
+          <span className="font-semibold">Languages & Frameworks:</span>{" "}
+          Node.js, TypeScript, React, React Native, Expo, Ruby on Rails
         </li>
         <li>
-          <span className="font-semibold">Backend:</span> Node.js, TypeScript,
-          Ruby on Rails, PostgreSQL, MongoDB, Redis, GraphQL
+          <span className="font-semibold">Backend & Architecture:</span>{" "}
+          Database Design, Distributed Locks, GraphQL (DataLoader), MongoDB Transactions, REST/GraphQL APIs, PostgreSQL, Redis
         </li>
         <li>
-          <span className="font-semibold">Frontend:</span> React, React Router,
-          Next.js, Vite, Tailwind CSS, TypeScript
+          <span className="font-semibold">Frontend & Mobile:</span>{" "}
+          React Router, Next.js, Vite, Tailwind CSS, Redux, AntD, Apollo
         </li>
         <li>
-          <span className="font-semibold">Infrastructure & Ops:</span> Docker,
-          Kubernetes, GCP, AWS, CI/CD (GitHub Actions), Git
+          <span className="font-semibold">Testing & DevOps:</span>{" "}
+          Playwright, Jest, Vitest, Docker, Kubernetes, GCP, CI/CD (GitHub Actions)
         </li>
         <li>
-          <span className="font-semibold">Testing:</span> Playwright, Cypress,
-          Jest, Vitest
+          <span className="font-semibold">Development Velocity:</span>{" "}
+          Claude Code, Git
         </li>
       </ul>
     </section>
