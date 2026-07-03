@@ -67,10 +67,9 @@ export default function Resume() {
         <section className="mb-5">
           <h3 className="text-lg font-bold mb-2">Summary</h3>
           <p>
-            Senior Software Engineer with 10+ years of experience architecting
-            high-scale cloud architectures, backend engines, and AI-driven platforms.
-            Currently building the next generation of natural language app creation
-            at Thunkable. Expert in Node.js, TypeScript, and React, leveraging
+            Senior Software Engineer with 10+ years of experience. Currently
+            building the next generation of natural language app creation at
+            Thunkable. Expert in Node.js, TypeScript, and React, leveraging
             Claude Code to accelerate engineering velocity and system delivery.
           </p>
         </section>
