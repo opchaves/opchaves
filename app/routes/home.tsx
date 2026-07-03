@@ -49,7 +49,7 @@ function SkillsSection() {
         </li>
         <li>
           <span className="font-semibold">Backend & Architecture:</span>{" "}
-          Database Design, Distributed Locks, GraphQL (DataLoader), MongoDB Transactions, REST/GraphQL APIs, PostgreSQL, Redis
+          Database Design, Distributed Locks, MongoDB Transactions, REST/GraphQL APIs, PostgreSQL, Redis
         </li>
         <li>
           <span className="font-semibold">Frontend & Mobile:</span>{" "}
