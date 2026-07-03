@@ -9,8 +9,8 @@ export function meta() {
       content: [
         "Senior Software Engineer with 10+ years of experience.",
         "Currently architecting AI-driven platforms at Thunkable to enable",
-        "natural language app generation. Main stack is Node.js, React, and",
-        "Ruby on Rails with an AI-augmented development using Claude Code.",
+        "natural language app generation. Main stack is Node.js, TypeScript, and React",
+        "with an AI-augmented development using Claude Code.",
       ].join(" "),
     },
   ];
@@ -67,10 +67,11 @@ export default function Resume() {
         <section className="mb-5">
           <h3 className="text-lg font-bold mb-2">Summary</h3>
           <p>
-            Senior Software Engineer with 10+ years of experience. Currently
-            architecting AI-driven platforms at Thunkable to enable natural
-            language app generation. Main stack is Node.js, React, and Ruby on
-            Rails with an AI-augmented development using Claude Code.
+            Senior Software Engineer with 10+ years of experience architecting
+            high-scale cloud architectures, backend engines, and AI-driven platforms.
+            Currently building the next generation of natural language app creation
+            at Thunkable. Expert in Node.js, TypeScript, and React, leveraging
+            Claude Code to accelerate engineering velocity and system delivery.
           </p>
         </section>
 
@@ -78,25 +79,24 @@ export default function Resume() {
           <h3 className="text-lg font-bold mb-2">Skills</h3>
           <ul className="list-disc pl-5 space-y-1 text-sm">
             <li>
-              <span className="font-semibold">AI & LLM:</span> Claude Code,
-              ChatGPT, Codex, Prompt Engineering, AI-Augmented Development
+              <span className="font-semibold">Languages & Frameworks:</span>{" "}
+              Node.js, TypeScript, React, React Native, Expo, Ruby on Rails
             </li>
             <li>
-              <span className="font-semibold">Backend:</span> Node.js,
-              TypeScript, Ruby on Rails, PostgreSQL, MongoDB, Redis, REST,
-              GraphQL
+              <span className="font-semibold">Backend & Architecture:</span>{" "}
+              Database Design, Distributed Locks, MongoDB Transactions, REST/GraphQL APIs, PostgreSQL, Redis
             </li>
             <li>
-              <span className="font-semibold">Frontend:</span> React.js, React
-              Router, Next.js, Vite, Tailwind CSS, TypeScript, UI/UX
+              <span className="font-semibold">Frontend & Mobile:</span>{" "}
+              React Router, Next.js, Vite, Tailwind CSS, Redux, AntD, Apollo
             </li>
             <li>
-              <span className="font-semibold">Infrastructure & Ops:</span>{" "}
-              Docker, Kubernetes, GCP, CI/CD (GitHub Actions), Git
+              <span className="font-semibold">Testing & DevOps:</span>{" "}
+              Playwright, Jest, Vitest, Docker, Kubernetes, GCP, CI/CD (GitHub Actions)
             </li>
             <li>
-              <span className="font-semibold">Testing:</span> Playwright,
-              Cypress, Jest, Vitest, Truffle
+              <span className="font-semibold">Development Velocity:</span>{" "}
+              Claude Code, Git
             </li>
           </ul>
         </section>
@@ -112,35 +112,32 @@ export default function Resume() {
             </div>
             <ul className="list-disc pl-5 space-y-1 text-sm">
               <li>
-                Architect and develop AI-driven features using LLMs (Claude,
-                ChatGPT) to transition the platform to a natural language
-                interface.
+                Architected and implemented Thunkable Cloud, a backend-as-a-service solution (powered by Supabase) that orchestrates database provisioning, table creation, relationships, permissions, and user authentication under the hood, enabling non-technical users to build applications with a fully-functional backend via natural language prompts.
               </li>
               <li>
-                Maintain scalable Node.js backends with REST/GraphQL,
-                integrating Google Sheets, Airtable, and Baserow for dynamic
-                apps.
+                Led the full-stack engineering of this backend generation engine across the backend infrastructure, user-facing configurations, and native mobile runtime libraries.
               </li>
               <li>
-                Optimize infrastructure using Docker and Kubernetes to enable
-                cross-platform app generation (React Native, Expo).
+                Engineered a secure API connector featuring backend key-vaulting to safely manage, store, and proxy third-party API credentials for end-user app integrations.
               </li>
               <li>
-                Lead end-to-end feature development across database, backend,
-                frontend (React, TypeScript), and mobile components.
+                Optimized core backend systems by introducing MongoDB transactions for multi-document ACID compliance, a distributed lock system (Redis) to prevent concurrent state collisions, and GraphQL DataLoader to eliminate N+1 queries.
               </li>
               <li>
-                Improve operational efficiency by optimizing MongoDB performance
-                and backend processes.
+                Maintained and scaled high-throughput Node.js backends, integrating external data providers like Google Sheets, Airtable, and Supabase.
               </li>
               <li>
-                Ensure reliability through comprehensive end-to-end testing with
-                Playwright.
+                Improved system diagnostics and observability by designing and implementing a centralized, structured logging pipeline.
+              </li>
+              <li>
+                Streamlined cross-platform app generation and build flows utilizing Docker, Kubernetes, React Native, and Expo.
+              </li>
+              <li>
+                Ensured platform reliability and test coverage using Playwright for end-to-end integration test suites.
               </li>
               <li>
                 <span className="font-semibold text-xs">Technologies:</span>{" "}
-                Node.js, TypeScript, React, GraphQL, LLMs, Docker, Kubernetes,
-                MongoDB, Redis.
+                Node.js, TypeScript, React, React Native, GraphQL, Supabase, MongoDB, Redis, Docker, Kubernetes, Playwright.
               </li>
             </ul>
           </div>
