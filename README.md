@@ -2,7 +2,7 @@
 
 Senior Software Engineer
 
-Most of my work is backend, especially databases and the services around them. A large share of what I ship is React. Node.js and TypeScript, after ten years of full-stack work.
+After ten years of full-stack work, most of what I do is backend, especially databases and the services around them, and a large share of what I ship is React. I work in Node.js and TypeScript.
 
 ## Skills
 

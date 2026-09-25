@@ -7,7 +7,7 @@ export function meta() {
   return pageMeta({
     title: "Paulo Chaves – Senior Software Engineer",
     description:
-      "Senior software engineer. Most of my work is backend, especially databases, and a large share of it is React. Node.js and TypeScript.",
+      "Senior software engineer. After ten years of full-stack work, most of what I do is backend, especially databases and the services around them, and a large share of what I ship is React. I work in Node.js and TypeScript.",
     path: "/",
   });
 }
@@ -58,9 +58,9 @@ export default function Home() {
       </h1>
       <p className="mt-1 text-gray-500">Senior Software Engineer</p>
       <p className="mt-6 text-lg leading-relaxed text-gray-700">
-        Most of my work is backend, especially databases and the services around
-        them. A large share of what I ship is React. Node.js and TypeScript,
-        after ten years of full-stack work.
+        After ten years of full-stack work, most of what I do is backend,
+        especially databases and the services around them, and a large share of
+        what I ship is React. I work in Node.js and TypeScript.
       </p>
       <ul className="mt-6 flex flex-wrap text-sm">
         {links.map((link) => (
