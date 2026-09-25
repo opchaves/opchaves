@@ -30,7 +30,7 @@ export function Navbar() {
     val === location.pathname ? "text-gray-900 font-semibold" : "";
 
   return (
-    <nav className="w-full max-w-7xl mx-auto flex items-center justify-between py-4 px-8 bg-white/80 backdrop-blur border-b border-gray-200 sticky top-0 z-10">
+    <nav className="print:hidden w-full max-w-7xl mx-auto flex items-center justify-between py-4 px-8 bg-white/80 backdrop-blur border-b border-gray-200 sticky top-0 z-10">
       <Link to="/" className="text-xl font-bold tracking-tight text-gray-800">
         OpChaves
       </Link>
@@ -93,7 +93,7 @@ export function Navbar() {
 
 export function Footer() {
   return (
-    <footer className="w-full py-6 text-center text-gray-600 border-t mt-12">
+    <footer className="print:hidden w-full py-6 text-center text-gray-600 border-t mt-12">
       <div className="max-w-3xl mx-auto mb-2">
         <a
           href="https://x.com/opchaves"

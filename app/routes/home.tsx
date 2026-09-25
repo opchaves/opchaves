@@ -8,12 +8,8 @@ export function meta() {
     { title: "Paulo Chaves – Senior Software Engineer" },
     {
       name: "description",
-      content: [
-        "Senior Software Engineer with 10+ years of experience.",
-        "Currently architecting AI-driven platforms at Thunkable to enable",
-        "natural language app generation. Main stack is Node.js, TypeScript, and React",
-        "with an AI-augmented development using Claude Code.",
-      ].join(" "),
+      content:
+        "Senior software engineer. Most of my work is backend, especially databases, and a large share of it is React. Node.js and TypeScript.",
     },
   ];
 }
@@ -28,10 +24,9 @@ function HeroSection() {
         Senior Software Engineer
       </h2>
       <p className="max-w-2xl text-base md:text-lg text-slate-600 mb-8 leading-relaxed">
-        Senior Software Engineer with 10+ years of experience. Currently
-        building the next generation of natural language app creation at
-        Thunkable. Expert in Node.js, TypeScript, and React, leveraging Claude
-        Code to accelerate engineering velocity and system delivery.
+        Most of my work is backend, especially databases and the services around
+        them. A large share of what I ship is React. Node.js and TypeScript,
+        after ten years of full-stack work.
       </p>
       <div>
         <a
@@ -48,26 +43,21 @@ function HeroSection() {
 function SkillsSection() {
   const skillCategories = [
     {
-      title: "Languages & Frameworks",
-      skills: "Node.js, TypeScript, React, React Native, Expo, Ruby on Rails",
+      title: "Languages",
+      skills: "TypeScript, JavaScript, Node.js, Ruby, SQL",
     },
     {
-      title: "Backend & Architecture",
+      title: "Frameworks",
+      skills: "React, React Native, Expo, Next.js, Ruby on Rails",
+    },
+    {
+      title: "Backend",
       skills:
-        "Database Design, Distributed Locks, MongoDB Transactions, REST/GraphQL APIs, PostgreSQL, Redis",
+        "PostgreSQL, Supabase, MongoDB, Redis, REST, GraphQL, transactions, distributed locks",
     },
     {
-      title: "Frontend & Mobile",
-      skills: "React Router, Next.js, Vite, Tailwind CSS, Redux, AntD, Apollo",
-    },
-    {
-      title: "Testing & DevOps",
-      skills:
-        "Playwright, Jest, Vitest, Docker, Kubernetes, GCP, CI/CD (GitHub Actions)",
-    },
-    {
-      title: "Development Velocity",
-      skills: "Claude Code, Git",
+      title: "Infrastructure",
+      skills: "Docker, Kubernetes, GCP, GitHub Actions, Playwright",
     },
   ];
 

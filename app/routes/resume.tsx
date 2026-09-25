@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import GithubIcon from "@/components/icons/github";
 import LinkedInIcon from "@/components/icons/linkedin";
 
@@ -6,41 +7,63 @@ export function meta() {
     { title: "Resume - Paulo Chaves" },
     {
       name: "description",
-      content: [
-        "Senior Software Engineer with 10+ years of experience.",
-        "Currently architecting AI-driven platforms at Thunkable to enable",
-        "natural language app generation. Main stack is Node.js, TypeScript, and React",
-        "with an AI-augmented development using Claude Code.",
-      ].join(" "),
+      content:
+        "Senior software engineer, backend-focused, with a large share of the work in React. At Thunkable AI: Supabase, Postgres, and platform MongoDB. Before that, Rails and React on Canvas LMS.",
     },
   ];
 }
 
+function SectionTitle({ children }: { children: ReactNode }) {
+  return (
+    <h3 className="text-sm font-bold uppercase tracking-wide border-b border-gray-300 pb-1 mb-3">
+      {children}
+    </h3>
+  );
+}
+
+function Job({
+  title,
+  dates,
+  note,
+  children,
+}: {
+  title: string;
+  dates: string;
+  note?: string;
+  children: ReactNode;
+}) {
+  return (
+    <article className="mb-4 break-inside-avoid">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-0.5">
+        <h4 className="font-semibold">{title}</h4>
+        <p className="text-xs text-gray-600 shrink-0">{dates}</p>
+      </div>
+      {note ? <p className="text-sm text-gray-700 mt-0.5">{note}</p> : null}
+      {children}
+    </article>
+  );
+}
+
+function Bullets({ children }: { children: ReactNode }) {
+  return <ul className="list-disc pl-5 mt-1 space-y-1 text-sm">{children}</ul>;
+}
+
 export default function Resume() {
   return (
-    <main className="max-w-3xl mx-auto px-4 py-10 text-gray-900">
+    <main className="max-w-3xl mx-auto px-4 py-10 text-gray-900 print:max-w-none print:px-0 print:py-0">
       <div id="resume">
         <header className="mb-5">
-          <h1 className="text-3xl font-extrabold mb-1">
+          <h1 className="text-3xl font-extrabold tracking-tight">
             Paulo Chaves da Silva Filho
           </h1>
-          <h2 className="text-xl font-semibold mb-2">
+          <p className="text-lg font-semibold text-gray-800 mt-0.5">
             Senior Software Engineer
-          </h2>
-          <div className="flex flex-wrap items-center gap-4 text-sm mb-2">
-            <a
-              href="https://opchaves.com"
-              target="_blank"
-              rel="noopener"
-              className="hover:underline text-sm"
-            >
+          </p>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm mt-2">
+            <a href="https://opchaves.com" className="hover:underline">
               opchaves.com
             </a>
-            <a
-              href="mailto:paulo@opchaves.com"
-              className="hover:underline"
-              aria-label="Email"
-            >
+            <a href="mailto:paulo@opchaves.com" className="hover:underline">
               paulo@opchaves.com
             </a>
             <a
@@ -48,350 +71,227 @@ export default function Resume() {
               target="_blank"
               rel="noopener"
               className="flex items-center gap-1 hover:underline"
-              aria-label="GitHub"
             >
-              <GithubIcon width={20} height={20} /> Github
+              <GithubIcon width={18} height={18} /> Github
             </a>
             <a
               href="https://linkedin.com/in/opchaves"
               target="_blank"
               rel="noopener"
               className="flex items-center gap-1 hover:underline"
-              aria-label="LinkedIn"
             >
-              <LinkedInIcon width={20} height={20} /> LinkedIn
+              <LinkedInIcon width={18} height={18} /> LinkedIn
             </a>
           </div>
         </header>
 
         <section className="mb-5">
-          <h3 className="text-lg font-bold mb-2">Summary</h3>
-          <p>
-            Senior Software Engineer with 10+ years of experience. Currently
-            building the next generation of natural language app creation at
-            Thunkable. Expert in Node.js, TypeScript, and React, leveraging
-            Claude Code to accelerate engineering velocity and system delivery.
+          <SectionTitle>Summary</SectionTitle>
+          <p className="text-sm leading-relaxed">
+            Senior software engineer. Backend is most of the work, and a large
+            share of it is React. At Thunkable AI, that means the cloud database
+            on Supabase and Postgres, and the platform MongoDB: version
+            upgrades, storage, and consistency. Before that, Rails and React on
+            Canvas LMS, used by millions of students and teachers.
           </p>
         </section>
 
         <section className="mb-5">
-          <h3 className="text-lg font-bold mb-2">Skills</h3>
+          <SectionTitle>Skills</SectionTitle>
           <ul className="list-disc pl-5 space-y-1 text-sm">
             <li>
-              <span className="font-semibold">Languages & Frameworks:</span>{" "}
-              Node.js, TypeScript, React, React Native, Expo, Ruby on Rails
+              <span className="font-semibold">Languages:</span> TypeScript,
+              JavaScript, Node.js, Ruby, SQL
             </li>
             <li>
-              <span className="font-semibold">Backend & Architecture:</span>{" "}
-              Database Design, Distributed Locks, MongoDB Transactions,
-              REST/GraphQL APIs, PostgreSQL, Redis
+              <span className="font-semibold">Frameworks:</span> React, React
+              Native, Expo, Next.js, Ruby on Rails
             </li>
             <li>
-              <span className="font-semibold">Frontend & Mobile:</span> React
-              Router, Next.js, Vite, Tailwind CSS, Redux, AntD, Apollo
+              <span className="font-semibold">Backend:</span> PostgreSQL,
+              Supabase, MongoDB, Redis, REST, GraphQL, transactions, distributed
+              locks
             </li>
             <li>
-              <span className="font-semibold">Testing & DevOps:</span>{" "}
-              Playwright, Jest, Vitest, Docker, Kubernetes, GCP, CI/CD (GitHub
-              Actions)
-            </li>
-            <li>
-              <span className="font-semibold">Development Velocity:</span>{" "}
-              Claude Code, Git
+              <span className="font-semibold">Infrastructure:</span> Docker,
+              Kubernetes, GCP, GitHub Actions, Playwright
             </li>
           </ul>
         </section>
 
         <section className="mb-5">
-          <h3 className="text-lg font-bold mb-2">Experience</h3>
-          <div className="mb-4">
-            <div className="font-semibold">
-              Senior Software Engineer at Thunkable
-            </div>
-            <div className="text-xs text-gray-600 my-1">
-              April 2023 to Current
-            </div>
-            <ul className="list-disc pl-5 space-y-1 text-sm">
-              <li>
-                Architected and implemented Thunkable Cloud, a
-                backend-as-a-service solution (powered by Supabase) that
-                orchestrates database provisioning, table creation,
-                relationships, permissions, and user authentication under the
-                hood, enabling non-technical users to build applications with a
-                fully-functional backend via natural language prompts.
-              </li>
-              <li>
-                Led the full-stack engineering of this backend generation engine
-                across the backend infrastructure, user-facing configurations,
-                and native mobile runtime libraries.
-              </li>
-              <li>
-                Engineered a secure API connector featuring backend key-vaulting
-                to safely manage, store, and proxy third-party API credentials
-                for end-user app integrations.
-              </li>
-              <li>
-                Optimized core backend systems by introducing MongoDB
-                transactions for multi-document ACID compliance, a distributed
-                lock system (Redis) to prevent concurrent state collisions, and
-                GraphQL DataLoader to eliminate N+1 queries.
-              </li>
-              <li>
-                Maintained and scaled high-throughput Node.js backends,
-                integrating external data providers like Google Sheets,
-                Airtable, and Supabase.
-              </li>
-              <li>
-                Improved system diagnostics and observability by designing and
-                implementing a centralized, structured logging pipeline.
-              </li>
-              <li>
-                Streamlined cross-platform app generation and build flows
-                utilizing Docker, Kubernetes, React Native, and Expo.
-              </li>
-              <li>
-                Ensured platform reliability and test coverage using Playwright
-                for end-to-end integration test suites.
-              </li>
-              <li>
-                <span className="font-semibold text-xs">Technologies:</span>{" "}
-                Node.js, TypeScript, React, React Native, GraphQL, Supabase,
-                MongoDB, Redis, Docker, Kubernetes, Playwright.
-              </li>
-            </ul>
-          </div>
-          <div className="mb-4">
-            <div className="font-semibold">Software Engineer at BairesDev</div>
-            <div className="text-xs text-gray-600 my-1">
-              July 2020 to December 2022
-            </div>
-            <div className="text-sm mb-2 italic">
-              Consulting for North American tech companies.
-            </div>
+          <SectionTitle>Experience</SectionTitle>
 
-            <div className="mb-3">
-              <div className="font-medium text-sm">
+          <Job
+            title="Senior Software Engineer, Thunkable"
+            dates="April 2023 – Present"
+          >
+            <Bullets>
+              <li>
+                Main engineer on Thunkable Cloud DB, the Supabase and Postgres
+                store behind apps made with Thunkable AI. Describing an app
+                proposes the tables, columns, and permissions in chat. On
+                approval, the integration creates a database in the creator's
+                Supabase account, and the app signs users in and reads and
+                writes that data.
+              </li>
+              <li>
+                A large part of the work is React, alongside the Supabase and
+                Postgres integration.
+              </li>
+              <li>
+                Built App Secrets. Creators enter third-party API keys in a
+                form, the keys stay on the server, and calls are proxied so the
+                generated app never holds them.
+              </li>
+              <li>
+                Plan and own Thunkable's MongoDB code: version upgrades and
+                storage optimization.
+              </li>
+              <li>
+                Introduced MongoDB transactions for multi-document writes, Redis
+                distributed locks so concurrent edits stop colliding, and a
+                GraphQL DataLoader that removes N+1 queries.
+              </li>
+            </Bullets>
+          </Job>
+
+          <Job
+            title="Software Engineer, BairesDev"
+            dates="July 2020 – December 2022"
+            note="Consulting for North American product companies."
+          >
+            <div className="mt-2 pl-3 border-l border-gray-200">
+              <h5 className="text-sm font-medium">
                 Blazer (formerly Brooks Bell) — Frontend Developer
-              </div>
-              <ul className="list-disc pl-5 space-y-1 mt-1 text-sm">
+              </h5>
+              <Bullets>
                 <li>
-                  Architected 50+ high-traffic A/B tests using Vanilla JS and
-                  jQuery via Adobe Target, optimizing UI/UX without direct
-                  source access.
+                  Shipped 50+ A/B tests in vanilla JavaScript and jQuery through
+                  Adobe Target, changing production UI on sites I did not have
+                  source access to.
                 </li>
                 <li>
-                  Eliminated "content flicker" by optimizing script execution
-                  for sub-second delivery on production sites.
+                  Removed content flicker by getting the experiment script onto
+                  the page in under a second.
                 </li>
-              </ul>
+              </Bullets>
             </div>
-
-            <div>
-              <div className="font-medium text-sm">
+            <div className="mt-3 pl-3 border-l border-gray-200">
+              <h5 className="text-sm font-medium">
                 Instructure — Software Engineer
-              </div>
-              <ul className="list-disc pl-5 space-y-1 mt-1 text-sm">
+              </h5>
+              <Bullets>
                 <li>
-                  Enhanced core Canvas LMS components using Ruby on Rails,
-                  React, and TypeScript.
+                  Shipped REST APIs, data models, and core UI on Canvas LMS
+                  (Ruby on Rails, React, and TypeScript), used by millions of
+                  students and teachers.
                 </li>
                 <li>
-                  Developed RESTful APIs and complex data models, contributing
-                  to the full feature lifecycle for millions of users.
+                  Built accessible (WCAG) and internationalized features for
+                  that global user base.
                 </li>
-                <li>
-                  Built accessible (WCAG) and internationalized (i18n) web
-                  experiences for a global audience.
-                </li>
-                <li>
-                  <span className="font-semibold text-xs">Technologies:</span>{" "}
-                  Ruby on Rails, React, TypeScript, PostgreSQL, AWS, Docker.
-                </li>
-              </ul>
+              </Bullets>
             </div>
-          </div>
-          <div className="mb-4">
-            <div className="font-semibold">
-              Senior Fullstack Developer (Remote) at Movinga
-            </div>
-            <div className="text-xs text-gray-600 my-1">
-              August 2019 to March 2020
-            </div>
+          </Job>
+
+          <Job
+            title="Senior Full-Stack Developer (Remote), Movinga"
+            dates="August 2019 – March 2020"
+          >
+            <Bullets>
+              <li>
+                Rebuilt the site in Next.js and React and moved it onto a
+                headless CMS (Gatsby).
+              </li>
+              <li>
+                Built Node.js and Rails backends and integrated Salesforce.
+              </li>
+            </Bullets>
+          </Job>
+
+          <Job
+            title="Software Engineer, Codeminer42"
+            dates="January 2018 – April 2019"
+            note="Remote consulting engagement at Lucidity Tech."
+          >
+            <Bullets>
+              <li>
+                Built Ethereum event-processing pipelines for Lucidity: Solidity
+                contracts, plus the Node.js and Ruby APIs in front of them.
+              </li>
+              <li>
+                Built the React app and the Truffle test suite for those
+                contracts.
+              </li>
+            </Bullets>
+          </Job>
+
+          <Job
+            title="Software Developer, SEFAZ-PI"
+            dates="September 2016 – April 2017"
+          >
+            <Bullets>
+              <li>
+                Wrote Python batch jobs that parsed millions of records from
+                Oracle into MongoDB, and operated the replica sets those jobs
+                wrote to.
+              </li>
+            </Bullets>
+          </Job>
+
+          <div className="mb-1">
+            <h4 className="font-semibold text-sm mb-1">Earlier</h4>
             <ul className="list-disc pl-5 space-y-1 text-sm">
               <li>
-                Developed scalable UIs with Next.js and React, migrating the
-                site to a headless CMS (Gatsby).
+                <span className="font-medium">
+                  Full-Stack Developer, Tartigrado Tecnologia
+                </span>{" "}
+                <span className="text-gray-600">
+                  · January 2016 – June 2016.
+                </span>{" "}
+                Replaced Struts2 screens with Spring, AngularJS, and REST.
               </li>
               <li>
-                Built Node.js/Rails backends and integrated Salesforce APIs
-                while establishing engineering best practices.
-              </li>
-              <li>
-                <span className="font-semibold text-xs">Technologies:</span>{" "}
-                Node.js, React, Gatsby, Rails, Postgres, Redis.
-              </li>
-            </ul>
-          </div>
-          <div className="mb-4">
-            <div className="font-semibold">
-              Blockchain Engineer (Remote) at Lucidity Tech
-            </div>
-            <div className="text-xs text-gray-600 my-1">
-              February 2018 to April 2019
-            </div>
-            <ul className="list-disc pl-5 space-y-1 text-sm">
-              <li>
-                Developed high-throughput event processing pipelines using
-                Ethereum, Smart Contracts, and Node.js/Ruby APIs.
-              </li>
-              <li>
-                Built React.js frontends and wrote automated tests for Solidity
-                contracts using Truffle.
-              </li>
-              <li>
-                <span className="font-semibold text-xs">Technologies:</span>{" "}
-                Node.js, Ruby, Ethereum, Solidity, React, Truffle.
-              </li>
-            </ul>
-          </div>
-          <div className="mb-4">
-            <div className="font-semibold">
-              Software Engineer at Codeminer42
-            </div>
-            <div className="text-xs text-gray-600 my-1">
-              January 2018 to April 2019
-            </div>
-            <ul className="list-disc pl-5 space-y-1 text-sm">
-              <li>
-                Collaborated with international customers to deliver scalable
-                solutions using JavaScript and Ruby.
-              </li>
-              <li>
-                Acted as a consultant for Lucidity Tech, specializing in
-                blockchain and full-stack development.
-              </li>
-              <li>
-                <span className="font-semibold text-xs">Technologies:</span>{" "}
-                JavaScript, Ruby, Ruby on Rails, REST APIs.
-              </li>
-            </ul>
-          </div>
-          <div className="mb-4">
-            <div className="font-semibold">Software Developer at SEFAZ-PI</div>
-            <div className="text-xs text-gray-600 my-1">
-              September 2016 to April 2017
-            </div>
-            <ul className="list-disc pl-5 space-y-1 text-sm">
-              <li>
-                Developed high-performance batch jobs using Python to parse
-                millions of records from Oracle to MongoDB.
-              </li>
-              <li>
-                Managed MongoDB replica sets for data persistence and
-                operational efficiency.
-              </li>
-              <li>
-                <span className="font-semibold text-xs">Technologies:</span>{" "}
-                Python, Oracle, MongoDB, Shell Scripting.
-              </li>
-            </ul>
-          </div>
-          <div className="mb-4">
-            <div className="font-semibold">
-              Full-Stack Developer at Tartigrado Tecnologia
-            </div>
-            <div className="text-xs text-gray-600 my-1">
-              January 2016 to June 2016
-            </div>
-            <ul className="list-disc pl-5 space-y-1 text-sm">
-              <li>
-                Modernized legacy Java/Struts2 applications by integrating
-                Spring Framework, AngularJS, and REST APIs.
-              </li>
-              <li>
-                <span className="font-semibold text-xs">Technologies:</span>{" "}
-                Java, Spring, Hibernate, Angular.js, REST.
-              </li>
-            </ul>
-          </div>
-          <div className="mb-4">
-            <div className="font-semibold">
-              Full-Stack Developer at Supra Tecnologia
-            </div>
-            <div className="text-xs text-gray-600 my-1">
-              January 2010 to December 2012
-            </div>
-            <ul className="list-disc pl-5 space-y-1 text-sm">
-              <li>
-                Developed a PHP-based scheduling system for 1M+ users and led
-                the migration from MySQL to PostgreSQL with Git adoption.
-              </li>
-              <li>
-                <span className="font-semibold text-xs">Technologies:</span>{" "}
-                PHP, PostgreSQL, JavaScript, Git.
+                <span className="font-medium">
+                  Full-Stack Developer, Supra Tecnologia
+                </span>{" "}
+                <span className="text-gray-600">
+                  · January 2010 – December 2012.
+                </span>{" "}
+                Built a PHP scheduling system for 1M+ users, migrated it from
+                MySQL to PostgreSQL, and moved the code onto Git.
               </li>
             </ul>
           </div>
         </section>
 
         <section>
-          <h3 className="text-lg font-bold mb-2">Education</h3>
-          <ul className="list-disc pl-5 space-y-1">
-            <li>Computer Science, Loyola University Chicago – 2014 - 2015</li>
-            <li>
-              Systems Analysis and Development, Federal Institute of Technology
-              in Piaui – 2013 - 2019
+          <SectionTitle>Education</SectionTitle>
+          <ul className="text-sm space-y-1">
+            <li className="flex flex-wrap justify-between gap-x-4">
+              <span>
+                Systems Analysis and Development, Federal Institute of
+                Technology in Piaui
+              </span>
+              <span className="text-gray-600 shrink-0">2013 – 2019</span>
+            </li>
+            <li className="flex flex-wrap justify-between gap-x-4">
+              <span>Computer Science, Loyola University Chicago</span>
+              <span className="text-gray-600 shrink-0">2014 – 2015</span>
             </li>
           </ul>
         </section>
       </div>
-      <div className="mt-10">
-        {/* <a */}
-        {/*   href="#" */}
-        {/*   className="ml-0 text-gray-800 hover:underline" */}
-        {/*   onClick={(e) => { */}
-        {/*     e.preventDefault(); */}
-        {/*     handlePrint(); */}
-        {/*   }} */}
-        {/* > */}
-        {/*   Print */}
-        {/* </a> */}
+
+      <div className="mt-8 print:hidden">
         <a
           href="/assets/paulo-chaves-resume.pdf"
-          className="text-gray-800 hover:underline"
+          className="text-sm text-gray-800 hover:underline"
         >
-          Download
+          Download PDF
         </a>
       </div>
     </main>
   );
 }
-
-// function handlePrint() {
-//   const resume = document.getElementById("resume");
-//   if (!resume) return;
-//
-//   const resumeContent = resume.innerHTML;
-//   const printWindow = window.open("", "", "width=800,height=600");
-//   const headContent = document.querySelector("head")?.innerHTML;
-//
-//   if (!printWindow || !headContent) {
-//     console.error("Failed to open print window.");
-//     return;
-//   }
-//
-//   printWindow.document.title = "paulo-chaves-resume";
-//   printWindow.document.write(`
-//     <html lang="en">
-//       <head>${headContent}</head>
-//       <body>${resumeContent}</body>
-//     </html>
-//   `);
-//
-//   // wait a tiny bit for the content to load and apply styles to the print window
-//   setTimeout(() => {
-//     printWindow.focus();
-//     printWindow.print();
-//     printWindow.close();
-//   }, 50);
-// }
