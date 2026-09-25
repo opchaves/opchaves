@@ -1,16 +1,22 @@
 import CaretDownIcon from "@/components/icons/caret-down";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { Link, Outlet, useLocation } from "react-router";
 
-export default function SiteLayout() {
+function Shell({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
-      <main className="flex-1">
-        <Outlet />
-      </main>
+      <main className="flex-1">{children}</main>
       <Footer />
     </div>
+  );
+}
+
+export default function SiteLayout() {
+  return (
+    <Shell>
+      <Outlet />
+    </Shell>
   );
 }
 

@@ -1,14 +1,15 @@
+import { PublicError } from "@/components/not-found";
+import { pageMeta } from "@/lib/site";
 import { Link } from "react-router";
+import type { Route } from "./+types/home";
 
 export function meta() {
-  return [
-    { title: "Paulo Chaves – Senior Software Engineer" },
-    {
-      name: "description",
-      content:
-        "Senior software engineer. Most of my work is backend, especially databases, and a large share of it is React. Node.js and TypeScript.",
-    },
-  ];
+  return pageMeta({
+    title: "Paulo Chaves – Senior Software Engineer",
+    description:
+      "Senior software engineer. Most of my work is backend, especially databases, and a large share of it is React. Node.js and TypeScript.",
+    path: "/",
+  });
 }
 
 const links: Array<
@@ -44,6 +45,10 @@ const skills = [
 
 const linkClass =
   "text-gray-900 underline decoration-gray-300 underline-offset-4 hover:decoration-gray-900";
+
+export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
+  return <PublicError error={error} />;
+}
 
 export default function Home() {
   return (

@@ -49,5 +49,6 @@ export const toDateString = (date: Date) => {
     year: "numeric",
     month: "long",
     day: "numeric",
+    timeZone: "UTC",
   });
 };

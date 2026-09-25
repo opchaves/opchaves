@@ -12,7 +12,9 @@ export default [
     route("/blog", "routes/blog.tsx"),
     route("/blog/:slug", "routes/blog-post.tsx"),
     route("/resume", "routes/resume.tsx"),
+    route("*", "routes/not-found.tsx"),
   ]),
+  route("/sitemap.xml", "routes/sitemap.ts"),
 
   route("/api/auth/*", "routes/api/auth.ts"),
 

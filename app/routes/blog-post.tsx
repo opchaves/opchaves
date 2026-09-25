@@ -1,9 +1,12 @@
 import { post } from "@/database/schema";
 import type { Route } from "./+types/blog-post";
 import { and, eq } from "drizzle-orm";
+import { isRouteErrorResponse } from "react-router";
 import { toDateString } from "@/lib/utils";
 import Markdown from "@/components/Markdown";
+import { PublicError } from "@/components/not-found";
 import markdownCSS from "github-markdown-css?url";
+import { pageMeta } from "@/lib/site";
 import { dbContext } from "@/lib/context";
 
 export const links: Route.LinksFunction = () => [
@@ -34,25 +37,36 @@ export async function loader({ params, context }: Route.LoaderArgs) {
   return aPost;
 }
 
-export const meta: Route.MetaFunction = ({ loaderData: data }) => {
+export const meta: Route.MetaFunction = ({ loaderData: data, error }) => {
+  if (isRouteErrorResponse(error) && error.status === 404) {
+    return [
+      { title: "Not found - Paulo Chaves" },
+      { name: "robots", content: "noindex" },
+    ];
+  }
   if (!data) return [];
-  return [
-    { title: `${data.title} - OpChaves` },
-    { name: "description", content: data.excerpt || "" },
-    { property: "og:description", content: data.excerpt || "" },
-    { name: "twitter:description", content: data.excerpt || "" },
-  ];
+  return pageMeta({
+    title: `${data.title} - OpChaves`,
+    description: data.excerpt || data.title,
+    path: `/blog/${data.slug}`,
+  });
 };
+
+export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
+  return <PublicError error={error} />;
+}
 
 export default function BlogPost({ loaderData: post }: Route.ComponentProps) {
   return (
-    <article className="max-w-2xl mx-auto py-12 px-4">
-      <h1 className="text-4xl font-extrabold text-gray-700 mb-2">
+    <article className="mx-auto max-w-2xl px-8 pt-16 pb-8">
+      <h1 className="text-3xl font-semibold tracking-tight text-gray-900">
         {post.title}
       </h1>
-      <div className="text-xs text-gray-400 mb-1">
-        {post.publishedDate ? toDateString(post.publishedDate) : ""}
-      </div>
+      {post.publishedDate ? (
+        <p className="mt-2 text-sm text-gray-500">
+          {toDateString(post.publishedDate)}
+        </p>
+      ) : null}
       <div className="mt-8">
         <Markdown>{post.content}</Markdown>
       </div>

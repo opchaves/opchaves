@@ -1,16 +1,21 @@
 import type { ReactNode } from "react";
 import GithubIcon from "@/components/icons/github";
 import LinkedInIcon from "@/components/icons/linkedin";
+import { PublicError } from "@/components/not-found";
+import { pageMeta } from "@/lib/site";
+import type { Route } from "./+types/resume";
 
 export function meta() {
-  return [
-    { title: "Resume - Paulo Chaves" },
-    {
-      name: "description",
-      content:
-        "Senior software engineer, backend-focused, with a large share of the work in React. At Thunkable AI: Supabase, Postgres, and platform MongoDB. Before that, Rails and React on Canvas LMS.",
-    },
-  ];
+  return pageMeta({
+    title: "Resume - Paulo Chaves",
+    description:
+      "Senior software engineer, backend-focused, with a large share of the work in React. At Thunkable AI: Supabase, Postgres, and platform MongoDB. Before that, Rails and React on Canvas LMS.",
+    path: "/resume",
+  });
+}
+
+export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
+  return <PublicError error={error} />;
 }
 
 function SectionTitle({ children }: { children: ReactNode }) {
