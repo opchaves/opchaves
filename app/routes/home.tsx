@@ -1,7 +1,4 @@
-import GithubIcon from "@/components/icons/github";
-import LinkedInIcon from "@/components/icons/linkedin";
-import XIcon from "@/components/icons/x";
-import YoutubeIcon from "@/components/icons/youtube";
+import { Link } from "react-router";
 
 export function meta() {
   return [
@@ -14,126 +11,86 @@ export function meta() {
   ];
 }
 
-function HeroSection() {
+const links: Array<
+  { label: string; to: string } | { label: string; href: string }
+> = [
+  { label: "Resume", to: "/resume" },
+  { label: "Blog", to: "/blog" },
+  { label: "GitHub", href: "https://github.com/opchaves" },
+  { label: "LinkedIn", href: "https://linkedin.com/in/opchaves" },
+  { label: "X", href: "https://x.com/opchaves" },
+  { label: "YouTube", href: "https://youtube.com/@opchaves" },
+];
+
+const skills = [
+  {
+    label: "Languages",
+    items: "TypeScript, JavaScript, Node.js, Ruby, SQL",
+  },
+  {
+    label: "Frameworks",
+    items: "React, React Native, Expo, Next.js, Ruby on Rails",
+  },
+  {
+    label: "Backend",
+    items:
+      "PostgreSQL, Supabase, MongoDB, Redis, REST, GraphQL, transactions, distributed locks",
+  },
+  {
+    label: "Infrastructure",
+    items: "Docker, Kubernetes, GCP, GitHub Actions, Playwright",
+  },
+];
+
+const linkClass =
+  "text-gray-900 underline decoration-gray-300 underline-offset-4 hover:decoration-gray-900";
+
+export default function Home() {
   return (
-    <section className="flex flex-col items-center justify-center min-h-[45vh] text-center px-4 max-w-4xl mx-auto pt-16 pb-8">
-      <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-3 text-slate-900">
+    <article className="mx-auto max-w-2xl px-8 pt-16 pb-8">
+      <h1 className="text-3xl font-semibold tracking-tight text-gray-900">
         Paulo Chaves
       </h1>
-      <h2 className="text-xl md:text-2xl font-semibold mb-6 text-slate-500">
-        Senior Software Engineer
-      </h2>
-      <p className="max-w-2xl text-base md:text-lg text-slate-600 mb-8 leading-relaxed">
+      <p className="mt-1 text-gray-500">Senior Software Engineer</p>
+      <p className="mt-6 text-lg leading-relaxed text-gray-700">
         Most of my work is backend, especially databases and the services around
         them. A large share of what I ship is React. Node.js and TypeScript,
         after ten years of full-stack work.
       </p>
-      <div>
-        <a
-          href="/resume"
-          className="inline-block bg-slate-900 text-white px-6 py-2.5 rounded-lg hover:bg-slate-800 transition-all font-medium text-sm shadow-sm"
-        >
-          View Full Resume
-        </a>
-      </div>
-    </section>
-  );
-}
-
-function SkillsSection() {
-  const skillCategories = [
-    {
-      title: "Languages",
-      skills: "TypeScript, JavaScript, Node.js, Ruby, SQL",
-    },
-    {
-      title: "Frameworks",
-      skills: "React, React Native, Expo, Next.js, Ruby on Rails",
-    },
-    {
-      title: "Backend",
-      skills:
-        "PostgreSQL, Supabase, MongoDB, Redis, REST, GraphQL, transactions, distributed locks",
-    },
-    {
-      title: "Infrastructure",
-      skills: "Docker, Kubernetes, GCP, GitHub Actions, Playwright",
-    },
-  ];
-
-  return (
-    <section className="max-w-4xl mx-auto pb-20 pt-8 px-4 border-t border-slate-100">
-      <h3 className="text-2xl font-bold mb-8 text-slate-900 text-center">
-        Technical Skills
-      </h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {skillCategories.map((category) => (
-          <div
-            key={category.title}
-            className="p-5 bg-slate-50/50 border border-slate-100 rounded-xl hover:shadow-md hover:bg-slate-50 transition-all"
+      <ul className="mt-6 flex flex-wrap text-sm">
+        {links.map((link) => (
+          <li
+            key={link.label}
+            className="after:mx-2 after:text-gray-300 after:content-['·'] last:after:content-none"
           >
-            <h4 className="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wider">
-              {category.title}
-            </h4>
-            <p className="text-sm text-slate-600 leading-relaxed">
-              {category.skills}
-            </p>
+            {"to" in link ? (
+              <Link to={link.to} className={linkClass}>
+                {link.label}
+              </Link>
+            ) : (
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={linkClass}
+              >
+                {link.label}
+              </a>
+            )}
+          </li>
+        ))}
+      </ul>
+      <dl className="mt-14 space-y-4 text-sm leading-relaxed">
+        {skills.map((skill) => (
+          <div
+            key={skill.label}
+            className="sm:grid sm:grid-cols-[9.5rem_1fr] sm:gap-x-6"
+          >
+            <dt className="text-gray-500">{skill.label}</dt>
+            <dd className="text-gray-800">{skill.items}</dd>
           </div>
         ))}
-      </div>
-    </section>
-  );
-}
-
-function SocialLinksSection() {
-  const links = [
-    { href: "https://x.com/opchaves", icon: <XIcon />, label: "X (Twitter)" },
-    {
-      href: "https://linkedin.com/in/opchaves",
-      icon: <LinkedInIcon />,
-      label: "LinkedIn",
-    },
-    {
-      href: "https://github.com/opchaves",
-      icon: <GithubIcon />,
-      label: "GitHub",
-    },
-    {
-      href: "https://youtube.com/@opchaves",
-      icon: <YoutubeIcon />,
-      label: "YouTube",
-    },
-  ];
-
-  return (
-    <section className="max-w-3xl mx-auto pb-12 pt-3 px-4">
-      <h3 className="text-lg font-bold mb-4 text-center text-slate-900">
-        Let's Connect
-      </h3>
-      <div className="flex gap-4 justify-center">
-        {links.map((link) => (
-          <a
-            key={link.label}
-            href={link.href}
-            target="_blank"
-            rel="noopener"
-            aria-label={link.label}
-            className="text-slate-500 hover:text-slate-900 p-2.5 rounded-full hover:bg-slate-100 transition-all text-xl"
-          >
-            {link.icon}
-          </a>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-export default function Home() {
-  return (
-    <main className="bg-white min-h-screen">
-      <HeroSection />
-      <SocialLinksSection />
-      <SkillsSection />
-    </main>
+      </dl>
+    </article>
   );
 }
