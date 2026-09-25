@@ -1,15 +1,21 @@
-# opchaves
+# Paulo Chaves
 
-Senior Full Stack Engineer
+Senior Software Engineer
 
-TypeScript / Node.js / React.js / MongoDB / Postgres / Docker
+Most of my work is backend, especially databases and the services around them. A large share of what I ship is React. Node.js and TypeScript, after ten years of full-stack work.
 
-## About
+## Skills
 
-- Building scalable web apps
-- Contributing to open-source
-- Always learning new tech
+- **Languages:** TypeScript, JavaScript, Node.js, Ruby, SQL
+- **Frameworks:** React, React Native, Expo, Next.js, Ruby on Rails
+- **Backend:** PostgreSQL, Supabase, MongoDB, Redis, REST, GraphQL, transactions, distributed locks
+- **Infrastructure:** Docker, Kubernetes, GCP, GitHub Actions, Playwright
 
-## Contact
+## Links
 
-- Website & Blog: [opchaves.com](https://opchaves.com)
+- [opchaves.com](https://opchaves.com)
+- [Resume](https://opchaves.com/resume)
+- [Blog](https://opchaves.com/blog)
+- [LinkedIn](https://linkedin.com/in/opchaves)
+- [X](https://x.com/opchaves)
+- [YouTube](https://youtube.com/@opchaves)
