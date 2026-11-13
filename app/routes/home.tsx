@@ -7,7 +7,7 @@ export function meta() {
   return pageMeta({
     title: "Paulo Chaves – Senior Software Engineer",
     description:
-      "Senior software engineer. After ten years of full-stack work, most of what I do is backend, especially databases and the services around them, and a large share of what I ship is React. I work in Node.js and TypeScript.",
+      "A senior software engineer with experience across backend and frontend development, cloud databases, and distributed systems. Work has centered on React, Ruby on Rails, TypeScript, Node.js, PostgreSQL, MongoDB, and Supabase, spanning product development, database architecture, API design, and performance optimization.",
     path: "/",
   });
 }
@@ -58,9 +58,11 @@ export default function Home() {
       </h1>
       <p className="mt-1 text-gray-500">Senior Software Engineer</p>
       <p className="mt-6 text-lg leading-relaxed text-gray-700">
-        After ten years of full-stack work, most of what I do is backend,
-        especially databases and the services around them, and a large share of
-        what I ship is React. I work in Node.js and TypeScript.
+        A senior software engineer with experience across backend and frontend
+        development, cloud databases, and distributed systems. Work has centered
+        on React, Ruby on Rails, TypeScript, Node.js, PostgreSQL, MongoDB, and
+        Supabase, spanning product development, database architecture, API
+        design, and performance optimization.
       </p>
       <ul className="mt-6 flex flex-wrap text-sm">
         {links.map((link) => (

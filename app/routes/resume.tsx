@@ -9,7 +9,7 @@ export function meta() {
   return pageMeta({
     title: "Resume - Paulo Chaves",
     description:
-      "Senior software engineer, backend-focused, with a large share of the work in React. At Thunkable AI: Supabase, Postgres, and platform MongoDB. Before that, Rails and React on Canvas LMS.",
+      "A senior software engineer with experience across backend and frontend development, cloud databases, and distributed systems. Work has centered on React, Ruby on Rails, TypeScript, Node.js, PostgreSQL, MongoDB, and Supabase, with contributions spanning product development, database architecture, API design, and performance optimization. Experience also includes consulting for product companies, building accessible and internationalized features, and modernizing web platforms.",
     path: "/resume",
   });
 }
@@ -93,11 +93,14 @@ export default function Resume() {
         <section className="mb-5">
           <SectionTitle>Summary</SectionTitle>
           <p className="text-sm leading-relaxed">
-            Senior software engineer. Backend is most of the work, and a large
-            share of it is React. At Thunkable AI, that means the cloud database
-            on Supabase and Postgres, and the platform MongoDB: version
-            upgrades, storage, and consistency. Before that, Rails and React on
-            Canvas LMS, used by millions of students and teachers.
+            A senior software engineer with experience across backend and
+            frontend development, cloud databases, and distributed systems. Work
+            has centered on React, Ruby on Rails, TypeScript, Node.js,
+            PostgreSQL, MongoDB, and Supabase, with contributions spanning
+            product development, database architecture, API design, and
+            performance optimization. Experience also includes consulting for
+            product companies, building accessible and internationalized
+            features, and modernizing web platforms.
           </p>
         </section>
 

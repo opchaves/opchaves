@@ -2,7 +2,7 @@
 
 Senior Software Engineer
 
-After ten years of full-stack work, most of what I do is backend, especially databases and the services around them, and a large share of what I ship is React. I work in Node.js and TypeScript.
+A senior software engineer with experience across backend and frontend development, cloud databases, and distributed systems. Work has centered on React, Ruby on Rails, TypeScript, Node.js, PostgreSQL, MongoDB, and Supabase, with contributions spanning product development, database architecture, API design, and performance optimization. Experience also includes consulting for product companies, building accessible and internationalized features, and modernizing web platforms.
 
 ## Skills
 
